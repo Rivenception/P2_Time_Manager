@@ -13,8 +13,8 @@ router.get("/", function(req, res) {
 });
 
 router.get("/admin", function(req, res) {
-    res.render("admin");
-  });
+  res.render("admin");
+});
 
 router.post("/api/employees", function(req, res) {
   employee.create(["name", "dept"], [req.body.name, req.body.dept], function(result) {

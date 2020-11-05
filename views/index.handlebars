@@ -2,18 +2,18 @@
 
 <p>Manage Employee Time</p>
 
-<!-- Pass in data from server.js -->
+<!-- Pass in data from server.js for specific employee and would like to include function to call last ten entries for user inputs and display-->
 <ul>
   {{#each employees}}
-  	<li>
-  		<p><span class="label">ID:</span> {{this.id}}</p>
-      <p><span class="label">Employee:</span> {{this.name}}</p>
-      <p><span class="label">Dept:</span> {{this.dept}}</p>
+  <li>
+    <p><span class="label">ID:</span> {{this.id}}</p>
+    <p><span class="label">Employee:</span> {{this.name}}</p>
+    <p><span class="label">Dept:</span> {{this.dept}}</p>
 
-      <button data-id="{{this.id}}" class="delquote">Delete</button>
+    <button data-id="{{this.id}}" class="delquote">Delete</button>
 
-      <a href="/{{this.id}}">Update Employee</a>
-  	</li>
+    <a href="/{{this.id}}">Update Employee</a>
+  </li>
   {{/each}}
 </ul>
 
@@ -39,24 +39,42 @@
 
 <form class="create-form">
 
+{{!-- {{Most likely will be a drop down select option}} --}}
   <div class="form-group">
     <label for="auth">Employee:</label>
     <input type="text" id="auth" name="employee">
   </div>
 
+{{!-- {{Would like Moment.js to handle time options or I found https://bootstrap-datepicker.readthedocs.io/en/latest/}} --}}
   <div class="form-group">
     <label for="auth">Date:</label>
     <input type="text" id="auth" name="employee">
   </div>
 
+{{!-- {{Most likely will be a drop down select option}} --}}
   <div class="form-group">
     <label for="auth">Type:</label>
     <input type="text" id="auth" name="employee">
   </div>
 
-  <div class="form-group">
-    <label for="auth">Time:</label>
-    <input type="text" id="auth" name="employee">
+{{!-- {{Most likely will be a drop down select option rather than an input}} --}}
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="inputGroupSelect01">Time:</label>
+    </div>
+    <select class="custom-select" id="inputGroupSelect01">
+      <option selected>Choose...</option>
+      <option value="1">30</option>
+      <option value="2">60</option>
+      <option value="3">90</option>
+      <option value="3">120</option>
+      <option value="3">150</option>
+      <option value="3">180</option>
+      <option value="3">210</option>
+      <option value="3">240</option>
+      <option value="3">270</option>
+      <option value="3">300</option>
+    </select>
   </div>
 
   <div class="form-group">
