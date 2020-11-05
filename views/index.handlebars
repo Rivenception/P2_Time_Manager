@@ -1,0 +1,68 @@
+<h1>Timesheet App</h1>
+
+<p>Manage Employee Time</p>
+
+<!-- Pass in data from server.js -->
+<ul>
+  {{#each employees}}
+  	<li>
+  		<p><span class="label">ID:</span> {{this.id}}</p>
+      <p><span class="label">Employee:</span> {{this.name}}</p>
+      <p><span class="label">Dept:</span> {{this.dept}}</p>
+
+      <button data-id="{{this.id}}" class="delquote">Delete</button>
+
+      <a href="/{{this.id}}">Update Employee</a>
+  	</li>
+  {{/each}}
+</ul>
+
+<h2>Add Employee</h2>
+
+<form class="employeeEntry-form">
+
+  <div class="form-group">
+    <label for="auth">Employee:</label>
+    <input type="text" id="auth" name="name">
+  </div>
+
+  <div class="form-group">
+    <label for="auth">Department:</label>
+    <input type="text" id="auth" name="dept">
+  </div>
+
+  <button type="submit">Add Entry</button>
+</form>
+
+
+<h2>Add Time</h2>
+
+<form class="create-form">
+
+  <div class="form-group">
+    <label for="auth">Employee:</label>
+    <input type="text" id="auth" name="employee">
+  </div>
+
+  <div class="form-group">
+    <label for="auth">Date:</label>
+    <input type="text" id="auth" name="employee">
+  </div>
+
+  <div class="form-group">
+    <label for="auth">Type:</label>
+    <input type="text" id="auth" name="employee">
+  </div>
+
+  <div class="form-group">
+    <label for="auth">Time:</label>
+    <input type="text" id="auth" name="employee">
+  </div>
+
+  <div class="form-group">
+    <label for="quo">Notes:</label>
+    <textarea id="quo" name="quote" rows="8" cols="40"></textarea>
+  </div>
+
+  <button type="submit">Add Entry</button>
+</form>
