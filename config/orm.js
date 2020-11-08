@@ -1,3 +1,4 @@
+  
 var connection = require("../config/connection.js");
 
 // Object Relational Mapper (ORM)
