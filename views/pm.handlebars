@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-10 offset-md-1">
+    <div class="author-container">
+      <h1>Time Summary</h1>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Category</th>
+            <th>Task</th>
+            <th>Time Spent</th>
+            <th>Program</th>
+            <th>Notes</th>
+            <th>Delete Entry</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="form-row">
+            <form id="author-form">
+              <td colspan="10">
+                <label for="auth">Date:</label>
+                <input placeholder="Enter the date" id="date" type="text" />
+                <br>
+                <label for="auth">Category:</label>
+                <select placeholder="Enter the Category" class="custom-select" id="inputGroupCategory"
+                  onload="categories()">
+                </select>
+                <br>
+                <label for="auth">Task:</label>
+                <select placeholder="Enter a task" class="custom-select" id="inputGroupTask" onload="tasks()">
+                </select>
+                <br>
+                <label for="auth">Time:</label>
+                <select placeholder="Enter time" class="custom-select" id="inputGroupTime" onload="times()">
+                </select>
+                <br>
+                <label for="auth">Program:</label>
+                <input placeholder="Enter a program" id="program" type="number" />
+                <br>
+                <label for="auth">Notes:</label>
+                <input placeholder="notes" id="notes" type="text" />
+              </td>
+              <td>
+                <button type="submit" class="btn btn-success">Add Entry</button>
+              </td>
+            </form>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
