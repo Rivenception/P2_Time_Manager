@@ -3,13 +3,11 @@ var express = require("express");
 var router = express.Router();
 
 // Import the model (employee.js) to use its database functions.
-var employee = require("../../models/employees.js");
+var employee = require("../../models/employee");
 
 // Create Routes
 router.get("/", function(req, res) {
-  employee.all(function(data) {
-    res.render("index", {employees: data});
-  });
+    res.render("index");
 });
 
 router.get("/admin", function(req, res) {
@@ -24,15 +22,20 @@ router.get("/mfg", function(req, res) {
   res.render("mfg");
 });
 
-router.get("/pm", function(req, res) {
+router.get("/pm/:id", function(req, res) {
   res.render("pm");
 });
 
-router.post("/api/employees", function(req, res) {
-  employee.create(["name", "dept"], [req.body.name, req.body.dept], function(result) {
-    // Send back the ID of the new employee
-    res.json({ id: result.insertId });
-  });
+router.get("/eng/:id", function(req, res) {
+  res.render("eng");
+});
+
+router.get("/mfg/:id", function(req, res) {
+  res.render("mfg");
+});
+
+router.get("/pm", function(req, res) {
+  res.render("pm");
 });
 
 // Export routes for server.js to use.

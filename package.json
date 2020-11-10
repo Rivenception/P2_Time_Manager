@@ -13,10 +13,8 @@
     "express-handlebars": "^3.0.0",
     "mdbootstrap": "^4.19.1",
     "moment": "^2.29.1",
-    "mysql": "^2.16.0"
-  },
-  "devDependencies": {
-    "handlebars-helper-css": "^0.1.0",
-    "less": "^3.12.2"
+    "mysql2": "^1.6.4",
+    "requirejs": "^2.3.6",
+    "sequelize": "^6.3.5"
   }
 }
