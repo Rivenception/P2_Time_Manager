@@ -1,23 +1,23 @@
 <h1>Timesheet App</h1>
 
-<p>Manage Employee Time</p>
+<h2>Manage Employee Time</h2>
 
 <!-- Pass in data from server.js for specific employee and would like to include function to call last ten entries for user inputs and display-->
-<ul>
+<ul id = "employeeID">
   {{#each employees}}
   <li>
     <p><span class="label">ID:</span> {{this.id}}</p>
     <p><span class="label">Employee:</span> {{this.name}}</p>
     <p><span class="label">Dept:</span> {{this.dept}}</p>
 
-    <button data-id="{{this.id}}" class="delquote">Delete</button>
+    <button data-id="{{this.id}}" class="btn">Delete</button>
 
-    <a href="/{{this.id}}">Update Employee</a>
+    <a href="/{{this.id}}"class="btn"> Update</a>
   </li>
   {{/each}}
 </ul>
 
-<h2>Add Employee</h2>
+<h3>Add Employee</h3>
 
 <form class="employeeEntry-form">
 
@@ -31,11 +31,11 @@
     <input type="text" id="auth" name="dept">
   </div>
 
-  <button type="submit">Add Entry</button>
+  <button type="submit" class="btn" >Add Entry</button>
 </form>
 
 
-<h2>Add Time</h2>
+<h3>Add Time</h3>
 
 <form class="create-form">
 
@@ -82,5 +82,5 @@
     <textarea id="quo" name="quote" rows="8" cols="40"></textarea>
   </div>
 
-  <button type="submit">Add Entry</button>
+  <button type="submit" class="btn">Add Entry</button>
 </form>
