@@ -6,15 +6,16 @@ USE time_monitorDB;
 
 CREATE TABLE employees (
   id VARCHAR(45) NOT NULL,
+  employee_id VARCHAR(45) NOT NULL,
   name VARCHAR(45) NOT NULL,
   dept VARCHAR(45) DEFAULT '' NOT NULL,
   title VARCHAR(45) DEFAULT '' NOT NULL,
   salary INT,
   PRIMARY KEY (id),
-  KEY (name)
+  KEY (employee_id)
   );
 
-CREATE TABLE timesheet (
+CREATE TABLE timesheets (
   id INT NOT NULL AUTO_INCREMENT,
   employee_id VARCHAR(45) NOT NULL,
   date DATE NOT NULL,
@@ -24,10 +25,10 @@ CREATE TABLE timesheet (
   program INT NOT NULL,
   notes VARCHAR(200) NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (employee_id) REFERENCES employees(id)
+  FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
 );
 
-SELECT * FROM timesheet INNER JOIN employees ON employee_id = employees.id;
+SELECT * FROM timesheets INNER JOIN employees ON timesheets.employee_id = employees.employee_id;
 
-SELECT * FROM timesheet INNER JOIN employees ON employee_id = employees.id ORDER BY date DESC;
-SELECT * FROM timesheet INNER JOIN employees ON employee_id = employees.id ORDER BY name;
+SELECT * FROM timesheets INNER JOIN employees ON timesheets.employee_id = employees.employee_id ORDER BY date DESC;
+SELECT * FROM timesheets INNER JOIN employees ON timesheets.employee_id = employees.employee_id ORDER BY name;

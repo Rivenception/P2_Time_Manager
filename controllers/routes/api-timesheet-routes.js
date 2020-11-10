@@ -1,22 +1,10 @@
 var db = require("../../models");
 
 module.exports = function (app) {
-    app.get("/api/employees", function (req, res) {
-        db.Employee.findAll({
-            include: [db.Timesheet]
-        }).then(function (dbEmployee) {
-            res.json(dbEmployee);
-        });
-    });
-
-    app.get("/api/employees/:id", function (req, res) {
-        db.Employee.findOne({
-            where: {
-                id: req.params.id
-            },
-            include: [db.Timesheet]
-        }).then(function (dbEmployee) {
-            res.json(dbEmployee);
+    app.get("/api/timesheets", function (req, res) {
+        db.Timesheet.findAll({
+        }).then(function (dbTimesheet) {
+            res.json(dbTimesheet);
         });
     });
 

@@ -1,11 +1,17 @@
 module.exports = function (sequelize, DataTypes) {
-    var Employee = sequelize.define("employees", {
+    var Employee = sequelize.define("Employee", {
         employee_id: {
             type: DataTypes.STRING,
             allowNull: false,
+            primaryKey: true,
             validate: {
                 len: [1]
             }
+        },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            len: [1]
         },
         dept: {
             type: DataTypes.STRING,
@@ -21,16 +27,22 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             allowNull: false,
             len: [1]
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP()')
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP()'),
         }
     });
 
     Employee.associate = function (models) {
-        // We're saying that a Post should belong to an Author
-        // A Post can't be created without an Author due to the foreign key constraint
+        // We're saying that a Timesheet should belong to an Employee
+        // A Timesheet can't be created without an Employee due to the foreign key constraint
         Employee.hasMany(models.Timesheet, {
-            foreignKey: {
-                allowNull: false
-            }
+            foreignKey: 'FKempoyee_id'
         });
     };
 
