@@ -1,22 +1,20 @@
-// Set up MySQL connection.
-var mysql = require("mysql");
+//Updated for Sequelize syntax
 
-var connection = mysql.createConnection({
+require("dotenv").config(); 
+
+// Dependencies
+var Sequelize = require("sequelize");
+
+var sequelize = new Sequelize("time_monitorDB", "root", process.env.MYSQLPASS, {
   host: "localhost",
   port: 3306,
-  user: "root",
-  password: "password",
-  database: "time_monitorDB"
-});
-
-// Make connection.
-connection.connect(function(err) {
-  if (err) {
-    console.error("error connecting: " + err.stack);
-    return;
+  dialect: "mysql",
+  pool: {
+    max: 5,
+    min: 0,
+    idle: 10000
   }
-  console.log("connected as id " + connection.threadId);
 });
 
-// Export connection for our ORM to use.
-module.exports = connection;
+// Export sequelize for use.
+module.exports = sequelize;
