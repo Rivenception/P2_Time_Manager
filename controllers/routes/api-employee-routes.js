@@ -9,10 +9,10 @@ module.exports = function (app) {
         });
     });
 
-    app.get("/api/employees/:id", function (req, res) {
+    app.get("/api/employees/:user", function (req, res) {
         db.Employee.findOne({
             where: {
-                id: req.params.id
+                id: req.params.user
             },
             include: [db.Timesheet]
         }).then(function (dbEmployee) {
@@ -20,20 +20,20 @@ module.exports = function (app) {
         });
     });
 
-    // app.post("/api/employees", function (req, res) {
-    //     db.Employee.create(req.body).then(function (dbEmployee) {
-    //         res.json(dbEmployee);
-    //     });
-    // });
+    app.post("/api/employees", function (req, res) {
+        db.Employee.create(req.body).then(function (dbEmployee) {
+            res.json(dbEmployee);
+        });
+    });
 
-    // app.delete("/api/employees/:id", function (req, res) {
-    //     db.Employee.destroy({
-    //         where: {
-    //             id: req.params.id
-    //         }
-    //     }).then(function (dbEmployee) {
-    //         res.json(dbEmployee);
-    //     });
-    // });
+    app.delete("/api/employees/:user", function (req, res) {
+        db.Employee.destroy({
+            where: {
+                id: req.params.user
+            }
+        }).then(function (dbEmployee) {
+            res.json(dbEmployee);
+        });
+    });
 
 };

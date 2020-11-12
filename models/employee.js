@@ -42,7 +42,7 @@ module.exports = function (sequelize, DataTypes) {
         // We're saying that a Timesheet should belong to an Employee
         // A Timesheet can't be created without an Employee due to the foreign key constraint
         Employee.hasMany(models.Timesheet, {
-            foreignKey: 'FKempoyee_id'
+            foreignKey: 'FKemployee_id'
         });
     };
 

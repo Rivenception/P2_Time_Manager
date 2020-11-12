@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-10 offset-md-1">
-    <div class="author-container">
+    <div class="table-container">
       <h1>Time Summary</h1>
       <table class="table table-striped">
         <thead>
@@ -19,6 +19,9 @@
           <tr id="form-row">
             <form id="author-form">
               <td colspan="10">
+                <label for="auth">Name:</label>
+                <input placeholder="  Enter the date" id="name" type="text" />
+                <br>
                 <label for="auth">Date:</label>
                 <input placeholder="Enter the date" id="date" type="text" />
                 <br>
@@ -42,7 +45,7 @@
                 <input placeholder="notes" id="notes" type="text" />
               </td>
               <td>
-                <button type="submit" class="btn btn-success">Add Entry</button>
+              <button type="submit" class="btn btn-success" id="timeSubmit">Add Entry</button>
               </td>
             </form>
           </tr>
