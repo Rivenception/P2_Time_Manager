@@ -13,7 +13,8 @@ var sequelize = new Sequelize("time_monitorDB", "root", process.env.MYSQLPASS, {
     max: 5,
     min: 0,
     idle: 10000
-  }
+  },
+ 
 });
 
 // Export sequelize for use.
