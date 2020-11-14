@@ -16,21 +16,17 @@ $(document).ready(function () {
 
     function categories() {
         if (window.location.href === "http://localhost:8080/eng") {
-            console.log("eng page");
             for (let i = 0; i < category.eng_category.length; i++) {
-                console.log(category.eng_category[i]);
                 let dropdown = $("<option>").attr("value", category.eng_category[i]).text(category.eng_category[i]);
                 // dropdown = dropdown.text(category.eng_category[i]);
                 $("#inputGroupCategory").append(dropdown);
             }
         } else if (window.location.href === "http://localhost:8080/mfg") {
-            console.log("mfg page");
             for (let i = 0; i < category.mfg_category.length; i++) {
                 let dropdown = $("<option>").attr("value", category.mfg_category[i]).text(category.mfg_category[i]);
                 $("#inputGroupCategory").append(dropdown);
             }
         } else if (window.location.href === "http://localhost:8080/pm") {
-            console.log("pm page");
             for (let i = 0; i < category.pm_category.length; i++) {
                 let dropdown = $("<option>").attr("value", category.pm_category[i]).text(category.pm_category[i]);
                 $("#inputGroupCategory").append(dropdown);
@@ -39,21 +35,17 @@ $(document).ready(function () {
     };
 
     function tasks() {
-        console.log(task.eng_tasks);
         if (window.location.href === "http://localhost:8080/eng") {
-            console.log("eng page");
             for (let i = 0; i < task.eng_tasks.length; i++) {
                 let dropdown = $("<option>").attr("value", task.eng_tasks[i]).text(task.eng_tasks[i]);
                 $("#inputGroupTask").append(dropdown);
             }
         } else if (window.location.href === "http://localhost:8080/mfg") {
-            console.log("mfg page");
             for (let i = 0; i < task.mfg_tasks.length; i++) {
                 let dropdown = $("<option>").attr("value", task.mfg_tasks[i]).text(task.mfg_tasks[i]);
                 $("#inputGroupTask").append(dropdown);
             }
         } else if (window.location.href === "http://localhost:8080/pm") {
-            console.log("pm page");
             for (let i = 0; i < task.pm_tasks.length; i++) {
                 let dropdown = $("<option>").attr("value", task.pm_tasks[i]).text(task.pm_tasks[i]);
                 $("#inputGroupTask").append(dropdown);
@@ -62,7 +54,6 @@ $(document).ready(function () {
     }
 
     function times() {
-        console.log("timer");
         for (let i = 0; i < minutes.length; i++) {
             let dropdown = $("<option>").attr("value", minutes[i]).text(minutes[i]);
             $("#inputGroupTime").append(dropdown);

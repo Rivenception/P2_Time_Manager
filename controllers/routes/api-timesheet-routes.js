@@ -52,14 +52,22 @@ module.exports = function (app) {
     });
 
 
-    // app.delete("/api/employees/:id", function (req, res) {
-    //     db.Employee.destroy({
-    //         where: {
-    //             id: req.params.id
-    //         }
-    //     }).then(function (dbEmployee) {
-    //         res.json(dbEmployee);
-    //     });
-    // });
+    app.post("/api/timesheets", function (req, res) {
+        db.Timesheet.create(req.body).then(function (dbTimesheet) {
+            res.json(dbTimesheet);
+        });
+    });
+
+
+
+    app.delete("/api/timesheets/:rfb", function (req, res) {
+        db.Timesheet.destroy({
+            where: {
+                program: req.params.rfb
+            }
+        }).then(function (dbTimesheet) {
+            res.json(dbTimesheet);
+        });
+    });
 
 };

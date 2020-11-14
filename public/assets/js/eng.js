@@ -15,7 +15,11 @@ $(document).ready(function () {
 
 
     $(document).on("submit", "#timeSubmit", handleFormSubmit);
-    $(document).on("click", ".delete", handleDeleteButtonPress);
+
+    // $(document).on("click", ".delete", handleDeleteButtonPress);
+
+    // Getting the initial list of Authors
+    getLastTenEntries();
 
     // A function for handling what happens when the form to create a new post is submitted
     function handleFormSubmit(event) {
@@ -26,7 +30,7 @@ $(document).ready(function () {
         }
         // Constructing a newPost object to hand to the database
         var newTimeEntry = {
-            employee_id: window.location.href,
+            employee_id: nameSelect.val(),
             name: nameSelect.val(),
 
             // may need to reformat date information for mySQL?
@@ -43,7 +47,7 @@ $(document).ready(function () {
 
     // Submits a new timeblock entry
     function submitTimeblock(data) {
-        $.post("/api/timesheet", data)
+        $.post("/api/timesheets", data)
             .then(getLastTenEntries);
     }
 
