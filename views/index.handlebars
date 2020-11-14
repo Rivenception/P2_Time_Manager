@@ -1,6 +1,9 @@
-<h1>Timesheet App</h1>
-
-<h2>Manage Employee Time</h2>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="header">Timesheet App</h1>
+    <h2 class="subheader">Manage Employee Time</h2>
+  </div>
+</div>
 
 <!-- Pass in data from server.js for specific employee and would like to include function to call last ten entries for user inputs and display-->
 <ul id = "employeeID">
@@ -21,17 +24,17 @@
 
 <form class="employeeEntry-form">
 
-  <div class="form-group">
+  <div class="container">
     <label for="auth">Employee:</label>
     <input type="text" id="auth" name="name">
   </div>
 
-  <div class="form-group">
+  <div class="container">
     <label for="auth">Department:</label>
     <input type="text" id="auth" name="dept">
   </div>
 
-  <button type="submit" class="btn" >Add Entry</button>
+  <button type="submit" class="indexbtn" >Add Entry</button>
 </form>
 
 
@@ -40,25 +43,24 @@
 <form class="create-form">
 
 {{!-- {{Most likely will be a drop down select option}} --}}
-  <div class="form-group">
+  <div class="container">
     <label for="auth">Employee:</label>
     <input type="text" id="auth" name="employee">
   </div>
 
 {{!-- {{Would like Moment.js to handle time options or I found https://bootstrap-datepicker.readthedocs.io/en/latest/}} --}}
-  <div class="form-group">
+  <div class="container">
     <label for="auth">Date:</label>
-    <input type="text" id="auth" name="employee">
+    <input type="date" id="date" name="date">
   </div>
 
 {{!-- {{Most likely will be a drop down select option}} --}}
-  <div class="form-group">
-    <label for="auth">Type:</label>
-    <input type="text" id="auth" name="employee">
-  </div>
-
-{{!-- {{Most likely will be a drop down select option rather than an input}} --}}
-  <div class="input-group mb-3">
+  <div class="container">
+    <label>Type:</label>
+    <input type="text" id="emp" name="employee">
+    <br>
+    <br>
+    <div class="input-group mb-3">
     <div class="input-group-prepend">
       <label class="input-group-text" for="inputGroupSelect01">Time:</label>
     </div>
@@ -77,10 +79,20 @@
     </select>
   </div>
 
-  <div class="form-group">
+  </div>
+<br>
+
+  <div class="container">
     <label for="quo">Notes:</label>
-    <textarea id="quo" name="quote" rows="8" cols="40"></textarea>
+    <textarea id="notes" rows="4" cols="50"></textarea>
   </div>
 
-  <button type="submit" class="btn">Add Entry</button>
+  <button type="submit" class="indexbtn">Add Entry</button>
 </form>
+<footer class="footer mt-auto py-3">
+  <div class="container">
+    <span class= "text-muted">
+      View As <a href="./admin.handlebars"> Admin </a> // <a href ="eng.handlebars"> Engineer </a> // <a href = "pm.handlebars">Project Manager</a> // <a href="mfg.handlebars"> Manufacturing </a>
+    </span>
+  </div>
+</footer>
