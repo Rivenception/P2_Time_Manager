@@ -41,10 +41,10 @@ module.exports = function (app) {
         });
     });
 
-    app.delete("/api/timesheets/:id", function (req, res) {
+    app.delete("/api/timesheets/:rfb", function (req, res) {
         db.Timesheet.destroy({
             where: {
-                id: req.params.id
+                program: req.params.rfb
             }
         }).then(function (dbTimesheet) {
             res.json(dbTimesheet);
