@@ -68,7 +68,7 @@ $(document).ready(function () {
 
     // Function for retrieving timeblocks and getting them ready to be rendered to the page
     function getLastTenEntries() {
-        $.get("/api/timesheet/limit=10", function (data) {
+        $.get("/api/timesheets/limit=10/:user?", function (data) {
             var rowsToAdd = [];
             for (var i = 2; i < 9; i++) {
                 rowsToAdd.push(createTimesheetRow(data[i]));

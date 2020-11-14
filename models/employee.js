@@ -30,11 +30,15 @@ module.exports = function (sequelize, DataTypes) {
         },
         createdAt: {
             type: DataTypes.DATE,
-            defaultValue: sequelize.literal('CURRENT_TIMESTAMP()')
+            timestamps: true,
+            defaultValue: DataTypes.NOW,
+            allowNull: false
         },
         updatedAt: {
             type: DataTypes.DATE,
-            defaultValue: sequelize.literal('CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP()'),
+            timestamps: true,
+            onUpdate: DataTypes.NOW,
+            allowNull: false
         }
     });
 

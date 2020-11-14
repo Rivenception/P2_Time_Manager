@@ -20,7 +20,7 @@ module.exports = function (app) {
         });
     });
 
-    app.post("/api/employees", function (req, res) {
+    app.post("/api/employees/:user?", function (req, res) {
         db.Employee.create(req.body).then(function (dbEmployee) {
             res.json(dbEmployee);
         });
@@ -29,7 +29,7 @@ module.exports = function (app) {
     app.delete("/api/employees/:user", function (req, res) {
         db.Employee.destroy({
             where: {
-                id: req.params.user
+                id: req.params.id
             }
         }).then(function (dbEmployee) {
             res.json(dbEmployee);
