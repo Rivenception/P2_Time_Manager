@@ -4,6 +4,7 @@
     <h2 class="subheader">Project Management</h2>
   </div>
 </div>
+    <div class="table-container">
       <table class="table table-striped">
         <thead>
           <tr>
@@ -21,8 +22,11 @@
           <tr id="form-row">
             <form id="input-form">
               <td colspan="10">
-                <label for="date">Date:</label>
-                <input placeholder="Enter the date" id="date" type="date" />
+                <label for="auth">Name:</label>
+                <input placeholder="  Enter the date" id="name" type="text" />
+                <br>
+                <label for="auth">Date:</label>
+                <input placeholder="Enter the date" id="date" type="text" />
                 <br>
                 <label for="category">Category:</label>
                 <select placeholder="Enter the Category" class="custom-select" id="inputGroupCategory"
@@ -43,8 +47,9 @@
                 <br>
                 <label for="notes">Notes:</label>
                 <input placeholder="notes" id="notes" type="text" />
-                <br>
-                <button type="submit" class="btn">Add Entry</button>
+              </td>
+              <td>
+              <button type="submit" class="btn btn-success" id="timeSubmit">Add Entry</button>
               </td>
             </form>
           </tr>
