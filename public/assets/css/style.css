@@ -1,7 +1,7 @@
 body {
   background: linear-gradient(to right, #0f253e, #3d4f62, #3d4f62, #5c6871,	#617084, #8794ac);
       margin: 0 auto;
-      width: 70%;
+      width: 80%;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       background-size: cover;
@@ -51,6 +51,22 @@ label {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
         
       }
+.container {
+        width: 500px;
+        clear: both;
+      }
+      
+.container input {
+
+        width: 100%;
+        clear: both;
+      }
+.jumbotron{
+        background-image: url(../background.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%;
+       }
 p {
         display: block;
         margin-block-start: 1em;
@@ -72,6 +88,27 @@ p {
      padding: 10px;
      background-color: #a72b32;;
     }
+    .btn:hover {
+      background-color: #ebecee;
+      opacity: 1.0;
+  }
+
+    
+.indexbtn{
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: normal;
+      font-size: 20px;
+      border-radius: 20px;
+     text-align: center;
+     width: 150px;
+     margin: 5px;
+     padding: 5px;
+     background-color: #a72b32;
+     float: right;
+    }
+    .indexbtn:hover {
+      background-color: #ebecee;
+  }
 
 li {
   padding: 5px;

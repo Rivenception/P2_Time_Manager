@@ -34,12 +34,31 @@ module.exports = function (app) {
             res.json(dbTimesheet);
         });
     });
+    app.post("/api/timesheets", function (req, res) {
+        db.Timesheet.create(req, body).then(function (dbTimesheet) {
+            res.json(dbTimesheet);
+        });
+    });
+
+    app.delete("/api/timesheets/:user", function (req, res) {
+        db.Timesheet.destroy({
+            where: {
+                id: req.params.id
+            }
+
+        }).then(function (dbTimesheet) {
+            res.json(dbTimesheet);
+        });
+    });
+
 
     app.post("/api/timesheets", function (req, res) {
         db.Timesheet.create(req.body).then(function (dbTimesheet) {
             res.json(dbTimesheet);
         });
     });
+
+
 
     app.delete("/api/timesheets/:rfb", function (req, res) {
         db.Timesheet.destroy({
