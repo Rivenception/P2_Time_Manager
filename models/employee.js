@@ -23,6 +23,12 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             len: [1]
         },
+        status: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "Active",
+            len: [1]
+        },
         salary: {
             type: DataTypes.INTEGER,
             allowNull: false,

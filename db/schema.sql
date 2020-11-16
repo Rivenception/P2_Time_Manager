@@ -11,6 +11,7 @@ CREATE TABLE employees (
   dept VARCHAR(45) DEFAULT '' NOT NULL,
   title VARCHAR(45) DEFAULT '' NOT NULL,
   salary INT,
+  status VARCHAR(45) DEFAULT 'ACTIVE' NOT NULL,
   PRIMARY KEY (id),
   KEY (employee_id)
   );
@@ -23,6 +24,7 @@ CREATE TABLE timesheets (
   task VARCHAR(45) NULL,
   timeSpent INT NULL,
   program INT NOT NULL,
+  ecr INT NOT NULL,
   notes VARCHAR(200) NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
