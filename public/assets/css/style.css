@@ -1,5 +1,5 @@
 body {
-  background: linear-gradient(to right, #0f253e, #3d4f62, #3d4f62, #5c6871,	#617084, #8794ac);
+    background: linear-gradient(to right, #0f253e, #3d4f62, #3d4f62, #5c6871,	#617084, #8794ac);
       margin: 0 auto;
       width: 80%;
       -webkit-background-size: cover;
@@ -26,6 +26,10 @@ body {
             line-height: 1.5;
         }
       }
+a     {
+        color: #ebecee;
+        font-size: 16px;
+      }
 h1 {
         color: #ebecee;
         font-size: 55px;
@@ -46,21 +50,38 @@ h3 {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
         
       }
+h4 {
+        color: #ebecee;
+        font-size: 25px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+      }
+h5 {
+  font-size: 18px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+h5:hover {
+  font-style: italic;
+  opacity: 1.0;
+}
+
 label {
         color: #ebecee;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
         
       }
-.container {
-        width: 500px;
-        clear: both;
+#maincontainer {
+       background-color: #3d4f62;
+       margin-bottom: 10px;
       }
+
       
 .container input {
-
         width: 100%;
         clear: both;
       }
+.card{
+        margin-bottom: 10px;
+    }
 .jumbotron{
         background-image: url(../background.png);
         background-size: cover;
@@ -123,26 +144,4 @@ li {
 #employeeID li{
   list-style-type: none;
 }
-
-.create-update-form {
-  padding: 5px;
-  margin: 5px;
-  background: aqua;
-}
-
-.form-group {
-  margin-bottom: 5px;
-}
-
-button.submit {
-  float: right;
-}
-
-form#cms {
-  margin-top: 50px;
-}
-
-#cms textarea {
-  resize: none;
-}
-
+/* #container-fullwidth */
