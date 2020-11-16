@@ -2,17 +2,14 @@ $(document).ready(function () {
     var tableBody = $("tbody");
     var tableContainer = $(".table-container");
 
-    var nameSelect = $('#name')
+    var userName = $('#hiddenId');
+    var nameSelect = $('#inputGroupEmployee');
     var dateSelect = $('#date');
     var categorySelect = $("#inputGroupCategory");
     var taskSelect = $('#inputGroupTask');
     var timeSelect = $('#inputGroupTime');
     var programId = $('#inputGroupProgram');
     var inputNotes = $('#inputGroupNotes');
-
-
-
-
 
     $(document).on("submit", "#timeSubmit", handleFormSubmit);
 
@@ -30,7 +27,7 @@ $(document).ready(function () {
         }
         // Constructing a newPost object to hand to the database
         var newTimeEntry = {
-            employee_id: nameSelect.val(),
+            employee_id: userName.val(),
             name: nameSelect.val(),
 
             // may need to reformat date information for mySQL?
@@ -51,39 +48,62 @@ $(document).ready(function () {
             .then(getLastTenEntries);
     }
 
-
     // Function for creating a new list row for timeblocks
+
+    // for some reason this is not working
     function createTimesheetRow(newTimeEntry) {
+        console.log(newTimeEntry)
         var newTr = $("<tr>");
-        newTr.data("timeblock", newTimeEntry);
-        newTr.append("<td>" + newTimeEntry.name + "</td>");
-        newTr.append("<td>" + newTimeEntry.date + "</td>");
-        newTr.append("<td>" + newTimeEntry.category + "</td>");
-        newTr.append("<td>" + newTimeEntry.task + "</td>");
-        newTr.append("<td>" + newTimeEntry.program + "</td>");
-        newTr.append("<td>" + newTimeEntry.notes + "</td>");
-        newTr.append("<td><a style='cursor:pointer;color:red' class='delete-entry'>Delete Entry</a></td>");
-        return newTr;
+        for (i = 0; i < newTimeEntry; i++) {
+            console.log("This is working")
+            newTr.data("timeblock", newTimeEntry);
+            newTr.append("<td>" + newTimeEntry[i].id + "</td>");
+            newTr.append("<td>" + newTimeEntry[i].name + "</td>");
+            newTr.append("<td>" + newTimeEntry[i].date + "</td>");
+            newTr.append("<td>" + newTimeEntry[i].category + "</td>");
+            newTr.append("<td>" + newTimeEntry[i].task + "</td>");
+            newTr.append("<td>" + newTimeEntry[i].timespent + "</td>");
+            newTr.append("<td>" + newTimeEntry[i].program + "</td>");
+            newTr.append("<td>" + newTimeEntry[i].notes + "</td>");
+            newTr.append("<td><a style='cursor:pointer;color:red' class='delete-entry'>Delete Entry</a></td>");
+            console.log(newTimeEntry[i].name)
+            console.log(newTr);
+            return newTr;
+        }
     }
 
     // Function for retrieving timeblocks and getting them ready to be rendered to the page
     function getLastTenEntries() {
-        $.get("/api/timesheets/limit=10/:user?", function (data) {
-            var rowsToAdd = [];
-            for (var i = 2; i < 9; i++) {
-                rowsToAdd.push(createTimesheetRow(data[i]));
+        var rowsToAdd = [];
+        $.get("/api/timesheets/limit=10/bpatel", function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var newTimeEntry = {
+                    logId: data[i].id,
+                    employee_id: data[i].employee_id,
+                    name: data[i].name,
+                    date: data[i].date,
+                    category: data[i].category,
+                    task: data[i].task,
+                    timespent: data[i].timespent,
+                    program: data[i].program,
+                    notes: data[i].notes,
+                }
+                // console.log(newTimeEntry);
+                rowsToAdd.push(newTimeEntry);
+                // console.log(rowsToAdd);
             }
+            createTimesheetRow(rowsToAdd);
             renderTimesheetList(rowsToAdd);
         });
     }
 
     // A function for rendering the list of timeblocks to the page
-    function renderTimesheetList(rows) {
+    function renderTimesheetList(rowsToAdd) {
         tableBody.children().not(":last").remove();
         tableContainer.children(".alert").remove();
-        if (rows.length) {
-            console.log(rows);
-            tableBody.prepend(rows);
+        if (rowsToAdd.length) {
+            // console.log(rowsToAdd);
+            tableBody.prepend(rowsToAdd);
         }
         else {
             renderEmpty()
@@ -97,5 +117,6 @@ $(document).ready(function () {
         alertDiv.text("Some text here");
         tableContainer.append(alertDiv);
     }
+
 
 });

@@ -2,12 +2,14 @@
   <div class="container">
     <h1 class="header">Time Summary</h1>
     <h2 class="subheader">Project Management</h2>
+    <h2 class="subheader">{{this.employeeName}}</h2>
   </div>
 </div>
 <div class="table-container">
   <table class="table table-striped">
     <thead>
       <tr>
+        <th>Log#</th>
         <th>Name</th>
         <th>Date</th>
         <th>Category</th>
@@ -21,8 +23,9 @@
     <tbody>
       <tr id="form-row">
         <td colspan="10">
-          <label for="auth">Name:</label>
-          <input placeholder="Enter the date" id="name" type="text" />
+          <label for="name">Name:</label>
+          <select placeholder="Select Employee" class="custom-select" id="inputGroupEmployee">
+          </select>
           <br>
           <label for="auth">Date:</label>
           <input placeholder="Enter the date" id="date" type="date" />

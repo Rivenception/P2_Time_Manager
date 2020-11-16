@@ -33,9 +33,13 @@ module.exports = function (sequelize, DataTypes) {
             len: [1]
         },
         program: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
             len: [4]
+        },
+        ecr: {
+            type: DataTypes.STRING,
+            len: [5]
         },
         notes: {
             type: DataTypes.STRING,
@@ -45,12 +49,13 @@ module.exports = function (sequelize, DataTypes) {
         createdAt: {
             type: DataTypes.DATE,
             timestamps: true,
-            defaultValue: DataTypes.NOW,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP()'),
             allowNull: false
         },
         updatedAt: {
             type: DataTypes.DATE,
             timestamps: true,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP()'),
             onUpdate: DataTypes.NOW,
             allowNull: false
         }

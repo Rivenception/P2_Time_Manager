@@ -3,18 +3,24 @@ var db = require("../../models");
 module.exports = function (app) {
     app.get("/api/timesheets", function (req, res) {
         db.Timesheet.findAll({
-            include: [db.Employee]
+            include: [db.Employee],
+            order: [
+                ['id', 'DESC']
+            ],
         }).then(function (dbTimesheet) {
             res.json(dbTimesheet);
         });
     });
 
-    app.get("/api/timesheets/:user", function (req, res) {
+    app.get("/api/timesheets/users/:user", function (req, res) {
         db.Timesheet.findAll({
             include: [db.Employee],
             where: {
                 employee_id: req.params.user
-            }
+            },
+            order: [
+                ['id', 'DESC']
+            ],
         }).then(function (dbTimesheet) {
             res.json(dbTimesheet);
         });
@@ -47,7 +53,7 @@ module.exports = function (app) {
         });
     });
 
-    app.get("/api/timesheets/:rfb", function (req, res) {
+    app.get("/api/timesheets/programs/:rfb", function (req, res) {
         db.Timesheet.findAll({
             include: [db.Employee],
             where: {

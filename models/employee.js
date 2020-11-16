@@ -31,12 +31,13 @@ module.exports = function (sequelize, DataTypes) {
         createdAt: {
             type: DataTypes.DATE,
             timestamps: true,
-            defaultValue: DataTypes.NOW,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP()'),
             allowNull: false
         },
         updatedAt: {
             type: DataTypes.DATE,
             timestamps: true,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP()'),
             onUpdate: DataTypes.NOW,
             allowNull: false
         }

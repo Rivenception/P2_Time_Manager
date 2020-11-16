@@ -2,11 +2,14 @@
   <class class="container">
     <h1 class="header">Time Summary</h1>
     <h2 class="subheader">Engineering</h2>
+    <h2 class="subheader">{{this.employeeName}}</h2>
+    <h2 class="subheader" id="hiddenId">{{this.userName}}</h2>
 </div>
 <div class="table-container">
   <table class="table table-striped">
     <thead>
       <tr>
+        <th>Log#</th>
         <th>Name</th>
         <th>Date</th>
         <th>Category</th>
@@ -20,8 +23,9 @@
     <tbody>
       <tr id="form-row">
         <td colspan="10">
-          <label for="auth">Name:</label>
-          <input placeholder="Enter the date" id="name" type="text" />
+          <label for="name">Name:</label>
+          <select placeholder="Select Employee" class="custom-select" id="inputGroupEmployee">
+          </select>
           <br>
           <label for="auth">Date:</label>
           <input placeholder="Enter the date" id="date" type="date" />
@@ -41,6 +45,9 @@
           <br>
           <label for="program">Program:</label>
           <input placeholder="  Enter an RFB#" id="inputGroupProgram" type="number" />
+          <br>
+          <label for="program">ECR:</label>
+          <input placeholder="  Enter an ECR#" id="inputGroupECR" type="number" />
           <br>
           <label for="notes">Notes:</label>
           <input placeholder="Enter Notes" id="inputGroupNotes" type="text"
