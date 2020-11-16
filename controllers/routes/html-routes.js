@@ -1,3 +1,5 @@
+var db = require("../../models");
+
 // Import the model (employee.js) to use its database functions.
 module.exports = function(app) {
 
@@ -22,16 +24,48 @@ module.exports = function(app) {
     res.render("pm");
   });
 
-  app.get("/pm/:id", function(req, res) {
-    res.render("pm");
+  app.get("/eng/:user", function (req, res) {
+    db.Employee.findOne({
+        where: {
+            employee_id: req.params.user
+        }
+    }).then(function (dbEmployee) {
+        console.log(dbEmployee.employee_id);
+        res.render("eng", {
+            userId: dbEmployee.employee_id,
+            employeeName: dbEmployee.name,
+        });
+    }
+    );
+  });
+  app.get("/mfg/:user", function (req, res) {
+    db.Employee.findOne({
+        where: {
+            employee_id: req.params.user
+        }
+    }).then(function (dbEmployee) {
+        console.log(dbEmployee.employee_id);
+        res.render("eng", {
+            userId: dbEmployee.employee_id,
+            employeeName: dbEmployee.name,
+        });
+    }
+    );
   });
 
-  app.get("/eng/:id", function(req, res) {
-    res.render("eng");
+  app.get("/pm/:user", function (req, res) {
+    db.Employee.findOne({
+        where: {
+            employee_id: req.params.user
+        }
+    }).then(function (dbEmployee) {
+        console.log(dbEmployee.employee_id);
+        res.render("eng", {
+            userId: dbEmployee.employee_id,
+            employeeName: dbEmployee.name,
+        });
+    }
+    );
   });
-
-  app.get("/mfg/:id", function(req, res) {
-    res.render("mfg");
-  });
-
+  
 };

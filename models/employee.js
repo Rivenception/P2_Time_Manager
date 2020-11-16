@@ -23,6 +23,12 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             len: [1]
         },
+        status: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "Active",
+            len: [1]
+        },
         salary: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -30,11 +36,16 @@ module.exports = function (sequelize, DataTypes) {
         },
         createdAt: {
             type: DataTypes.DATE,
-            defaultValue: sequelize.literal('CURRENT_TIMESTAMP()')
+            timestamps: true,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP()'),
+            allowNull: false
         },
         updatedAt: {
             type: DataTypes.DATE,
-            defaultValue: sequelize.literal('CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP()'),
+            timestamps: true,
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP()'),
+            onUpdate: DataTypes.NOW,
+            allowNull: false
         }
     });
 
