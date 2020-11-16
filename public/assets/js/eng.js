@@ -54,7 +54,7 @@ $(document).ready(function () {
     function createTimesheetRow(newTimeEntry) {
         console.log(newTimeEntry)
         var newTr = $("<tr>");
-        for (i = 0; i < newTimeEntry; i++) {
+        for (var i = 0; i < newTimeEntry.length; i++) {
             console.log("This is working")
             newTr.data("timeblock", newTimeEntry);
             newTr.append("<td>" + newTimeEntry[i].id + "</td>");
