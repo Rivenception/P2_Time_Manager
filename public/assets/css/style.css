@@ -29,20 +29,24 @@ body {
 a     {
         color: #ebecee;
         font-size: 16px;
+        font-family: 'Ubuntu', sans-serif;
       }
 h1 {
         color: #ebecee;
         font-size: 55px;
         text-align: center;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+        font-family: 'Ubuntu', sans-serif;
         
       }
 h2 {
         color: #ebecee;
         font-size: 40px;
         text-align: center;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-        
+        font-family: 'Ubuntu', sans-serif;
+      }
+ #includethis{
+        color: #0f253e;
+        font-family: 'Ubuntu', sans-serif;
       }
 h3 {
         color: #ebecee;
@@ -53,11 +57,11 @@ h3 {
 h4 {
         color: #ebecee;
         font-size: 25px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+        font-family: 'Ubuntu', sans-serif;
       }
 h5 {
   font-size: 18px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  font-family: 'Ubuntu', sans-serif;
 }
 h5:hover {
   font-style: italic;
@@ -82,6 +86,13 @@ label {
 .card{
         margin-bottom: 10px;
     }
+.logo-image{
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-top: -6px;
+}
 .jumbotron{
         background-image: url(../background.png);
         background-size: cover;
@@ -96,6 +107,13 @@ p {
         margin-inline-end: 0px;
         color: #ebecee;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    }
+    .responsive {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
     }
 
     .btn{
