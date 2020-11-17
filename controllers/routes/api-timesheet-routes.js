@@ -83,5 +83,15 @@ module.exports = function (app) {
             res.json(dbTimesheet);
         });
     });
-
-};
+    app.put("/api/timesheets/:id", function(req, res) {
+        db.Timesheet.update({
+          where: {
+            id: req.body.id
+          }
+        }).then(function(dbTimesheet) {
+          res.json(dbTimesheet);
+        });
+      });
+    
+    };
+    
