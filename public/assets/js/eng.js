@@ -12,8 +12,7 @@ $(document).ready(function () {
     var inputNotes = $('#inputGroupNotes');
 
     $(document).on("submit", "#timeSubmit", handleFormSubmit);
-
-    // $(document).on("click", ".delete", handleDeleteButtonPress);
+    $(document).on("click", ".delete-entry", handleDeleteButtonPress);
 
     // Getting the initial list of Authors
     getLastTenEntries();
@@ -52,11 +51,10 @@ $(document).ready(function () {
 
     // for some reason this is not working
     function createTimesheetRow(newTimeEntry) {
-        console.log(newTimeEntry)
-        var newTr = $("<tr>");
+        var allEntries = [];
         for (var i = 0; i < newTimeEntry.length; i++) {
-            console.log("This is working")
-            newTr.data("timeblock", newTimeEntry);
+            var newTr = $("<tr>");
+            newTr.data("timeblock", newTimeEntry[i].id);
             newTr.append("<td>" + newTimeEntry[i].id + "</td>");
             newTr.append("<td>" + newTimeEntry[i].name + "</td>");
             newTr.append("<td>" + newTimeEntry[i].date + "</td>");
@@ -64,26 +62,27 @@ $(document).ready(function () {
             newTr.append("<td>" + newTimeEntry[i].task + "</td>");
             newTr.append("<td>" + newTimeEntry[i].timespent + "</td>");
             newTr.append("<td>" + newTimeEntry[i].program + "</td>");
+            newTr.append("<td>" + newTimeEntry[i].ecr + "</td>");
             newTr.append("<td>" + newTimeEntry[i].notes + "</td>");
             newTr.append("<td><a style='cursor:pointer;color:red' class='delete-entry'>Delete Entry</a></td>");
-            console.log(newTimeEntry[i].name)
-            console.log(newTr);
-            return newTr;
+            allEntries.push(newTr)
         }
+        return allEntries;
     }
 
     // Function for retrieving timeblocks and getting them ready to be rendered to the page
     function getLastTenEntries() {
         var rowsToAdd = [];
-        $.get("/api/timesheets/limit=10/bpatel", function (data) {
+        $.get("/api/timesheets/limit=10/" + userName.val(), function (data) {
             for (var i = 0; i < data.length; i++) {
                 var newTimeEntry = {
-                    logId: data[i].id,
+                    id: data[i].id,
                     employee_id: data[i].employee_id,
                     name: data[i].name,
                     date: data[i].date,
                     category: data[i].category,
                     task: data[i].task,
+                    ecr: data[i].ecr,
                     timespent: data[i].timespent,
                     program: data[i].program,
                     notes: data[i].notes,
@@ -92,8 +91,7 @@ $(document).ready(function () {
                 rowsToAdd.push(newTimeEntry);
                 // console.log(rowsToAdd);
             }
-            createTimesheetRow(rowsToAdd);
-            renderTimesheetList(rowsToAdd);
+            renderTimesheetList(createTimesheetRow(rowsToAdd));
         });
     }
 
@@ -118,5 +116,15 @@ $(document).ready(function () {
         tableContainer.append(alertDiv);
     }
 
+    // Function for handling what happens when the delete button is pressed
+    function handleDeleteButtonPress() {
+        var id = $(this).parent("td").parent("tr").data("timeblock");
+        console.log(id);
+        $.ajax({
+            method: "DELETE",
+            url: "api/timesheets/" + id
+        })
+            .then(getLastTenEntries);
+    }
 
 });

@@ -22,8 +22,10 @@ $(document).ready(function () {
     function getEmployees() {
         $.get("/api/employees", function (data) {
             for (var i = 0; i < data.length; i++) {
+                if (data[i].status === 'Active') {
                     employees.push(data[i].name);
                     employeeId.push(data[i].employee_id);
+                }
             }
         })
         .then(employeesDropdown);
