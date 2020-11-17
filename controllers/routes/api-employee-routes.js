@@ -22,16 +22,16 @@ module.exports = function (app) {
         });
     });
 
-    app.post("/api/employees/:user?", function (req, res) {
+    app.post("/api/employees", function (req, res) {
         db.Employee.create(req.body).then(function (dbEmployee) {
             res.json(dbEmployee);
         });
     });
 
-    app.delete("/api/employees/:user", function (req, res) {
+    app.put("/api/employees/:user", function (req, res) {
         db.Employee.destroy({
             where: {
-                employee_id: req.params.id
+                name: req.params.user
             }
         }).then(function (dbEmployee) {
             res.json(dbEmployee);
