@@ -91,7 +91,7 @@ $(document).ready(function () {
         var rowsToAdd = [];
         var route = "";
         if (updating) {
-            route = "/api/timesheets/" + entryId;
+            route = "/api/timesheets/entries/" + entryId;
         } else {
             route = "/api/timesheets/limit=10/" + userName;
         }
@@ -147,7 +147,7 @@ $(document).ready(function () {
         console.log(id);
         $.ajax({
             method: "DELETE",
-            url: "api/timesheets/" + id
+            url: "api/timesheets/entries/" + id
         })
             .then(getLastTenEntries);
     }
@@ -168,11 +168,11 @@ $(document).ready(function () {
     function updateTimeblock(entry) {
         $.ajax({
             method: "PUT",
-            url: "/api/timesheets/" + id,
+            url: "/api/timesheets/entries/" + id,
             data: entry
         })
             .then(function () {
-                window.location.href = "/blog";
+                window.location.href = "/eng/" + userName;
             });
     }
 

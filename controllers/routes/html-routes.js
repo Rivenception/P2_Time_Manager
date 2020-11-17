@@ -38,7 +38,7 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/entry/:id", function (req, res) {
+  app.get("/update/:id", function (req, res) {
     db.Timesheet.findOne({
       include: [db.Employee],
       where: {
@@ -46,7 +46,10 @@ module.exports = function (app) {
       }
     }).then(function (dbTimesheet) {
       console.log(dbTimesheet.id);
-      res.render("eng");
+      res.render("update", {
+        user: dbTimesheet.employee_id,
+        employeeName: dbTimesheet.name,
+      });
     });
   });
 

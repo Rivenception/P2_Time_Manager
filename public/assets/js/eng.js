@@ -128,7 +128,7 @@ $(document).ready(function () {
         console.log(id);
         $.ajax({
             method: "DELETE",
-            url: "api/timesheets/" + id
+            url: "api/timesheets/entries/" + id
         })
             .then(function(event) {
                 getLastTenEntries();
