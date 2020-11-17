@@ -1,6 +1,7 @@
 INSERT INTO employees (employee_id, name, dept, title, status, salary) VALUES ('rmingione', 'Rick Mingione', 'Program Management', 'Sr. Program Manager', 70000);
 INSERT INTO employees (employee_id, name, dept, title, status, salary) VALUES ('flucena', 'Fernando Lucena', 'Engineering', 'Engineer', 70000);
 INSERT INTO employees (employee_id, name, dept, title, status, salary) VALUES ('bpatel', 'Bhaumik Patel', 'Engineering', 'Engineering Manager', 70000);
+INSERT INTO employees (employee_id, name, dept, title, status, salary) VALUES ('agroover', 'Andrew Groover', 'Engineering', 'Engineer', 'Inactive', 70000);
 
 INSERT INTO timesheets (employee_id, name, date, category, task, timeSpent, program, ecr, notes, FKemployee_id) VALUES ('rmingione', 'Rick Mingione', '20/11/07', 'Program Management', 'Admin', 30, "5924", null, 'test note', 'rmingione');
 INSERT INTO timesheets (employee_id, name, date, category, task, timeSpent, program, ecr, notes, FKemployee_id) VALUES ('rmingione', 'Rick Mingione', '20/11/04', 'Program Management', 'Meeting', 30, "99999", "19562", 'test note', 'rmingione');
