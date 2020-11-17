@@ -99,7 +99,8 @@ module.exports = function (app) {
     });
     
     app.put("/api/timesheets/entries/:id", function (req, res) {
-        db.Timesheet.update({
+        db.Timesheet.update(req.body,
+            {
             where: {
                 id: req.body.id
             }

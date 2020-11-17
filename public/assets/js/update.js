@@ -49,6 +49,7 @@ $(document).ready(function () {
         };
 
         if (updating) {
+            console.log("fetching updates");
             newTimeEntry.id = entryId;
             updateTimeblock(newTimeEntry);
         } else {
@@ -125,11 +126,9 @@ $(document).ready(function () {
         if (rowsToAdd.length) {
             // console.log(rowsToAdd);
             tableBody.prepend(rowsToAdd);
-            updating = false;
         }
         else {
             renderEmpty()
-            updating = false;
         }
     }
 
@@ -168,7 +167,7 @@ $(document).ready(function () {
     function updateTimeblock(entry) {
         $.ajax({
             method: "PUT",
-            url: "/api/timesheets/entries/" + id,
+            url: "/api/timesheets/entries/" + entryId,
             data: entry
         })
             .then(function () {

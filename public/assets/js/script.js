@@ -35,10 +35,7 @@ $(document).ready(function () {
         //For loop that checks the URL for a userId and compares to the employee_id key in the database. If accurate, it sets the Name value in the html for the user by default.
         for (let i = 0; i < employeeId.length && employees.length; i++) {
             if (window.location.href === "http://localhost:8080/eng" + employeeId || "http://localhost:8080/mfg" + employeeId || "http://localhost:8080/pm" + employeeId) {
-                console.log(employees[i]);
-                console.log(employeeId[i]);
                 if (window.location.href.indexOf(employeeId[i]) > -1) {
-                    console.log(employeeId[i]);
                     let dropdown = $("<option>").attr("value", employees[i]).text(employees[i]);
                     $("#inputGroupEmployee").append(dropdown);
                     return;
