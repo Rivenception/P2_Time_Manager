@@ -12,6 +12,12 @@ $(document).ready(function () {
     var inputEcr = $('#inputGroupEcr');
     var inputNotes = $('#inputGroupNotes');
 
+    var windowURL = window.location.href
+    var entryId = windowURL.split("http://localhost:8080/update/", 2)
+    entryId = entryId[1]
+
+    updating = true;
+
     $(document).on("click", "#timeSubmit", handleFormSubmit);
     $(document).on("click", ".delete-entry", handleDeleteButtonPress);
 
@@ -42,7 +48,12 @@ $(document).ready(function () {
             notes: inputNotes.val(),
         };
 
-        submitTimeblock(newTimeEntry);
+        if (updating) {
+            newTimeEntry.id = entryId;
+            updateTimeblock(newTimeEntry);
+        } else {
+            submitTimeblock(newTimeEntry);
+        }
     };
 
     // Submits a new timeblock entry
@@ -78,7 +89,13 @@ $(document).ready(function () {
     // Function for retrieving timeblocks and getting them ready to be rendered to the page
     function getLastTenEntries() {
         var rowsToAdd = [];
-        var route = "/api/timesheets/limit=10/" + userName;
+        var route = "";
+        if (updating) {
+            route = "/api/timesheets/" + entryId;
+        } else {
+            route = "/api/timesheets/limit=10/" + userName;
+        }
+        console.log(route);
         $.get(route, function (data) {
             for (var i = 0; i < data.length; i++) {
                 var newTimeEntry = {
@@ -108,9 +125,11 @@ $(document).ready(function () {
         if (rowsToAdd.length) {
             // console.log(rowsToAdd);
             tableBody.prepend(rowsToAdd);
+            updating = false;
         }
         else {
             renderEmpty()
+            updating = false;
         }
     }
 
@@ -130,11 +149,8 @@ $(document).ready(function () {
             method: "DELETE",
             url: "api/timesheets/" + id
         })
-            .then(function(event) {
-                getLastTenEntries();
-                event.preventDefault();
-            })
-    };
+            .then(getLastTenEntries);
+    }
 
     // working on editing
     $(document).on("click", ".edit-entry", handleEdit);
@@ -144,7 +160,20 @@ $(document).ready(function () {
         console.log("yes");
         var currentEntry = $(this).parent("td").parent("tr").data("timeblock");
         console.log(currentEntry);
+        updating = true;
         window.location.href = "/update/" + currentEntry
+    }
+
+    // Update a given post, bring user to the blog page when done
+    function updateTimeblock(entry) {
+        $.ajax({
+            method: "PUT",
+            url: "/api/timesheets/" + id,
+            data: entry
+        })
+            .then(function () {
+                window.location.href = "/blog";
+            });
     }
 
 });
