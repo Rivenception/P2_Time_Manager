@@ -3,7 +3,6 @@ var db = require("../../models");
 module.exports = function (app) {
     app.get("/api/employees", function (req, res) {
         db.Employee.findAll({
-            include: [db.Timesheet],
             order: [
                 ['name', 'ASC']
             ],
