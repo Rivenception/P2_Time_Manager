@@ -38,7 +38,6 @@ $(document).ready(function () {
             task: taskSelect.val(),
             timespent: timeSelect.val(),
             program: programId.val().trim(),
-            ecr: inputEcr.val(),
             notes: inputNotes.val(),
         };
 
@@ -66,9 +65,8 @@ $(document).ready(function () {
             newTr.append("<td>" + newTimeEntry[i].task + "</td>");
             newTr.append("<td>" + newTimeEntry[i].timespent + "</td>");
             newTr.append("<td>" + newTimeEntry[i].program + "</td>");
-            newTr.append("<td>" + newTimeEntry[i].ecr + "</td>");
             newTr.append("<td>" + newTimeEntry[i].notes + "</td>");
-            newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='edit-entry fa fa-pencil-square-o aria-hidden='true'></i></td>");
+            newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='update-entry fa fa-pencil-square-o aria-hidden='true'></i></td>");
             newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='delete-entry fa fa-trash-o'></i></td>");
             allEntries.push(newTr)
         }
@@ -131,17 +129,6 @@ $(document).ready(function () {
             url: "api/timesheets/" + id
         })
             .then(getLastTenEntries);
-    }
-
-    // working on editing
-    $(document).on("click", ".edit-entry", handleEdit);
-
-    // This function figures out which post we want to edit and takes it to the appropriate url
-    function handleEdit() {
-        console.log("yes");
-        var currentEntry = $(this).parent("td").parent("tr").data("timeblock");
-        console.log(currentEntry);
-        window.location.href = "/entry?" + currentEntry
     }
 
 });
