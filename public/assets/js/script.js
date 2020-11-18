@@ -3,14 +3,15 @@ $(document).ready(function () {
     let task = {
         pm_tasks: ["Kick-Off", "Project Planning", "Internal Meeting", "Program Tracking", "Customer Support", "Customer Meeting"],
         mfg_tasks: ["Tooling LP", "Tooling Mold", "Tooling Hotwire", "Tooling Programming", "GPD Cushion Rev", "GPD dress covers"],
-        eng_tasks: ["Design", "Samples", "GPDs", "Patterns", "Drafting", "BOMs", "Product Development", "Internal Meeting", "Customer Meeting", "Other"],
-        admin_tasks: ["Internal Meeting", "Customer Meeting", "Training", "H-cell Support", "Production/Mfg Supprort", "Other"],
+        eng_tasks: ["Design", "Samples", "GPDs", "Patterns", "TLDs", "BOMs", "Labels", "Product Development", "Review", "Other"],
+        ecr_tasks: ["Design", "GPDs", "Patterns", "TLDs", "BOMs", "Product Development", "Labels", "Review", "Processing", "Other"],
+        admin_tasks: ["Other", "Internal Meeting", "Customer Meeting", "Training", "H-cell Support", "Production/Mfg Supprort", "Emails"],
         rd_tasks: ["Product Development", "Production Implementation", "Sales Samples"]
     }
 
     let category = {
-        eng_category: ["ECR", "Development", "Non-Development", "Sales Samples", "Admin (Non-Dev)", "R&D"],
-        mfg_category: ["ECR", "Development", "Non-Development", "Sales Samples", "Admin (Non-Dev)", "R&D"],
+        eng_category: ["ECR", "Development", "Admin", "R&D"],
+        mfg_category: ["ECR", "Development", "Admin", "R&D"],
         pm_category: ["Program Management", "Admin"],
     }
 

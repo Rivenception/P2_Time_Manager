@@ -82,6 +82,20 @@ module.exports = function (app) {
         });
     });
 
+    app.get("/api/timesheets/programs/ecr/:ecr", function (req, res) {
+        db.Timesheet.findAll({
+            include: [db.Employee],
+            where: {
+                ecr: req.params.ecr
+            },
+            order: [
+                ['id', 'DESC']
+            ]
+        }).then(function (dbTimesheet) {
+            res.json(dbTimesheet);
+        });
+    });
+
     app.post("/api/timesheets", function (req, res) {
         db.Timesheet.create(req.body).then(function (dbTimesheet) {
             res.json(dbTimesheet);

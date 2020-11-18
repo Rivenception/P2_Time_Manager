@@ -2,6 +2,7 @@ $(document).ready(function () {
     var tableBody = $("tbody");
     var tableContainer = $(".table-container");
 
+    var dept = $('#dept').text();
     var userName = $('#hiddenId').text();
     var nameSelect = $('#inputGroupEmployee');
     var dateSelect = $('#date');
@@ -11,14 +12,28 @@ $(document).ready(function () {
     var programId = $('#inputGroupProgram');
     var inputEcr = $('#inputGroupEcr');
     var inputNotes = $('#inputGroupNotes');
+    var deptURL = '';
 
     $(document).on("click", "#timeSubmit", handleFormSubmit);
     $(document).on("click", ".delete-entry", handleDeleteButtonPress);
 
-    // console.log(userName);
-
     // Getting the initial list of Time Entries
     getLastTenEntries();
+    checkDept();
+
+    console.log(deptURL)
+
+    // Function that checks html to confirm department called from routes
+    function checkDept() {
+        deptURL = '';
+        if (dept === 'Engineering') {
+            deptURL = "eng";
+        } else if (dept === 'Manufacturing') {
+            deptURL = "mfg";
+        } else if (dept === 'Program Management') {
+            deptURL = "pm";
+        };
+    };
 
     // A function for handling what happens when the form to create a new post is submitted
     function handleFormSubmit(event) {
@@ -60,15 +75,15 @@ $(document).ready(function () {
             var newTr = $("<tr>");
             newTr.data("timeblock", newTimeEntry[i].id);
             newTr.append("<td>" + newTimeEntry[i].id + "</td>");
-            newTr.append("<td>" + newTimeEntry[i].name + "</td>");
+            newTr.append("<td><a href='/" + deptURL + newTimeEntry[i].employee_id + "'>" + newTimeEntry[i].name +"</td>");
             newTr.append("<td>" + newTimeEntry[i].date + "</td>");
             newTr.append("<td>" + newTimeEntry[i].category + "</td>");
             newTr.append("<td>" + newTimeEntry[i].task + "</td>");
             newTr.append("<td>" + newTimeEntry[i].timespent + "</td>");
-            newTr.append("<td>" + newTimeEntry[i].program + "</td>");
-            newTr.append("<td>" + newTimeEntry[i].ecr + "</td>");
+            newTr.append("<td><a href='/rfb/" + newTimeEntry[i].program + "'>" + newTimeEntry[i].program + "</td>");
+            newTr.append("<td><a href='/rfb/ecr/" + newTimeEntry[i].ecr + "'>" + newTimeEntry[i].ecr + "</td>");
             newTr.append("<td>" + newTimeEntry[i].notes + "</td>");
-            newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='update-entry fa fa-pencil-square-o aria-hidden='true'></i></td>");
+            newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='edit-entry fa fa-pencil-square-o aria-hidden='true'></i></td>");
             newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='delete-entry fa fa-trash-o'></i></td>");
             allEntries.push(newTr)
         }
@@ -114,11 +129,11 @@ $(document).ready(function () {
         }
     }
 
-    // Function for handling what to render when there are no authors
+    // Function for handling what to render when the employee is not in the database
     function renderEmpty() {
         var alertDiv = $("<div>");
         alertDiv.addClass("alert alert-danger");
-        alertDiv.text("There are no entries for the selected employee");
+        alertDiv.text("Please contact your administrator to have your employeeID entered");
         tableContainer.append(alertDiv);
     }
 
@@ -131,6 +146,16 @@ $(document).ready(function () {
             url: "api/timesheets/entries/" + id
         })
             .then(getLastTenEntries);
+    }
+
+    $(document).on("click", ".edit-entry", handleEdit);
+
+    // This function figures out which post we want to edit and takes it to the appropriate url
+    function handleEdit() {
+        console.log("yes");
+        var currentEntry = $(this).parent("td").parent("tr").data("timeblock");
+        console.log(currentEntry);
+        window.location.href = "/update/" + currentEntry
     }
 
 });

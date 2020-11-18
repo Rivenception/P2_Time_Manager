@@ -2,7 +2,7 @@ $(document).ready(function () {
     var tableBody = $("tbody");
     var tableContainer = $(".table-container");
 
-    var rfb = $('#hiddenId').text();
+    var ecr = $('#hiddenId').text();
     var addHours = document.getElementById("#total-hours");
     var addCosts = document.getElementById("#total-cost");
 
@@ -33,7 +33,7 @@ $(document).ready(function () {
     // Function for retrieving timeblocks and getting them ready to be rendered to the page
     function getEntries() {
         var rowsToAdd = [];
-        var route = "/api/timesheets/programs/" + rfb;
+        var route = "/api/timesheets/programs/ecr/" + ecr;
         $.get(route, function (data) {
             for (var i = 0; i < data.length; i++) {
                 var newTimeEntry = {
@@ -78,7 +78,7 @@ $(document).ready(function () {
     }
 
     function getTime() {
-        var route = "/api/timesheets/programs/" + rfb;
+        var route = "/api/timesheets/programs/ecr/" + ecr;
         let programTime = 0;
         $.get(route, function (data) {
             for (var i = 0; i < data.length; i++) {

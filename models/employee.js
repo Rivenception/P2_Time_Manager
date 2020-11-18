@@ -10,15 +10,12 @@ module.exports = function (sequelize, DataTypes) {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
-            primaryKey: true,
             len: [1]
         },
         employee_id: {
             type: DataTypes.STRING,
+            primaryKey: true,
             allowNull: false,
-            validate: {
-                len: [1,45]
-            }
         },
         dept: {
             type: DataTypes.STRING,
@@ -38,7 +35,6 @@ module.exports = function (sequelize, DataTypes) {
         },
         salary: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             len: [1]
         },
         createdAt: {
