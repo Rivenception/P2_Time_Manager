@@ -153,7 +153,6 @@ $(document).ready(function () {
             })
     };
 
-    // working on editing
     $(document).on("click", ".edit-entry", handleEdit);
 
     // This function figures out which post we want to edit and takes it to the appropriate url
