@@ -17,7 +17,7 @@ $(document).ready(function () {
 
     // console.log(userName);
 
-    // Getting the initial list of Authors
+    // Getting the initial list of Time Entries
     getLastTenEntries();
 
     // A function for handling what happens when the form to create a new post is submitted

@@ -2,7 +2,7 @@ $(document).ready(function () {
     var tableBody = $("tbody");
     var tableContainer = $(".table-container");
 
-    var userName = $('#hiddenId').text();
+    var rfb = $('#hiddenId').text();
     var nameSelect = $('#inputGroupEmployee');
     var dateSelect = $('#date');
     var categorySelect = $("#inputGroupCategory");
@@ -15,10 +15,11 @@ $(document).ready(function () {
     $(document).on("click", "#timeSubmit", handleFormSubmit);
     $(document).on("click", ".delete-entry", handleDeleteButtonPress);
 
-    // console.log(userName);
+    // console.log(rfb);
 
     // Getting the initial list of Time Entries
-    getLastTenEntries();
+    getEntries();
+    getTime();
 
     // A function for handling what happens when the form to create a new post is submitted
     function handleFormSubmit(event) {
@@ -29,7 +30,7 @@ $(document).ready(function () {
         }
         // Constructing a newPost object to hand to the database
         var newTimeEntry = {
-            employee_id: userName,
+            employee_id: rfb,
             name: nameSelect.val(),
 
             // may need to reformat date information for mySQL?
@@ -68,17 +69,15 @@ $(document).ready(function () {
             newTr.append("<td>" + newTimeEntry[i].program + "</td>");
             newTr.append("<td>" + newTimeEntry[i].ecr + "</td>");
             newTr.append("<td>" + newTimeEntry[i].notes + "</td>");
-            newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='update-entry fa fa-pencil-square-o aria-hidden='true'></i></td>");
-            newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='delete-entry fa fa-trash-o'></i></td>");
             allEntries.push(newTr)
         }
         return allEntries;
     }
 
     // Function for retrieving timeblocks and getting them ready to be rendered to the page
-    function getLastTenEntries() {
+    function getEntries() {
         var rowsToAdd = [];
-        var route = "/api/timesheets/limit=10/" + userName;
+        var route = "/api/timesheets/programs/" + rfb;
         $.get(route, function (data) {
             for (var i = 0; i < data.length; i++) {
                 var newTimeEntry = {
@@ -130,7 +129,44 @@ $(document).ready(function () {
             method: "DELETE",
             url: "api/timesheets/entries/" + id
         })
-            .then(getLastTenEntries);
+            .then(function (event) {
+                getLastTenEntries();
+                event.preventDefault();
+            })
+    };
+
+    // working on editing
+    $(document).on("click", ".edit-entry", handleEdit);
+
+    // This function figures out which post we want to edit and takes it to the appropriate url
+    function handleEdit() {
+        console.log("yes");
+        var currentEntry = $(this).parent("td").parent("tr").data("timeblock");
+        console.log(currentEntry);
+        window.location.href = "/update/" + currentEntry
     }
+
+    function getTime() {
+        var route = "/api/timesheets/programs/" + rfb;
+        let programTime = 0;
+        $.get(route, function (data) {
+            for (var i = 0; i < data.length; i++) {
+                number = data[i].timespent;
+                programTime += number
+                console.log(programTime);
+            }
+            totalHours = programTime / 60;
+            console.log(totalHours);
+            totalCost = totalHours * 100;
+            console.log(totalCost);
+            $("#total-hours").innerHTML = "Current Hours: " + totalHours;
+            $("#total-cost").innerHTML = "Current NRE Cost: $" + totalCost;
+        })
+            .then(function () {
+
+            })
+    };
+
+
 
 });

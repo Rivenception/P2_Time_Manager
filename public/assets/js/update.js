@@ -23,7 +23,7 @@ $(document).ready(function () {
 
     // console.log(userName);
 
-    // Getting the initial list of Authors
+    // Getting the initial list of Time Entries
     getLastTenEntries();
 
     // A function for handling what happens when the form to create a new post is submitted
@@ -163,7 +163,7 @@ $(document).ready(function () {
         window.location.href = "/update/" + currentEntry
     }
 
-    // Update a given post, bring user to the blog page when done
+    // Update a given post, bring user to the blog page when done ***NEED TO IMPLEMENT SWITCH BETWEEN DEPARTMENTS***
     function updateTimeblock(entry) {
         $.ajax({
             method: "PUT",
