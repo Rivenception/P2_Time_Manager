@@ -6,6 +6,9 @@ global.$ = require('jquery')(window);
 global.document = document;  */
 
 $(document).ready(function () {
+    var tableBody = $("tbody");
+    var tableContainer = $(".table-container");
+    
     var employeeId = $("#employee-id");
     var name = $('#name')
     var department = $('#department');
@@ -14,7 +17,8 @@ $(document).ready(function () {
     var status = $('#status');
 
     $(document).on("click", "#employeeSubmit", handleFormSubmit);
-    $(document).on("click", ".delete", handleDeleteButtonPress);
+
+    getAllEmployees();
 
     // A function for handling what happens when the form to create a new employee is submitted
     function handleFormSubmit(event) {
@@ -39,7 +43,68 @@ $(document).ready(function () {
 
     // Submits a new employee entry
     function submitEmployee(data) {
-        $.post("/api/employees", data);
+        $.post("/api/employees", data)
+        .then(getAllEmployees);
+    }
+
+    
+    // Function for creating a new list row for timeblocks
+    function createTimesheetRow(newEntry) {
+        var allEntries = [];
+        for (var i = 0; i < newEntry.length; i++) {
+            var newTr = $("<tr>");
+            newTr.data("employee", newEntry[i].employee_id);
+            newTr.append("<td>" + newEntry[i].employee_id + "</td>");
+            newTr.append("<td>" + newEntry[i].name + "</td>");
+            newTr.append("<td>" + newEntry[i].dept + "</td>");
+            newTr.append("<td>" + newEntry[i].title + "</td>");
+            newTr.append("<td>" + newEntry[i].salary + "</td>");
+            newTr.append("<td>" + newEntry[i].status + "</td>");
+            newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='edit-entry fa fa-pencil-square-o aria-hidden='true'></i></td>");
+            allEntries.push(newTr)
+        }
+        return allEntries;
+    }
+
+    // Function for retrieving timeblocks and getting them ready to be rendered to the page
+    function getAllEmployees() {
+        var rowsToAdd = [];
+        var route = "/api/employees";
+        $.get(route, function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var newEntry = {
+                    employee_id: data[i].employee_id,
+                    name: data[i].name,
+                    dept: data[i].dept,
+                    title: data[i].title,
+                    salary: data[i].salary,
+                    status: data[i].status,
+                }
+                rowsToAdd.push(newEntry);
+            }
+            renderTimesheetList(createTimesheetRow(rowsToAdd));
+        });
+    }
+
+    // A function for rendering the list of timeblocks to the page
+    function renderTimesheetList(rowsToAdd) {
+        tableBody.children().not(":last").remove();
+        tableContainer.children(".alert").remove();
+        if (rowsToAdd.length) {
+            // console.log(rowsToAdd);
+            tableBody.prepend(rowsToAdd);
+        }
+        else {
+            renderEmpty()
+        }
+    }
+
+    // Function for handling what to render when the employee is not in the database
+    function renderEmpty() {
+        var alertDiv = $("<div>");
+        alertDiv.addClass("alert alert-danger");
+        alertDiv.text("Please contact your administrator to have your employeeID entered");
+        tableContainer.append(alertDiv);
     }
 });
 

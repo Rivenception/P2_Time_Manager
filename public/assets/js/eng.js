@@ -67,10 +67,6 @@ $(document).ready(function () {
     }
 
     // Function for creating a new list row for timeblocks
-
-    "/rfb/ecr/:ecr"
-
-    // for some reason this is not working
     function createTimesheetRow(newTimeEntry) {
         var allEntries = [];
         for (var i = 0; i < newTimeEntry.length; i++) {

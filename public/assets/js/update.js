@@ -21,8 +21,6 @@ $(document).ready(function () {
     $(document).on("click", "#timeSubmit", handleFormSubmit);
     $(document).on("click", ".delete-entry", handleDeleteButtonPress);
 
-    // console.log(userName);
-
     // Getting the initial list of Time Entries
     getLastTenEntries();
 
@@ -174,5 +172,4 @@ $(document).ready(function () {
                 window.location.href = "/eng/" + userName;
             });
     }
-
 });
