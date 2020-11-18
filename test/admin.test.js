@@ -5,7 +5,7 @@ const { JSDOM } = jsdom;
 const Employee = require('../models/employee')
 const html = require('../views/layouts/main.handlebars')
 global.$ = require('jquery')(window);
-global.document = document;
+global.document = document; 
 
 
 describe('adminModule', () =>{
@@ -24,3 +24,4 @@ describe('adminModule', () =>{
     }
 )});
  */
+

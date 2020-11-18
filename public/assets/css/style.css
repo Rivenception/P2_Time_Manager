@@ -162,6 +162,13 @@ li {
 #employeeID li{
   list-style-type: none;
 }
+td{
+  color: #ebecee;
+  ;
+}
+tr{
+  color: #ebecee;
+}
 
 #hiddenId {
   display: none;

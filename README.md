@@ -1,27 +1,55 @@
-Brian Garrity, Juliette Gondon, Rick Mingione
+ # Employee Timesheet Manager
+ ## Brian Garrity, Juliette Gondon, Rick Mingione
 
-Employee Timesheet Manager
+ ## Description 
+ This is application serves tech workers and administrators who need to keep track of expenses and hours. Engineers don’t always have a punch-in punch-out method of logging their work hours, so this timesheet app offers a user friendly way to log hours and manage their expenses.
 
-A block formatted webpage that manages an employee database, their last 10 entries of time logged. This is going to function as a catchup and benefit tech workers as well as administrators and managers who need to keep track of expenses and hours. engineers don’t always have a punch-in punch-out method of logging their work hours, so this timesheet app would create a user friendly way to log hours and expenses. We are potentially entering an admin page so this would be secure for users. The user would enter their time and be given back their past logs. Eventually this application will be used on local servers by Franklin Products - an engineering company in the airline industry 
+ A block formatted webpage that manages an employee database, where employees can log their work hours and productivity, as well as access their last 10 entries of time logged.
 
-* Must use a Node and Express server
+ Our engineered interface allows employees to adjust hours worked and submit a timesheet to the administrator, who also has their own view of the application from a management perspective. You can create and run reports for overtime hours and view a users past 10 timesheet entries. This tool can provide program managers and department heads the visibility of active projects and tasks completed in real time.
+
+ ## Features: 
+  
+ * uses Node and Express server
 ​
-* Must use Handlebars.js as the template engine
+ * Handlebars.js as the template engine, designed for https://franklinproductsinc.com/ using Bootstrap
 ​
-* Must be backed by a MySQL database with a Sequelize ORM
+ * data is housed in MySQL database with a Sequelize ORM
 ​
-* Must utilize both GET and POST routes for retrieving and adding new data
+ * uses GET, POST, and PUT routes for retrieving and adding new data to database
 ​
-* Must be deployed using Heroku (with data)
+ * deployed to Heroku
 ​
-* Must utilize at least one new library, package, or technology that we haven’t discussed
+ * uses Mocha & Chai for testing
 ​
-* Must have a polished front end/UI
-​
-* Must have a folder structure that meets the MVC paradigm
-​
-* Must meet good quality coding standards (indentation, scoping, naming)
-​
-* Must protect API keys in Node with environment variables
+* MVC standard file structure
 
 
+
+  ## Installation:
+    You can 'git clone' this application onto your local machine, be sure to change the database password to your own in the config.json file. Otherwise, the deployed app can be accessed on heroku through this link: 
+
+  ## License:
+  ISC
+  
+
+  ## Contributing:
+Not currently open source, but visit the contact section to get a hold of the developers for suggestion and editing. 
+
+ ## Tests:
+ Mocha - Javascript testing framework
+  Chai - BDD / TDD assertion library for NodeJS
+  'npm run test'
+
+ ## How To Use
+ Run as a user on the deployed app
+ Run node server.js on cloned repository, launch local host in browser
+
+
+ ## Questions: 
+If you have any questions, you can contact the creators of this repo here: [juliettegondon@gmail.com](juliettegondon@gmail.com)
+GitHub: https://github.com/juliettegondon
+[garrib10@gmail.com](garrib10@gmail.com)
+GitHub: https://github.com/garrib10
+[@gmail.com](@gmail.com)
+GitHub: https://github.com/rivenception

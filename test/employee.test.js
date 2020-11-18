@@ -10,10 +10,10 @@ const { document } = new JSDOM(`...`).window;
 global.$ = require('jquery')(window);
 global.document = document;
 
-
 describe('Can database accept employee', () => {
     let Employees = R;
     it('check that get Employees function works', () => {
+
         //inside here Assert is used to see if test worked
        assert.isNotNull(Employees, "employee is not null")
     })

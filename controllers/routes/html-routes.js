@@ -13,16 +13,50 @@ module.exports = function (app) {
   });
 
   app.get("/eng", function (req, res) {
-    res.render("eng");
+    db.Employee.findOne({
+      where: {
+        dept: 'Engineering'
+      }
+    }).then(function (dbEmployee) {
+      res.render("eng", {
+        dept: dbEmployee.dept,
+      });
+    });
   });
 
   app.get("/mfg", function (req, res) {
-    res.render("mfg");
+    db.Employee.findOne({
+      where: {
+        dept: 'Manufacturing'
+      }
+    }).then(function (dbEmployee) {
+      res.render("mfg", {
+        dept: dbEmployee.dept,
+      });
+    });
   });
 
   app.get("/pm", function (req, res) {
-    res.render("pm");
+    db.Employee.findOne({
+      where: {
+        dept: 'Program Management'
+      }
+    }).then(function (dbEmployee) {
+      console.log(dbEmployee.dept)
+      res.render("pm", {
+        dept: dbEmployee.dept,
+      });
+    });
   });
+
+  app.get("/rfb", function (req, res) {
+    res.render("rfb", {
+      user: dbEmployee.employee_id,
+      employeeName: dbEmployee.name,
+      dept: dbEmployee.dept,
+    });
+  });
+
 
   app.get("/eng/:user", function (req, res) {
     db.Employee.findOne({
@@ -34,11 +68,12 @@ module.exports = function (app) {
       res.render("eng", {
         user: dbEmployee.employee_id,
         employeeName: dbEmployee.name,
+        dept: dbEmployee.dept,
       });
     });
   });
 
-  app.get("/entry/:id", function (req, res) {
+  app.get("/update/:id", function (req, res) {
     db.Timesheet.findOne({
       include: [db.Employee],
       where: {
@@ -46,7 +81,10 @@ module.exports = function (app) {
       }
     }).then(function (dbTimesheet) {
       console.log(dbTimesheet.id);
-      res.render("eng");
+      res.render("update", {
+        user: dbTimesheet.employee_id,
+        employeeName: dbTimesheet.name,
+      });
     });
   });
 
@@ -60,6 +98,7 @@ module.exports = function (app) {
       res.render("eng", {
         user: dbEmployee.employee_id,
         employeeName: dbEmployee.name,
+        dept: dbEmployee.dept,
       });
     });
   });
@@ -74,6 +113,36 @@ module.exports = function (app) {
       res.render("eng", {
         user: dbEmployee.employee_id,
         employeeName: dbEmployee.name,
+        dept: dbEmployee.dept,
+      });
+    });
+  });
+
+  app.get("/rfb/:rfb", function (req, res) {
+    db.Timesheet.findOne({
+      include: [db.Employee],
+      where: {
+        program: req.params.rfb
+      }
+    }).then(function (dbTimesheet) {
+      console.log(dbTimesheet.id);
+      res.render("rfb", {
+        program: dbTimesheet.program,
+      });
+    });
+  });
+
+  app.get("/rfb/ecr/:ecr", function (req, res) {
+    db.Timesheet.findOne({
+      include: [db.Employee],
+      where: {
+        ecr: req.params.ecr
+      }
+    }).then(function (dbTimesheet) {
+      console.log(dbTimesheet.id);
+      res.render("rfb", {
+        program: dbTimesheet.program,
+        ecr: dbTimesheet.ecr,
       });
     });
   });

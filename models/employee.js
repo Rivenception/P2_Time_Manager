@@ -1,17 +1,21 @@
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+const { window } = new JSDOM(`...`);
+const { document } = new JSDOM(`...`).window;
+global.$ = require('jquery')(window);
+global.document = document;
+
 module.exports = function (sequelize, DataTypes) {
     var Employee = sequelize.define("Employee", {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
-            primaryKey: true,
             len: [1]
         },
         employee_id: {
             type: DataTypes.STRING,
+            primaryKey: true,
             allowNull: false,
-            validate: {
-                len: [1,45]
-            }
         },
         dept: {
             type: DataTypes.STRING,
@@ -31,7 +35,6 @@ module.exports = function (sequelize, DataTypes) {
         },
         salary: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             len: [1]
         },
         createdAt: {
@@ -53,7 +56,7 @@ module.exports = function (sequelize, DataTypes) {
         // We're saying that a Timesheet should belong to an Employee
         // A Timesheet can't be created without an Employee due to the foreign key constraint
         Employee.hasMany(models.Timesheet, {
-            foreignKey: 'FKname'
+            foreignKey: 'FKemployee_id'
         });
     };
 

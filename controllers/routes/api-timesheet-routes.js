@@ -26,6 +26,20 @@ module.exports = function (app) {
         });
     });
 
+    app.get("/api/timesheets/entries/:id", function (req, res) {
+        db.Timesheet.findAll({
+            include: [db.Employee],
+            where: {
+                id: req.params.id
+            },
+            order: [
+                ['id', 'DESC']
+            ],
+        }).then(function (dbTimesheet) {
+            res.json(dbTimesheet);
+        });
+    });
+
     app.get("/api/timesheets/limit=10", function (req, res) {
         db.Timesheet.findAll({
             include: [db.Employee],
@@ -68,13 +82,27 @@ module.exports = function (app) {
         });
     });
 
+    app.get("/api/timesheets/programs/ecr/:ecr", function (req, res) {
+        db.Timesheet.findAll({
+            include: [db.Employee],
+            where: {
+                ecr: req.params.ecr
+            },
+            order: [
+                ['id', 'DESC']
+            ]
+        }).then(function (dbTimesheet) {
+            res.json(dbTimesheet);
+        });
+    });
+
     app.post("/api/timesheets", function (req, res) {
         db.Timesheet.create(req.body).then(function (dbTimesheet) {
             res.json(dbTimesheet);
         });
     });
 
-    app.delete("/api/timesheets/:id", function (req, res) {
+    app.delete("/api/timesheets/entries/:id", function (req, res) {
         db.Timesheet.destroy({
             where: {
                 id: req.params.id
@@ -83,15 +111,17 @@ module.exports = function (app) {
             res.json(dbTimesheet);
         });
     });
-    app.put("/api/timesheets/:id", function(req, res) {
-        db.Timesheet.update({
-          where: {
-            id: req.body.id
-          }
-        }).then(function(dbTimesheet) {
-          res.json(dbTimesheet);
+    
+    app.put("/api/timesheets/entries/:id", function (req, res) {
+        db.Timesheet.update(req.body,
+            {
+            where: {
+                id: req.body.id
+            }
+        }).then(function (dbTimesheet) {
+            res.json(dbTimesheet);
         });
-      });
-    
-    };
-    
+    });
+
+};
+
