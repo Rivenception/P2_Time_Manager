@@ -8,7 +8,7 @@ global.document = document;  */
 $(document).ready(function () {
     var tableBody = $("tbody");
     var tableContainer = $(".table-container");
-    
+
     var employeeId = $("#employee-id");
     var name = $('#name')
     var department = $('#department');
@@ -23,6 +23,10 @@ $(document).ready(function () {
     // A function for handling what happens when the form to create a new employee is submitted
     function handleFormSubmit(event) {
         event.preventDefault();
+        console.log(employeeId);
+        console.log(department);
+        console.log(name);
+        console.log(title);
         // Wont submit if data is missing.
         if (!employeeId.val().trim() || !name.val().trim() || !department.val().trim() || !title.val().trim()) {
             return;
