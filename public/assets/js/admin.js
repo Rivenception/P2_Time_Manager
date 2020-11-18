@@ -1,3 +1,10 @@
+/* const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+const { window } = new JSDOM(`...`);
+const { document } = new JSDOM(`...`).window;
+global.$ = require('jquery')(window);
+global.document = document;  */
+
 $(document).ready(function () {
     var employeeId = $("#employee-id");
     var name = $('#name')
@@ -28,3 +35,4 @@ $(document).ready(function () {
         submitEmployee(newEmployee);
     };
 });
+
