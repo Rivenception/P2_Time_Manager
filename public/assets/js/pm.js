@@ -80,6 +80,7 @@ $(document).ready(function () {
             newTr.append("<td>" + newTimeEntry[i].category + "</td>");
             newTr.append("<td>" + newTimeEntry[i].task + "</td>");
             newTr.append("<td>" + newTimeEntry[i].timespent + "</td>");
+            newTr.append("<td><a href='/rfb/ecr/" + newTimeEntry[i].ecr + "'>" + newTimeEntry[i].ecr + "</td>");
             newTr.append("<td>" + newTimeEntry[i].program + "</td>");
             newTr.append("<td>" + newTimeEntry[i].notes + "</td>");
             newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='update-entry fa fa-pencil-square-o aria-hidden='true'></i></td>");
@@ -128,11 +129,11 @@ $(document).ready(function () {
         }
     }
 
-    // Function for handling what to render when there are no authors
+    // Function for handling what to render when the employee is not in the database
     function renderEmpty() {
         var alertDiv = $("<div>");
         alertDiv.addClass("alert alert-danger");
-        alertDiv.text("There are no entries for the selected employee");
+        alertDiv.text("Please contact your administrator to have your employeeID entered");
         tableContainer.append(alertDiv);
     }
 

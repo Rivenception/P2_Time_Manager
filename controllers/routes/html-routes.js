@@ -132,4 +132,19 @@ module.exports = function (app) {
     });
   });
 
+  app.get("/rfb/ecr/:ecr", function (req, res) {
+    db.Timesheet.findOne({
+      include: [db.Employee],
+      where: {
+        ecr: req.params.ecr
+      }
+    }).then(function (dbTimesheet) {
+      console.log(dbTimesheet.id);
+      res.render("rfb", {
+        program: dbTimesheet.program,
+        ecr: dbTimesheet.ecr,
+      });
+    });
+  });
+
 };
