@@ -37,6 +37,7 @@ $(document).ready(function () {
 
     // A function for handling what happens when the form to create a new post is submitted
     function handleFormSubmit(event) {
+        console.log("this is working");
         event.preventDefault();
         // Wont submit the post if we are missing a body, title, or author
         if (!nameSelect.val() || !dateSelect.val().trim() || !categorySelect.val() || !taskSelect.val() || !timeSelect.val() || !programId.val().trim()) {
@@ -56,7 +57,6 @@ $(document).ready(function () {
             ecr: inputEcr.val(),
             notes: inputNotes.val(),
         };
-
         submitTimeblock(newTimeEntry);
     };
 

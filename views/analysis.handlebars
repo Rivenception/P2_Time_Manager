@@ -5,3 +5,31 @@
     <h2 class="subheader" id="hiddenId">{{this.user}}</h2>
   </div>
 </div>
+<div class="container">
+  <form class="employeeEntry-form">
+    <div class="form-group">
+      <label for="dept">Program:</label>
+      <input list="program">
+      <datalist id="program">
+        <option value="Internet Explorer">
+      </datalist>
+
+
+      <select class="custom-select" id="program" name="program">
+        <option value="Engineering">Engineering</option>
+      </select>
+
+
+      <label for="dept">ECR:</label>
+      <input list="ecr">
+      <datalist id="ecr">
+        <option value="Internet Explorer">
+      </datalist>
+
+
+      <select class="custom-select" id="ecr" name="ecr">
+        <option value="Engineering">Engineering</option>
+      </select>
+      <button type="submit" class="btn btn-success" id="timeSubmit">Run Analysis</button>
+  </form>
+</div>
