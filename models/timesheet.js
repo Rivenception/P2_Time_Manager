@@ -1,5 +1,12 @@
 module.exports = function (sequelize, DataTypes) {
     var Timesheet = sequelize.define("Timesheet", {
+        employee_id: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
+        },
         name: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -59,7 +66,7 @@ module.exports = function (sequelize, DataTypes) {
         // We're saying that a Timesheet should belong to an Employee
         // A Timesheet can't be created without an Employee due to the foreign key constraint
         Timesheet.belongsTo(models.Employee, {
-            foreignKey: 'FKname'
+            foreignKey: 'FKemployee_id'
         });
     };
 

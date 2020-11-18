@@ -17,7 +17,7 @@ $(document).ready(function () {
 
     // console.log(userName);
 
-    // Getting the initial list of Authors
+    // Getting the initial list of Time Entries
     getLastTenEntries();
 
     // A function for handling what happens when the form to create a new post is submitted
@@ -128,10 +128,13 @@ $(document).ready(function () {
         console.log(id);
         $.ajax({
             method: "DELETE",
-            url: "api/timesheets/" + id
+            url: "api/timesheets/entries/" + id
         })
-            .then(getLastTenEntries);
-    }
+            .then(function(event) {
+                getLastTenEntries();
+                event.preventDefault();
+            })
+    };
 
     // working on editing
     $(document).on("click", ".edit-entry", handleEdit);
@@ -141,7 +144,7 @@ $(document).ready(function () {
         console.log("yes");
         var currentEntry = $(this).parent("td").parent("tr").data("timeblock");
         console.log(currentEntry);
-        window.location.href = "/entry?" + currentEntry
+        window.location.href = "/update/" + currentEntry
     }
 
 });

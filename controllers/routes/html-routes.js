@@ -24,6 +24,10 @@ module.exports = function (app) {
     res.render("pm");
   });
 
+  app.get("/rfb", function (req, res) {
+    res.render("rfb");
+  });
+
   app.get("/eng/:user", function (req, res) {
     db.Employee.findOne({
       where: {
@@ -38,7 +42,7 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/entry/:id", function (req, res) {
+  app.get("/update/:id", function (req, res) {
     db.Timesheet.findOne({
       include: [db.Employee],
       where: {
@@ -46,7 +50,10 @@ module.exports = function (app) {
       }
     }).then(function (dbTimesheet) {
       console.log(dbTimesheet.id);
-      res.render("eng");
+      res.render("update", {
+        user: dbTimesheet.employee_id,
+        employeeName: dbTimesheet.name,
+      });
     });
   });
 
@@ -74,6 +81,20 @@ module.exports = function (app) {
       res.render("eng", {
         user: dbEmployee.employee_id,
         employeeName: dbEmployee.name,
+      });
+    });
+  });
+  
+  app.get("/rfb/:rfb", function (req, res) {
+    db.Timesheet.findOne({
+      include: [db.Employee],
+      where: {
+        program: req.params.rfb
+      }
+    }).then(function (dbTimesheet) {
+      console.log(dbTimesheet.id);
+      res.render("rfb", {
+        program: dbTimesheet.program,
       });
     });
   });

@@ -12,6 +12,12 @@ $(document).ready(function () {
     var inputEcr = $('#inputGroupEcr');
     var inputNotes = $('#inputGroupNotes');
 
+    var windowURL = window.location.href
+    var entryId = windowURL.split("http://localhost:8080/update/", 2)
+    entryId = entryId[1]
+
+    updating = true;
+
     $(document).on("click", "#timeSubmit", handleFormSubmit);
     $(document).on("click", ".delete-entry", handleDeleteButtonPress);
 
@@ -42,7 +48,13 @@ $(document).ready(function () {
             notes: inputNotes.val(),
         };
 
-        submitTimeblock(newTimeEntry);
+        if (updating) {
+            console.log("fetching updates");
+            newTimeEntry.id = entryId;
+            updateTimeblock(newTimeEntry);
+        } else {
+            submitTimeblock(newTimeEntry);
+        }
     };
 
     // Submits a new timeblock entry
@@ -68,7 +80,7 @@ $(document).ready(function () {
             newTr.append("<td>" + newTimeEntry[i].program + "</td>");
             newTr.append("<td>" + newTimeEntry[i].ecr + "</td>");
             newTr.append("<td>" + newTimeEntry[i].notes + "</td>");
-            newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='update-entry fa fa-pencil-square-o aria-hidden='true'></i></td>");
+            newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='edit-entry fa fa-pencil-square-o aria-hidden='true'></i></td>");
             newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='delete-entry fa fa-trash-o'></i></td>");
             allEntries.push(newTr)
         }
@@ -78,7 +90,13 @@ $(document).ready(function () {
     // Function for retrieving timeblocks and getting them ready to be rendered to the page
     function getLastTenEntries() {
         var rowsToAdd = [];
-        var route = "/api/timesheets/limit=10/" + userName;
+        var route = "";
+        if (updating) {
+            route = "/api/timesheets/entries/" + entryId;
+        } else {
+            route = "/api/timesheets/limit=10/" + userName;
+        }
+        console.log(route);
         $.get(route, function (data) {
             for (var i = 0; i < data.length; i++) {
                 var newTimeEntry = {
@@ -131,6 +149,30 @@ $(document).ready(function () {
             url: "api/timesheets/entries/" + id
         })
             .then(getLastTenEntries);
+    }
+
+    // working on editing
+    $(document).on("click", ".edit-entry", handleEdit);
+
+    // This function figures out which post we want to edit and takes it to the appropriate url
+    function handleEdit() {
+        console.log("yes");
+        var currentEntry = $(this).parent("td").parent("tr").data("timeblock");
+        console.log(currentEntry);
+        updating = true;
+        window.location.href = "/update/" + currentEntry
+    }
+
+    // Update a given post, bring user to the blog page when done ***NEED TO IMPLEMENT SWITCH BETWEEN DEPARTMENTS***
+    function updateTimeblock(entry) {
+        $.ajax({
+            method: "PUT",
+            url: "/api/timesheets/entries/" + entryId,
+            data: entry
+        })
+            .then(function () {
+                window.location.href = "/eng/" + userName;
+            });
     }
 
 });
