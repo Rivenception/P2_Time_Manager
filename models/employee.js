@@ -10,11 +10,11 @@ module.exports = function (sequelize, DataTypes) {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
-            primaryKey: true,
             len: [1]
         },
         employee_id: {
             type: DataTypes.STRING,
+            primaryKey: true,
             allowNull: false,
         },
         dept: {
