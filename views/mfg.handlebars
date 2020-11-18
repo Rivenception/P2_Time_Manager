@@ -2,12 +2,12 @@
   <div class="container">
     <h1 class="header">Time Summary</h1>
     <h2 class="subheader" id="dept">{{this.dept}}</h2>
-    <h2 class="subheader">{{this.employeeName}}</h2>
+    <h2 class="subheader" id="employeeName">{{this.employeeName}}</h2>
     <h2 class="subheader" id="hiddenId">{{this.user}}</h2>
   </div>
 </div>
 <div class="table-container">
-  <table class="table table-striped ">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>Log#</th>
@@ -26,6 +26,11 @@
     <tbody>
       <tr id="form-row">
         <td colspan="11">
+          <br>
+          <label for="task">Company:</label>
+          <select class="custom-select" id="inputGroupCompany">
+          </select>
+          <br>
           <br>
           <label for="auth">Date:</label>
           <input placeholder="Enter the date" id="date" value="" type="date" />
@@ -49,6 +54,10 @@
           <select placeholder="Enter a task" class="custom-select" id="inputGroupTask">
           </select>
           <br>
+          <label for="task">Task Type:</label>
+          <select class="custom-select" id="inputGroupType">
+          </select>
+          <br>
           <label for="time">Time:</label>
           <select placeholder="Enter time" class="custom-select" id="inputGroupTime">
           </select>
@@ -59,7 +68,7 @@
             style="width: -webkit-fill-available; height: 100px;" />
           <br>
           <div style="display: flex; justify-content: center; align-tiems: center;">
-            <button type="submit" class="btn btn-success" id="timeSubmit">Add Entry</button>
+            <button type="submit" class="btn btn-success" id="employeeSubmit">Add Entry</button>
           </div>
         </td>
       </tr>
