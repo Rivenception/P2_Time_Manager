@@ -1,3 +1,10 @@
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+const { window } = new JSDOM(`...`);
+const { document } = new JSDOM(`...`).window;
+global.$ = require('jquery')(window);
+global.document = document;
+
 module.exports = function (sequelize, DataTypes) {
     var Employee = sequelize.define("Employee", {
         name: {
