@@ -2,6 +2,7 @@ $(document).ready(function () {
     var tableBody = $("tbody");
     var tableContainer = $(".table-container");
 
+    var dept = $('#dept').text();
     var userName = $('#hiddenId').text();
     var nameSelect = $('#inputGroupEmployee');
     var dateSelect = $('#date');
@@ -11,14 +12,28 @@ $(document).ready(function () {
     var programId = $('#inputGroupProgram');
     var inputEcr = $('#inputGroupEcr');
     var inputNotes = $('#inputGroupNotes');
+    var deptURL = '';
 
     $(document).on("click", "#timeSubmit", handleFormSubmit);
     $(document).on("click", ".delete-entry", handleDeleteButtonPress);
 
-    // console.log(userName);
-
     // Getting the initial list of Time Entries
     getLastTenEntries();
+    checkDept();
+
+    console.log(deptURL)
+
+    // Function that checks html to confirm department called from routes
+    function checkDept() {
+        deptURL = '';
+        if (dept === 'Engineering') {
+            deptURL = "eng";
+        } else if (dept === 'Manufacturing') {
+            deptURL = "mfg";
+        } else if (dept === 'Program Management') {
+            deptURL = "pm";
+        };
+    };
 
     // A function for handling what happens when the form to create a new post is submitted
     function handleFormSubmit(event) {
@@ -60,7 +75,7 @@ $(document).ready(function () {
             var newTr = $("<tr>");
             newTr.data("timeblock", newTimeEntry[i].id);
             newTr.append("<td>" + newTimeEntry[i].id + "</td>");
-            newTr.append("<td>" + newTimeEntry[i].name + "</td>");
+            newTr.append("<td><a href='/" + deptURL + newTimeEntry[i].employee_id + "'>" + newTimeEntry[i].name +"</td>");
             newTr.append("<td>" + newTimeEntry[i].date + "</td>");
             newTr.append("<td>" + newTimeEntry[i].category + "</td>");
             newTr.append("<td>" + newTimeEntry[i].task + "</td>");

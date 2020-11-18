@@ -35,7 +35,6 @@ module.exports = function (sequelize, DataTypes) {
         },
         salary: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             len: [1]
         },
         createdAt: {
