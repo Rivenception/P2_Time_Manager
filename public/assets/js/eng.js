@@ -65,7 +65,7 @@ $(document).ready(function () {
             newTr.append("<td>" + newTimeEntry[i].category + "</td>");
             newTr.append("<td>" + newTimeEntry[i].task + "</td>");
             newTr.append("<td>" + newTimeEntry[i].timespent + "</td>");
-            newTr.append("<td>" + newTimeEntry[i].program + "</td>");
+            newTr.append("<td><a href='/rfb/" + newTimeEntry[i].program + "'>" + newTimeEntry[i].program +"</td>");
             newTr.append("<td>" + newTimeEntry[i].ecr + "</td>");
             newTr.append("<td>" + newTimeEntry[i].notes + "</td>");
             newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='edit-entry fa fa-pencil-square-o aria-hidden='true'></i></td>");

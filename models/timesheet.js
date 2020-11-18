@@ -3,9 +3,6 @@ module.exports = function (sequelize, DataTypes) {
         employee_id: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                len: [1]
-            }
         },
         name: {
             type: DataTypes.STRING,
