@@ -170,7 +170,7 @@ tr{
   color: #ebecee;
 }
 
-#hiddenId {
+.hidden {
   display: none;
 }
 /* #container-fullwidth */

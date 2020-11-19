@@ -2,7 +2,8 @@ $(document).ready(function () {
     var tableBody = $("tbody");
     var tableContainer = $(".table-container");
 
-    var userName = $('#hiddenId').text();
+    var userName = $('#hidden-employeeId').text();
+    var entryId = $('#hidden-logId').text();
     var nameSelect = $('#inputGroupEmployee');
     var dateSelect = $('#date');
     var categorySelect = $("#inputGroupCategory");
@@ -12,9 +13,12 @@ $(document).ready(function () {
     var inputEcr = $('#inputGroupEcr');
     var inputNotes = $('#inputGroupNotes');
 
-    var windowURL = window.location.href
-    var entryId = windowURL.split("http://localhost:8080/update/", 2)
-    entryId = entryId[1]
+    //Probably need to recode this for deployment
+    // var windowURL = window.location.href
+    // var entryId = windowURL.split("http://localhost:8080/update/", 2)
+    // entryId = entryId[1]
+
+    console.log(entryId)
 
     updating = true;
 
@@ -92,7 +96,7 @@ $(document).ready(function () {
         if (updating) {
             route = "/api/timesheets/entries/" + entryId;
         } else {
-            route = "/api/timesheets/limit=10/" + userName;
+            route = "/api/timesheets/limit=20/" + userName;
         }
         console.log(route);
         $.get(route, function (data) {

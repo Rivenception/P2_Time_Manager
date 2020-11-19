@@ -86,6 +86,7 @@ module.exports = function (app) {
     }).then(function (dbTimesheet) {
       console.log(dbTimesheet.id);
       res.render("update", {
+        logId: dbTimesheet.id,
         user: dbTimesheet.employee_id,
         employeeName: dbTimesheet.name,
       });

@@ -2,8 +2,10 @@
   <class class="container">
     <h1 class="header">Time Summary</h1>
     <h2 class="subheader">Update Entry</h2>
-    <h2 class="subheader" type="text/x-handlebars-template">{{this.employeeName}}</h2>
-    <h2 class="subheader" id="hiddenId" type="text/x-handlebars-template">{{this.user}}</h2>
+    <h2 class="subheader">{{this.employeeName}}</h2>
+    <h2 class="subheader" id="logId">Log# {{this.logId}}</h2>
+    <h2 class="hidden" id="hidden-logId">{{this.logId}}</h2>
+    <h2 class="hidden" id="hidden-employeeId">{{this.user}}</h2>
 </div>
 <div class="table-container">
   <table class="table table-striped">

@@ -57,7 +57,7 @@ $(document).ready(function () {
     function employeesDropdown() {
         //For loop that checks the URL for a userId and compares to the employee_id key in the database. If accurate, it sets the Name value in the html for the user by default.
         for (let i = 0; i < employeeId.length && employees.length; i++) {
-            if (window.location.href === "http://localhost:8080/eng" + employeeId || "http://localhost:8080/mfg" + employeeId || "http://localhost:8080/pm" + employeeId) {
+            if (window.location.href === "/eng" + employeeId || "/mfg" + employeeId || "/pm" + employeeId) {
                 if (window.location.href.indexOf(employeeId[i]) > -1) {
                     let dropdown = $("<option>").attr("value", employees[i]).text(employees[i]);
                     $("#inputGroupEmployee").append(dropdown);
@@ -66,7 +66,7 @@ $(document).ready(function () {
             }
         };
         // For loop that gets all employees and dynamically creates listin the html for the respective departments.
-        if (window.location.href === "http://localhost:8080/eng" || "http://localhost:8080/mfg" || "http://localhost:8080/pm") {
+        if (window.location.href === "/eng" || "/mfg" || "/pm") {
             for (let i = 0; i < employees.length; i++) {
                 let dropdown = $("<option>").attr("value", employees[i]).text(employees[i]);
                 // dropdown = dropdown.text(category.eng_category[i]);
@@ -78,17 +78,17 @@ $(document).ready(function () {
     // Function that dyanmically creates the categories input options for the user in the html
     function categoriesDropdown() {
         console.log("fetching Categories...");
-        if (window.location.href === "http://localhost:8080/eng" || "http://localhost:8080/eng" + employeeId) {
+        if (window.location.href === "/eng" || "/eng" + employeeId) {
             for (let i = 0; i < category.eng_category.length; i++) {
                 let dropdown = $("<option>").attr("value", category.eng_category[i]).text(category.eng_category[i]);
                 $("#inputGroupCategory").append(dropdown);
             }
-        } else if (window.location.href === "http://localhost:8080/mfg" || "http://localhost:8080/mfg" + employeeId) {
+        } else if (window.location.href === "/mfg" || "/mfg" + employeeId) {
             for (let i = 0; i < category.mfg_category.length; i++) {
                 let dropdown = $("<option>").attr("value", category.mfg_category[i]).text(category.mfg_category[i]);
                 $("#inputGroupCategory").append(dropdown);
             }
-        } else if (window.location.href === "http://localhost:8080/pm" || "http://localhost:8080/pm" + employeeId) {
+        } else if (window.location.href === "/pm" || "/pm" + employeeId) {
             for (let i = 0; i < category.pm_category.length; i++) {
                 let dropdown = $("<option>").attr("value", category.pm_category[i]).text(category.pm_category[i]);
                 $("#inputGroupCategory").append(dropdown);
@@ -99,17 +99,17 @@ $(document).ready(function () {
     // Function that dyanmically creates the task input options for the user in the html
     function tasksDropdown() {
         console.log("fetching Tasks...");
-        if (window.location.href === "http://localhost:8080/eng" || "http://localhost:8080/eng" + employeeId) {
+        if (window.location.href === "/eng" || "/eng" + employeeId) {
             for (let i = 0; i < task.eng_tasks.length; i++) {
                 let dropdown = $("<option>").attr("value", task.eng_tasks[i]).text(task.eng_tasks[i]);
                 $("#inputGroupTask").append(dropdown);
             }
-        } else if (window.location.href === "http://localhost:8080/mfg" || "http://localhost:8080/mfg" + employeeId) {
+        } else if (window.location.href === "/mfg" || "/mfg" + employeeId) {
             for (let i = 0; i < task.mfg_tasks.length; i++) {
                 let dropdown = $("<option>").attr("value", task.mfg_tasks[i]).text(task.mfg_tasks[i]);
                 $("#inputGroupTask").append(dropdown);
             }
-        } else if (window.location.href === "http://localhost:8080/pm" || "http://localhost:8080/pm" + employeeId) {
+        } else if (window.location.href === "/pm" || "/pm" + employeeId) {
             for (let i = 0; i < task.pm_tasks.length; i++) {
                 let dropdown = $("<option>").attr("value", task.pm_tasks[i]).text(task.pm_tasks[i]);
                 $("#inputGroupTask").append(dropdown);
