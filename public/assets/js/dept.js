@@ -141,7 +141,7 @@ $(document).ready(function () {
             method: "DELETE",
             url: "api/timesheets/entries/" + id
         })
-        .then(getLastEntries);
+            .then(getLastEntries);
     }
 
     $(document).on("click", ".edit-entry", handleEdit);
@@ -156,26 +156,36 @@ $(document).ready(function () {
 
     $(document).on("click", ".duplicate-entry", duplicate);
 
+    //Set default date of today
+    var today = new Date();
+    var dd = ("0" + (today.getDate())).slice(-2);
+    var mm = ("0" + (today.getMonth() + 1)).slice(-2);
+    var yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+
     // This function figures out which post we want to edit and takes it to the appropriate url
     function duplicate() {
         // console.log($(this));
         // console.log($(this).parent("td"));
         // console.log($(this).parent("td").parent("tr"));
-        // console.log($(this).parent("td").parent("tr").children("#tableName"));
-        // console.log($(this).parent("td").parent("tr").children("#tableName").text());
+        console.log($(this).parent("td").parent("tr").children("#tableECR"));
+        console.log($(this).parent("td").parent("tr").children("#tableECR").text());
+        console.log($(this).parent("td").parent("tr").children("#tableProgram"));
+        console.log($(this).parent("td").parent("tr").children("#tableProgram").text());
         duplicateEntry = {
             employee_id: userName,
             name: $(this).parent("td").parent("tr").children("#tableName").text(),
-            date: $(this).parent("td").parent("tr").children("#tableDate").text(),
+            date: today,
             category: $(this).parent("td").parent("tr").children("#tableCategory").text(),
             task: $(this).parent("td").parent("tr").children("#tableTask").text(),
             timespent: $(this).parent("td").parent("tr").children("#tableTime").text(),
             program: $(this).parent("td").parent("tr").children("#tableProgram").text(),
-            ecr: $(this).parent("td").parent("tr").children("#tableEcr").text(),
+            ecr: $(this).parent("td").parent("tr").children("#tableECR").text(),
             notes: $(this).parent("td").parent("tr").children("#tableNotes").text(),
         }
-        console.log(duplicateEntry);
-        
+        console.log(duplicateEntry.ecr);
+        submitTableRow(duplicateEntry);
+
         // window.location.href = "/update/" + currentEntry
     }
 
