@@ -140,11 +140,11 @@ module.exports = function (app) {
     db.Timesheet.findOne({
       include: [db.Employee],
       where: {
-        ecr: req.params.ecr
+          ecr: req.params.ecr
       }
     }).then(function (dbTimesheet) {
       console.log(dbTimesheet.id);
-      res.render("rfb", {
+      res.render("ecr", {
         program: dbTimesheet.program,
         ecr: dbTimesheet.ecr,
       });

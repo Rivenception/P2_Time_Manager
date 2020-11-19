@@ -81,6 +81,7 @@ $(document).ready(function () {
             newTr.append("<td><a href='/rfb/" + newTimeEntry[i].program + "'>" + newTimeEntry[i].program + "</td>");
             newTr.append("<td><a href='/rfb/ecr/" + newTimeEntry[i].ecr + "'>" + newTimeEntry[i].ecr + "</td>");
             newTr.append("<td>" + newTimeEntry[i].notes + "</td>");
+            newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='duplicate-entry fa fa-files-o aria-hidden='true'></i></td>");
             newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='edit-entry fa fa-pencil-square-o aria-hidden='true'></i></td>");
             newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='delete-entry fa fa-trash-o'></i></td>");
             allEntries.push(newTr)

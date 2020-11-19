@@ -1,16 +1,18 @@
 $(document).ready(function () {
-    programInput = $("#program").val();
-    ecrInput = $("#ecr").val();
     
-    $(document).on("click", ".analyze", handleAnalysis);
+    $(document).on("click", "#analyze", handleAnalysis);
 
-    function handleAnalysis(event) {
+    function handleAnalysis() {
         event.preventDefault();
-        console.log("working");
-        programInput = $("#program").val();
-        ecrInput = $("#ecr").val();
-        console.log(programInput);
-        console.log(ecrInput);
-        // window.location.href = "/update/" + currentEntry
+        let programInput = $("#programInput").val();
+        let ecrInput = $("#ecrInput").val();
+
+        if ((programInput === '') && !ecrInput) {
+            return;
+        } else if (!ecrInput && (programInput != '')) {
+            window.location.href = "/rfb/" + programInput
+        } else {
+            window.location.href = "/rfb/ecr/" + ecrInput
+        } 
     }
 });

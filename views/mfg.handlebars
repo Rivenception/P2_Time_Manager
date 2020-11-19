@@ -1,29 +1,14 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="header">Time Summary</h1>
-    <h2 class="subheader" id="dept">{{this.dept}}</h2>
-    <h2 class="subheader" id="employeeName">{{this.employeeName}}</h2>
+    <h2 class="subheader">{{this.dept}}</h2>
+    <h2 class="subheader">{{this.employeeName}}</h2>
     <h2 class="subheader" id="hiddenId">{{this.user}}</h2>
   </div>
 </div>
 <div class="table-container">
   <table class="table table-striped">
     <thead>
-      <tr>
-        <th>Log#</th>
-        <th>Name</th>
-        <th>Date</th>
-        <th>Category</th>
-        <th>Task</th>
-        <th>Time Spent</th>
-        <th>Program</th>
-        <th>ECR</th>
-        <th>Notes</th>
-        <th>Update Entry</th>
-        <th>Delete Entry</th>
-      </tr>
-    </thead>
-    <tbody>
       <tr id="form-row">
         <td colspan="11">
           <br>
@@ -40,8 +25,8 @@
           <input placeholder="  Enter an RFB#" id="inputGroupProgram" type="number" />
           <br>
           <br>
-          <label for="program">ECR:</label>
-          <input placeholder="  Enter an ECR#" id="inputGroupECR" type="number" />
+          <label for="ecr">ECR:</label>
+          <input placeholder="  Enter an ECR#" id="inputGroupEcr" type="number" />
           <br>
           <label for="name">Name:</label>
           <select placeholder="Select Employee" class="custom-select" id="inputGroupEmployee">
@@ -54,7 +39,7 @@
           <select placeholder="Enter a task" class="custom-select" id="inputGroupTask">
           </select>
           <br>
-          <label for="task">Task Type:</label>
+          <label for="task type">Task Type:</label>
           <select class="custom-select" id="inputGroupType">
           </select>
           <br>
@@ -72,6 +57,22 @@
           </div>
         </td>
       </tr>
+      <tr>
+        <th>Log#</th>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Task</th>
+        <th>Time Spent</th>
+        <th>Program</th>
+        <th>ECR</th>
+        <th>Notes</th>
+        <th>Duplicate</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
     </tbody>
   </table>
 </div>

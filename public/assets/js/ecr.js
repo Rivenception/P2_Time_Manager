@@ -34,6 +34,7 @@ $(document).ready(function () {
     function getEntries() {
         var rowsToAdd = [];
         var route = "/api/timesheets/programs/ecr/" + ecr;
+        console.log(route);
         $.get(route, function (data) {
             for (var i = 0; i < data.length; i++) {
                 var newTimeEntry = {

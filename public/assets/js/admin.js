@@ -9,9 +9,9 @@ $(document).ready(function () {
     var tableBody = $("tbody");
     var tableContainer = $(".table-container");
 
-    var employeeId = S("#employee-id");
+    var employeeId = $("#employee-id");
     var name = $('#name')
-    var department = $('#department');
+    var department = $('#dept');
     var title = $("#title");
     var salary = $('#salary');
     var status = $('#status');
