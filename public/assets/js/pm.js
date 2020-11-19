@@ -92,7 +92,7 @@ $(document).ready(function () {
     // Function for retrieving timeblocks and getting them ready to be rendered to the page
     function getLastTenEntries() {
         var rowsToAdd = [];
-        var route = "/api/timesheets/limit=10/" + userName;
+        var route = "/api/timesheets/limit=20/" + userName;
         $.get(route, function (data) {
             for (var i = 0; i < data.length; i++) {
                 var newTimeEntry = {

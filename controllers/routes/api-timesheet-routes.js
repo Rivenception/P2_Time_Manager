@@ -40,19 +40,19 @@ module.exports = function (app) {
         });
     });
 
-    app.get("/api/timesheets/limit=10", function (req, res) {
+    app.get("/api/timesheets/limit=20", function (req, res) {
         db.Timesheet.findAll({
             include: [db.Employee],
             order: [
                 ['id', 'DESC']
             ],
-            limit: 10
+            limit: 20
         }).then(function (dbTimesheet) {
             res.json(dbTimesheet);
         });
     });
 
-    app.get("/api/timesheets/limit=10/:user?", function (req, res) {
+    app.get("/api/timesheets/limit=20/:user?", function (req, res) {
         db.Timesheet.findAll({
             include: [db.Employee],
             where: {
@@ -61,7 +61,7 @@ module.exports = function (app) {
             order: [
                 ['id', 'DESC']
             ],
-            limit: 10
+            limit: 20
         }).then(function (dbTimesheet) {
             res.json(dbTimesheet);
         });
@@ -76,7 +76,7 @@ module.exports = function (app) {
             order: [
                 ['id', 'DESC']
             ],
-            limit: 10
+            limit: 20
         }).then(function (dbTimesheet) {
             res.json(dbTimesheet);
         });

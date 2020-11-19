@@ -90,7 +90,7 @@ $(document).ready(function () {
     // Function for retrieving tableRows and getting them ready to be rendered to the page
     function getLastTenEntries() {
         var rowsToAdd = [];
-        var route = "/api/timesheets/limit=10/" + userName;
+        var route = "/api/timesheets/limit=20/" + userName;
         $.get(route, function (data) {
             for (var i = 0; i < data.length; i++) {
                 var newEntry = {
@@ -168,7 +168,7 @@ $(document).ready(function () {
         // console.log($(this).parent("td").parent("tr").children("#tableName"));
         // console.log($(this).parent("td").parent("tr").children("#tableName").text());
         duplicateEntry = {
-            employee_id: userName,
+            employee_id: $(this).parent("td").parent("tr").children("#tableName").text(),
             name: $(this).parent("td").parent("tr").children("#tableName").text(),
             date: $(this).parent("td").parent("tr").children("#tableDate").text(),
             category: $(this).parent("td").parent("tr").children("#tableCategory").text(),
