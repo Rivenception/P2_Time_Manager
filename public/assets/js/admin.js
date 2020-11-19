@@ -9,7 +9,7 @@ $(document).ready(function () {
     var tableBody = $("tbody");
     var tableContainer = $(".table-container");
 
-    var employeeId = $("#employee-id");
+    var employeeId = S("#employee-id");
     var name = $('#name')
     var department = $('#department');
     var title = $("#title");
@@ -23,11 +23,13 @@ $(document).ready(function () {
     // A function for handling what happens when the form to create a new employee is submitted
     function handleFormSubmit(event) {
         event.preventDefault();
-        console.log(employeeId);
-        console.log(department);
-        console.log(name);
-        console.log(title);
         // Wont submit if data is missing.
+
+        console.log(employeeId.val().trim());
+        console.log(department.val().trim());
+        console.log(name.val().trim());
+        console.log(title.val().trim());
+
         if (!employeeId.val().trim() || !name.val().trim() || !department.val().trim() || !title.val().trim()) {
             return;
         }

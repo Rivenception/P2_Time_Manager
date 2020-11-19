@@ -12,6 +12,10 @@ module.exports = function (app) {
     res.render("admin");
   });
 
+  app.get("/analysis", function (req, res) {
+    res.render("analysis");
+  });
+
   app.get("/eng", function (req, res) {
     db.Employee.findOne({
       where: {

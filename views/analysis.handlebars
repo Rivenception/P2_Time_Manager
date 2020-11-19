@@ -9,27 +9,17 @@
   <form class="employeeEntry-form">
     <div class="form-group">
       <label for="dept">Program:</label>
-      <input list="program">
+      <input placeholder="Enter Program" list="program">
       <datalist id="program">
-        <option value="Internet Explorer">
       </datalist>
-
-
-      <select class="custom-select" id="program" name="program">
-        <option value="Engineering">Engineering</option>
-      </select>
-
 
       <label for="dept">ECR:</label>
-      <input list="ecr">
+      <input placeholder="Enter ECR" list="ecr">
       <datalist id="ecr">
-        <option value="Internet Explorer">
       </datalist>
 
-
-      <select class="custom-select" id="ecr" name="ecr">
-        <option value="Engineering">Engineering</option>
-      </select>
-      <button type="submit" class="btn btn-success" id="timeSubmit">Run Analysis</button>
+      <button type="submit" class="btn btn-success" id="analyze">Run Analysis</button>
   </form>
 </div>
+<!-- Custom Script -->
+<script src="assets/js/analysis.js" type="text/javascript"></script>
