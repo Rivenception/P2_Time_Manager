@@ -18,7 +18,7 @@ $(document).ready(function () {
     $(document).on("click", ".delete-entry", handleDeleteButtonPress);
 
     // Getting the initial list of Time Entries
-    getLastTenEntries();
+    getLastEntries();
     checkDept();
 
     // Function that checks html to confirm department called from routes
@@ -60,7 +60,7 @@ $(document).ready(function () {
     // Submits a new tableRow entry
     function submitTableRow(data) {
         $.post("/api/timesheets", data)
-            .then(getLastTenEntries);
+            .then(getLastEntries);
     }
 
     // Function for creating a new list row for tableRows
@@ -87,7 +87,7 @@ $(document).ready(function () {
     }
 
     // Function for retrieving tableRows and getting them ready to be rendered to the page
-    function getLastTenEntries() {
+    function getLastEntries() {
         var rowsToAdd = [];
         var route = "/api/timesheets/limit=20/" + userName;
         $.get(route, function (data) {
@@ -141,7 +141,7 @@ $(document).ready(function () {
             method: "DELETE",
             url: "api/timesheets/entries/" + id
         })
-        .then(getLastTenEntries);
+        .then(getLastEntries);
     }
 
     $(document).on("click", ".edit-entry", handleEdit);

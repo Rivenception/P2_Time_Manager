@@ -13,20 +13,13 @@ $(document).ready(function () {
     var inputEcr = $('#inputGroupEcr');
     var inputNotes = $('#inputGroupNotes');
 
-    //Probably need to recode this for deployment
-    // var windowURL = window.location.href
-    // var entryId = windowURL.split("http://localhost:8080/update/", 2)
-    // entryId = entryId[1]
-
-    console.log(entryId)
-
     updating = true;
 
     $(document).on("click", "#timeSubmit", handleFormSubmit);
     $(document).on("click", ".delete-entry", handleDeleteButtonPress);
 
     // Getting the initial list of Time Entries
-    getLastTenEntries();
+    getLastEntries();
 
     // A function for handling what happens when the form to create a new post is submitted
     function handleFormSubmit(event) {
@@ -62,7 +55,7 @@ $(document).ready(function () {
     // Submits a new timeblock entry
     function submitTimeblock(data) {
         $.post("/api/timesheets", data)
-            .then(getLastTenEntries);
+            .then(getLastEntries);
     }
 
     // Function for creating a new list row for timeblocks
@@ -82,15 +75,13 @@ $(document).ready(function () {
             newTr.append("<td>" + newTimeEntry[i].program + "</td>");
             newTr.append("<td>" + newTimeEntry[i].ecr + "</td>");
             newTr.append("<td>" + newTimeEntry[i].notes + "</td>");
-            newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='edit-entry fa fa-pencil-square-o aria-hidden='true'></i></td>");
-            newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='delete-entry fa fa-trash-o'></i></td>");
             allEntries.push(newTr)
         }
         return allEntries;
     }
 
     // Function for retrieving timeblocks and getting them ready to be rendered to the page
-    function getLastTenEntries() {
+    function getLastEntries() {
         var rowsToAdd = [];
         var route = "";
         if (updating) {
@@ -150,7 +141,7 @@ $(document).ready(function () {
             method: "DELETE",
             url: "api/timesheets/entries/" + id
         })
-            .then(getLastTenEntries);
+            .then(getLastEntries);
     }
 
     // working on editing

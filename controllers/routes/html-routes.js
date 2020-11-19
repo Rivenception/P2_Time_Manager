@@ -12,6 +12,10 @@ module.exports = function (app) {
     res.render("admin");
   });
 
+  app.get("/dept", function (req, res) {
+    res.render("dept");
+  });
+
   app.get("/analysis", function (req, res) {
     res.render("analysis");
   });
