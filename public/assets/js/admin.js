@@ -54,7 +54,7 @@ $(document).ready(function () {
 
     
     // Function for creating a new list row for timeblocks
-    function createTimesheetRow(newEntry) {
+    function createRow(newEntry) {
         var allEntries = [];
         for (var i = 0; i < newEntry.length; i++) {
             var newTr = $("<tr>");
@@ -87,12 +87,12 @@ $(document).ready(function () {
                 }
                 rowsToAdd.push(newEntry);
             }
-            renderTimesheetList(createTimesheetRow(rowsToAdd));
+            renderList(createRow(rowsToAdd));
         });
     }
 
     // A function for rendering the list of timeblocks to the page
-    function renderTimesheetList(rowsToAdd) {
+    function renderList(rowsToAdd) {
         tableBody.children().not(":last").remove();
         tableContainer.children(".alert").remove();
         if (rowsToAdd.length) {

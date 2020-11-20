@@ -63,7 +63,7 @@ $(document).ready(function () {
     }
 
     // Function for creating a new list row for tableRows
-    function createTimesheetRow(newEntry) {
+    function createRow(newEntry) {
         var allEntries = [];
         for (var i = 0; i < newEntry.length; i++) {
             var newTr = $("<tr>");
@@ -87,8 +87,9 @@ $(document).ready(function () {
 
     // Function for retrieving tableRows and getting them ready to be rendered to the page
     function getLastEntries() {
+        checkDept();
         var rowsToAdd = [];
-        var route = "/api/timesheets/limit=20/" + userName;
+        var route = "/api/timesheets/limit=50/"  + userName;
         $.get(route, function (data) {
             for (var i = 0; i < data.length; i++) {
                 var newEntry = {
@@ -107,12 +108,12 @@ $(document).ready(function () {
                 rowsToAdd.push(newEntry);
                 // console.log(rowsToAdd);
             }
-            renderTimesheetList(createTimesheetRow(rowsToAdd));
+            renderList(createRow(rowsToAdd));
         });
     }
 
     // A function for rendering the list of tableRows to the page
-    function renderTimesheetList(rowsToAdd) {
+    function renderList(rowsToAdd) {
         tableBody.children().not(":last").remove();
         tableContainer.children(".alert").remove();
         if (rowsToAdd.length) {

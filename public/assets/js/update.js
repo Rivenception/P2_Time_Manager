@@ -61,7 +61,7 @@ $(document).ready(function () {
     // Function for creating a new list row for timeblocks
 
     // for some reason this is not working
-    function createTimesheetRow(newTimeEntry) {
+    function createRow(newTimeEntry) {
         var allEntries = [];
         for (var i = 0; i < newTimeEntry.length; i++) {
             var newTr = $("<tr>");
@@ -108,12 +108,12 @@ $(document).ready(function () {
                 rowsToAdd.push(newTimeEntry);
                 // console.log(rowsToAdd);
             }
-            renderTimesheetList(createTimesheetRow(rowsToAdd));
+            renderList(createRow(rowsToAdd));
         });
     }
 
     // A function for rendering the list of timeblocks to the page
-    function renderTimesheetList(rowsToAdd) {
+    function renderList(rowsToAdd) {
         tableBody.children().not(":last").remove();
         tableContainer.children(".alert").remove();
         if (rowsToAdd.length) {
@@ -149,9 +149,7 @@ $(document).ready(function () {
 
     // This function figures out which post we want to edit and takes it to the appropriate url
     function handleEdit() {
-        console.log("yes");
         var currentEntry = $(this).parent("td").parent("tr").data("timeblock");
-        console.log(currentEntry);
         updating = true;
         window.location.href = "/update/" + currentEntry
     }

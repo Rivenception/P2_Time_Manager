@@ -93,6 +93,12 @@ module.exports = function (app) {
         logId: dbTimesheet.id,
         user: dbTimesheet.employee_id,
         employeeName: dbTimesheet.name,
+        // program: dbTimesheet.program,
+        // ecr: dbTimesheet.ecr,
+        // category: dbTimesheet.category,
+        // task: dbTimesheet.task,
+        // time: dbTimesheet.time,
+        // note: dbTimesheet.note
       });
     });
   });
