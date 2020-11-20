@@ -2,7 +2,7 @@ $(document).ready(function () {
     var tableBody = $("tbody");
     var tableContainer = $(".table-container");
 
-    var rfb = $('#hiddenId').text();
+    var hiddenURL = $('#hiddenId').text();
     var addHours = document.getElementById("#total-hours");
     var addCosts = document.getElementById("#total-cost");
 
@@ -33,7 +33,7 @@ $(document).ready(function () {
     // Function for retrieving timeblocks and getting them ready to be rendered to the page
     function getEntries() {
         var rowsToAdd = [];
-        var route = "/api/timesheets/programs/" + rfb;
+        var route = "/api/timesheets/programs/" + hiddenURL;
         $.get(route, function (data) {
             for (var i = 0; i < data.length; i++) {
                 var newTimeEntry = {
@@ -78,15 +78,14 @@ $(document).ready(function () {
     }
 
     function getTime() {
-        var route = "/api/timesheets/programs/" + rfb;
-        let programTime = 0;
+        var route = "/api/timesheets/programs/" + hiddenURL;
+        let totalMinutes = 0;
         $.get(route, function (data) {
             for (var i = 0; i < data.length; i++) {
                 number = data[i].timespent;
-                programTime += number
-                console.log(programTime);
+                totalMinutes += number
             }
-            totalHours = programTime / 60;
+            totalHours = totalMinutes / 60;
             totalCost = totalHours * 100;
             addHours.innerHTML = "Current Hours: " + totalHours;
             addCosts.innerHTML = "Total Cost: $" + totalCost;

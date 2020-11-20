@@ -9,12 +9,12 @@ module.exports = function (sequelize, DataTypes) {
     var Employee = sequelize.define("Employee", {
         name: {
             type: DataTypes.STRING,
+            primaryKey: true,
             allowNull: false,
             len: [1]
         },
         employee_id: {
             type: DataTypes.STRING,
-            primaryKey: true,
             allowNull: false,
         },
         dept: {
@@ -56,7 +56,8 @@ module.exports = function (sequelize, DataTypes) {
         // We're saying that a Timesheet should belong to an Employee
         // A Timesheet can't be created without an Employee due to the foreign key constraint
         Employee.hasMany(models.Timesheet, {
-            foreignKey: 'FKemployee_id'
+            foreignKey: 'FKemployee_id',
+            foreignKeyConstraint: true
         });
     };
 

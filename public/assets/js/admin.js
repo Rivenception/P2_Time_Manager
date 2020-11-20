@@ -21,8 +21,7 @@ $(document).ready(function () {
     getAllEmployees();
 
     // A function for handling what happens when the form to create a new employee is submitted
-    function handleFormSubmit(event) {
-        event.preventDefault();
+    function handleFormSubmit() {
         // Wont submit if data is missing.
 
         console.log(employeeId.val().trim());

@@ -69,7 +69,7 @@ $(document).ready(function () {
             var newTr = $("<tr>");
             newTr.data("tableRow", newEntry[i].id);
             newTr.append("<td id=''>" + newEntry[i].id + "</td>");
-            newTr.append("<td id='tableName'><a href='/" + deptURL + "/"  + newEntry[i].employee_id + "'>" + newEntry[i].name + "</td>");
+            newTr.append("<td id='tableName'><a href='/" + deptURL + "/" + newEntry[i].employee_id + "'>" + newEntry[i].name + "</td>");
             newTr.append("<td id='tableDate'>" + newEntry[i].date + "</td>");
             newTr.append("<td id='tableCategory'>" + newEntry[i].category + "</td>");
             newTr.append("<td id='tableTask'>" + newEntry[i].task + "</td>");
@@ -77,6 +77,9 @@ $(document).ready(function () {
             newTr.append("<td id='tableProgram'><a href='/rfb/" + newEntry[i].program + "'>" + newEntry[i].program + "</td>");
             newTr.append("<td id='tableECR'><a href='/rfb/ecr/" + newEntry[i].ecr + "'>" + newEntry[i].ecr + "</td>");
             newTr.append("<td id='tableNotes'>" + newEntry[i].notes + "</td>");
+            newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='duplicate-entry fa fa-files-o aria-hidden='true'></i></td>");
+            newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='edit-entry fa fa-pencil-square-o aria-hidden='true'></i></td>");
+            newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='delete-entry fa fa-trash-o'></i></td>");
             allEntries.push(newTr)
         }
         return allEntries;
