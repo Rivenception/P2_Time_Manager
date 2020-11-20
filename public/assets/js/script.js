@@ -140,47 +140,47 @@ $(document).ready(function () {
     today = yyyy + '-' + mm + '-' + dd;
     $("#date").attr("value", today);
 
-});
+    $(document).on("change", "#inputGroupCategory", getSelects);
 
-$("#inputGroupCategory").onselect = getSelects();
-
-var dept = $('#dept').text();
-
-function getSelects() {
-    console.log("fetching Selects...");
-    categoryInput = $("#inputGroupCategory").val();
-    console.log($("#inputGroupCategory").val())
-    if (categoryInput === "ECR") {
-        for (let i = 0; i < ecr_tasks.length; i++) {
-            let dropdown = $("<option>").attr("value", ecr_tasks[i]).text(ecr_tasks[i]);
-            $("#inputGroupTask").append(dropdown);
-        }
-    } else if (categoryInput === "Development") {
-        if (dept === 'Engineering') {
-            for (let i = 0; i < mfg_tasks.length; i++) {
-                let dropdown = $("<option>").attr("value", mfg_tasks[i]).text(mfg_tasks[i]);
+    function getSelects() {
+        console.log("fetching Selects...");
+        var categoryInput = $("#inputGroupCategory").val();
+        var taskInput = $("#inputGroupTask");
+        var dept = $('#dept').text();
+        taskInput.children().remove();
+        console.log(categoryInput);
+        if (categoryInput === "ECR") {
+            for (let i = 0; i < ecr_tasks.length; i++) {
+                let dropdown = $("<option>").attr("value", ecr_tasks[i]).text(ecr_tasks[i]);
                 $("#inputGroupTask").append(dropdown);
             }
-        } else if (dept === 'Manufacturing') {
-            for (let i = 0; i < mfg_tasks.length; i++) {
-                let dropdown = $("<option>").attr("value", mfg_tasks[i]).text(mfg_tasks[i]);
+        } else if (categoryInput === "Development") {
+            if (dept === 'Engineering') {
+                for (let i = 0; i < eng_tasks.length; i++) {
+                    let dropdown = $("<option>").attr("value", eng_tasks[i]).text(eng_tasks[i]);
+                    $("#inputGroupTask").append(dropdown);
+                }
+            } else if (dept === 'Manufacturing') {
+                for (let i = 0; i < mfg_tasks.length; i++) {
+                    let dropdown = $("<option>").attr("value", mfg_tasks[i]).text(mfg_tasks[i]);
+                    $("#inputGroupTask").append(dropdown);
+                }
+            }
+        } else if (categoryInput === "Admin") {
+            for (let i = 0; i < admin_tasks.length; i++) {
+                let dropdown = $("<option>").attr("value", admin_tasks[i]).text(admin_tasks[i]);
                 $("#inputGroupTask").append(dropdown);
             }
-        }
-    } else if (categoryInput === "Admin") {
-        for (let i = 0; i < admin_tasks.length; i++) {
-            let dropdown = $("<option>").attr("value", admin_tasks[i]).text(pm_tasks[i]);
-            $("#inputGroupTask").append(dropdown);
-        }
-    } else if (categoryInput === "Program Management") {
-        for (let i = 0; i < pm_tasks.length; i++) {
-            let dropdown = $("<option>").attr("value", pm_tasks[i]).text(pm_tasks[i]);
-            $("#inputGroupTask").append(dropdown);
-        }
-    } else if (categoryInput === "R&D") {
-        for (let i = 0; i < rd_tasks.length; i++) {
-            let dropdown = $("<option>").attr("value", rd_tasks[i]).text(pm_tasks[i]);
-            $("#inputGroupTask").append(dropdown);
+        } else if (categoryInput === "Program Management") {
+            for (let i = 0; i < pm_tasks.length; i++) {
+                let dropdown = $("<option>").attr("value", pm_tasks[i]).text(pm_tasks[i]);
+                $("#inputGroupTask").append(dropdown);
+            }
+        } else if (categoryInput === "R&D") {
+            for (let i = 0; i < rd_tasks.length; i++) {
+                let dropdown = $("<option>").attr("value", rd_tasks[i]).text(rd_tasks[i]);
+                $("#inputGroupTask").append(dropdown);
+            }
         }
     }
-}
+});

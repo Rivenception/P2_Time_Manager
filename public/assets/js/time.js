@@ -1,3 +1,5 @@
+// trialing a router switch to calculate total time logged for tasks by week as a mool for metrics later.
+
 var route = ''
 var htmlHeader = $(".header");
 var hiddenURL = $('#hiddenId').text();
@@ -18,7 +20,7 @@ function getTime() {
     $.get(route, function (data) {
         for (var i = 0; i < data.length; i++) {
             number = data[i].timespent;
-            programTime += number
+            totalMinutes += number
         }
         totalHours = totalMinutes / 60;
         totalCost = totalHours * 100;
