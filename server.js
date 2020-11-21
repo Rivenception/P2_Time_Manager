@@ -31,7 +31,8 @@ require("./controllers/routes/api-employee-routes.js")(app);
 require("./controllers/routes/api-timesheet-routes.js")(app);
 require("./controllers/routes/html-routes.js")(app);
 
-// SQL functions
+// Partials functions
+// Handlebars.registerHelper('mgr', '{{partials}}');
 
 
 // Syncing our sequelize models and then starting our Express app

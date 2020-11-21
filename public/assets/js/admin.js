@@ -11,7 +11,7 @@ $(document).ready(function () {
 
     var employeeId = $("#employee-id");
     var name = $('#name')
-    var department = $('#department');
+    var department = $('#dept');
     var title = $("#title");
     var salary = $('#salary');
     var status = $('#status');
@@ -21,13 +21,14 @@ $(document).ready(function () {
     getAllEmployees();
 
     // A function for handling what happens when the form to create a new employee is submitted
-    function handleFormSubmit(event) {
-        event.preventDefault();
-        console.log(employeeId);
-        console.log(department);
-        console.log(name);
-        console.log(title);
+    function handleFormSubmit() {
         // Wont submit if data is missing.
+
+        console.log(employeeId.val().trim());
+        console.log(department.val().trim());
+        console.log(name.val().trim());
+        console.log(title.val().trim());
+
         if (!employeeId.val().trim() || !name.val().trim() || !department.val().trim() || !title.val().trim()) {
             return;
         }
@@ -53,7 +54,7 @@ $(document).ready(function () {
 
     
     // Function for creating a new list row for timeblocks
-    function createTimesheetRow(newEntry) {
+    function createRow(newEntry) {
         var allEntries = [];
         for (var i = 0; i < newEntry.length; i++) {
             var newTr = $("<tr>");
@@ -86,12 +87,12 @@ $(document).ready(function () {
                 }
                 rowsToAdd.push(newEntry);
             }
-            renderTimesheetList(createTimesheetRow(rowsToAdd));
+            renderList(createRow(rowsToAdd));
         });
     }
 
     // A function for rendering the list of timeblocks to the page
-    function renderTimesheetList(rowsToAdd) {
+    function renderList(rowsToAdd) {
         tableBody.children().not(":last").remove();
         tableContainer.children(".alert").remove();
         if (rowsToAdd.length) {

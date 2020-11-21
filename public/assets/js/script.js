@@ -1,19 +1,18 @@
 $(document).ready(function () {
 
-    let task = {
-        pm_tasks: ["Kick-Off", "Project Planning", "Internal Meeting", "Program Tracking", "Customer Support", "Customer Meeting"],
-        mfg_tasks: ["Tooling LP", "Tooling Mold", "Tooling Hotwire", "Tooling Programming", "GPD Cushion Rev", "GPD dress covers"],
-        eng_tasks: ["Design", "Samples", "GPDs", "Patterns", "TLDs", "BOMs", "Labels", "Product Development", "Review", "Other"],
-        ecr_tasks: ["Design", "GPDs", "Patterns", "TLDs", "BOMs", "Product Development", "Labels", "Review", "Processing", "Other"],
-        admin_tasks: ["Other", "Internal Meeting", "Customer Meeting", "Training", "H-cell Support", "Production/Mfg Supprort", "Emails"],
-        rd_tasks: ["Product Development", "Production Implementation", "Sales Samples"]
-    }
 
-    let category = {
-        eng_category: ["ECR", "Development", "Admin", "R&D"],
-        mfg_category: ["ECR", "Development", "Admin", "R&D"],
-        pm_category: ["Program Management", "Admin"],
-    }
+    let pm_tasks = ["Kick-Off", "Project Planning", "Internal Meeting", "Program Tracking", "Customer Support", "Customer Meeting"]
+    let mfg_tasks = ["Tooling LP", "Tooling Mold", "Tooling Hotwire", "Tooling Programming", "GPD Cushion Rev", "GPD dress covers"]
+    let eng_tasks = ["Design", "Samples", "GPDs", "Patterns", "TLDs", "BOMs", "Labels", "Product Development", "Review", "Other"]
+    let ecr_tasks = ["Design", "GPDs", "Patterns", "TLDs", "BOMs", "Product Development", "Labels", "Review", "Processing", "Other"]
+    let admin_tasks = ["Other", "Internal Meeting", "Customer Meeting", "Training", "H-cell Support", "Production/Mfg Supprort", "Emails"]
+    let rd_tasks = ["Product Development", "Production Implementation", "Sales Samples"]
+
+
+    let eng_category = ["ECR", "Development", "Admin", "R&D"]
+    let mfg_category = ["ECR", "Development", "Admin", "R&D"]
+    let pm_category = ["Program Management", "Admin"]
+
 
     let company = ["US", "UK", "POL"]
     let type = ["Dress Cover", "Cushions", "Armcaps", "Other"]
@@ -57,7 +56,7 @@ $(document).ready(function () {
     function employeesDropdown() {
         //For loop that checks the URL for a userId and compares to the employee_id key in the database. If accurate, it sets the Name value in the html for the user by default.
         for (let i = 0; i < employeeId.length && employees.length; i++) {
-            if (window.location.href === "http://localhost:8080/eng" + employeeId || "http://localhost:8080/mfg" + employeeId || "http://localhost:8080/pm" + employeeId) {
+            if (window.location.href === "/eng" + employeeId || "/mfg" + employeeId || "/pm" + employeeId) {
                 if (window.location.href.indexOf(employeeId[i]) > -1) {
                     let dropdown = $("<option>").attr("value", employees[i]).text(employees[i]);
                     $("#inputGroupEmployee").append(dropdown);
@@ -66,7 +65,7 @@ $(document).ready(function () {
             }
         };
         // For loop that gets all employees and dynamically creates listin the html for the respective departments.
-        if (window.location.href === "http://localhost:8080/eng" || "http://localhost:8080/mfg" || "http://localhost:8080/pm") {
+        if (window.location.href === "/eng" || "/mfg" || "/pm") {
             for (let i = 0; i < employees.length; i++) {
                 let dropdown = $("<option>").attr("value", employees[i]).text(employees[i]);
                 // dropdown = dropdown.text(category.eng_category[i]);
@@ -78,19 +77,19 @@ $(document).ready(function () {
     // Function that dyanmically creates the categories input options for the user in the html
     function categoriesDropdown() {
         console.log("fetching Categories...");
-        if (window.location.href === "http://localhost:8080/eng" || "http://localhost:8080/eng" + employeeId) {
-            for (let i = 0; i < category.eng_category.length; i++) {
-                let dropdown = $("<option>").attr("value", category.eng_category[i]).text(category.eng_category[i]);
+        if (window.location.href === "/eng" || "/eng" + employeeId) {
+            for (let i = 0; i < eng_category.length; i++) {
+                let dropdown = $("<option>").attr("value", eng_category[i]).text(eng_category[i]);
                 $("#inputGroupCategory").append(dropdown);
             }
-        } else if (window.location.href === "http://localhost:8080/mfg" || "http://localhost:8080/mfg" + employeeId) {
-            for (let i = 0; i < category.mfg_category.length; i++) {
-                let dropdown = $("<option>").attr("value", category.mfg_category[i]).text(category.mfg_category[i]);
+        } else if (window.location.href === "/mfg" || "/mfg" + employeeId) {
+            for (let i = 0; i < mfg_category.length; i++) {
+                let dropdown = $("<option>").attr("value", mfg_category[i]).text(mfg_category[i]);
                 $("#inputGroupCategory").append(dropdown);
             }
-        } else if (window.location.href === "http://localhost:8080/pm" || "http://localhost:8080/pm" + employeeId) {
-            for (let i = 0; i < category.pm_category.length; i++) {
-                let dropdown = $("<option>").attr("value", category.pm_category[i]).text(category.pm_category[i]);
+        } else if (window.location.href === "/pm" || "/pm" + employeeId) {
+            for (let i = 0; i < pm_category.length; i++) {
+                let dropdown = $("<option>").attr("value", pm_category[i]).text(pm_category[i]);
                 $("#inputGroupCategory").append(dropdown);
             }
         }
@@ -99,19 +98,19 @@ $(document).ready(function () {
     // Function that dyanmically creates the task input options for the user in the html
     function tasksDropdown() {
         console.log("fetching Tasks...");
-        if (window.location.href === "http://localhost:8080/eng" || "http://localhost:8080/eng" + employeeId) {
-            for (let i = 0; i < task.eng_tasks.length; i++) {
-                let dropdown = $("<option>").attr("value", task.eng_tasks[i]).text(task.eng_tasks[i]);
+        if (window.location.href === "/eng" || "/eng" + employeeId) {
+            for (let i = 0; i < eng_tasks.length; i++) {
+                let dropdown = $("<option>").attr("value", eng_tasks[i]).text(eng_tasks[i]);
                 $("#inputGroupTask").append(dropdown);
             }
-        } else if (window.location.href === "http://localhost:8080/mfg" || "http://localhost:8080/mfg" + employeeId) {
-            for (let i = 0; i < task.mfg_tasks.length; i++) {
-                let dropdown = $("<option>").attr("value", task.mfg_tasks[i]).text(task.mfg_tasks[i]);
+        } else if (window.location.href === "/mfg" || "/mfg" + employeeId) {
+            for (let i = 0; i < mfg_tasks.length; i++) {
+                let dropdown = $("<option>").attr("value", mfg_tasks[i]).text(mfg_tasks[i]);
                 $("#inputGroupTask").append(dropdown);
             }
-        } else if (window.location.href === "http://localhost:8080/pm" || "http://localhost:8080/pm" + employeeId) {
-            for (let i = 0; i < task.pm_tasks.length; i++) {
-                let dropdown = $("<option>").attr("value", task.pm_tasks[i]).text(task.pm_tasks[i]);
+        } else if (window.location.href === "/pm" || "/pm" + employeeId) {
+            for (let i = 0; i < pm_tasks.length; i++) {
+                let dropdown = $("<option>").attr("value", pm_tasks[i]).text(pm_tasks[i]);
                 $("#inputGroupTask").append(dropdown);
             }
         }
@@ -141,4 +140,47 @@ $(document).ready(function () {
     today = yyyy + '-' + mm + '-' + dd;
     $("#date").attr("value", today);
 
+    $(document).on("change", "#inputGroupCategory", getSelects);
+
+    function getSelects() {
+        console.log("fetching Selects...");
+        var categoryInput = $("#inputGroupCategory").val();
+        var taskInput = $("#inputGroupTask");
+        var dept = $('#dept').text();
+        taskInput.children().remove();
+        console.log(categoryInput);
+        if (categoryInput === "ECR") {
+            for (let i = 0; i < ecr_tasks.length; i++) {
+                let dropdown = $("<option>").attr("value", ecr_tasks[i]).text(ecr_tasks[i]);
+                $("#inputGroupTask").append(dropdown);
+            }
+        } else if (categoryInput === "Development") {
+            if (dept === 'Engineering') {
+                for (let i = 0; i < eng_tasks.length; i++) {
+                    let dropdown = $("<option>").attr("value", eng_tasks[i]).text(eng_tasks[i]);
+                    $("#inputGroupTask").append(dropdown);
+                }
+            } else if (dept === 'Manufacturing') {
+                for (let i = 0; i < mfg_tasks.length; i++) {
+                    let dropdown = $("<option>").attr("value", mfg_tasks[i]).text(mfg_tasks[i]);
+                    $("#inputGroupTask").append(dropdown);
+                }
+            }
+        } else if (categoryInput === "Admin") {
+            for (let i = 0; i < admin_tasks.length; i++) {
+                let dropdown = $("<option>").attr("value", admin_tasks[i]).text(admin_tasks[i]);
+                $("#inputGroupTask").append(dropdown);
+            }
+        } else if (categoryInput === "Program Management") {
+            for (let i = 0; i < pm_tasks.length; i++) {
+                let dropdown = $("<option>").attr("value", pm_tasks[i]).text(pm_tasks[i]);
+                $("#inputGroupTask").append(dropdown);
+            }
+        } else if (categoryInput === "R&D") {
+            for (let i = 0; i < rd_tasks.length; i++) {
+                let dropdown = $("<option>").attr("value", rd_tasks[i]).text(rd_tasks[i]);
+                $("#inputGroupTask").append(dropdown);
+            }
+        }
+    }
 });

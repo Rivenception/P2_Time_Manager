@@ -2,8 +2,10 @@
   <class class="container">
     <h1 class="header">Time Summary</h1>
     <h2 class="subheader">Update Entry</h2>
-    <h2 class="subheader" type="text/x-handlebars-template">{{this.employeeName}}</h2>
-    <h2 class="subheader" id="hiddenId" type="text/x-handlebars-template">{{this.user}}</h2>
+    <h2 class="subheader">{{this.employeeName}}</h2>
+    <h2 class="subheader" id="logId">Log# {{this.logId}}</h2>
+    <h2 class="hidden" id="hidden-logId">{{this.logId}}</h2>
+    <h2 class="hidden" id="hidden-employeeId">{{this.user}}</h2>
 </div>
 <div class="table-container">
   <table class="table table-striped">
@@ -18,13 +20,11 @@
         <th>Program</th>
         <th>ECR</th>
         <th>Notes</th>
-        <th>Update Entry</th>
-        <th>Delete Entry</th>
       </tr>
     </thead>
     <tbody>
       <tr id="form-row">
-        <td colspan="11">
+        <td colspan="12">
           <br>
           <label for="task">Company:</label>
           <select class="custom-select" id="inputGroupCompany">
@@ -39,26 +39,26 @@
           <input placeholder="  Enter an RFB#" id="inputGroupProgram" type="number" />
           <br>
           <br>
-          <label for="program">ECR:</label>
-          <input placeholder="  Enter an ECR#" id="inputGroupECR" type="number" />
+          <label for="ecr">ECR:</label>
+          <input placeholder="  Enter an ECR#" id="inputGroupEcr" type="number" />
           <br>
           <label for="name">Name:</label>
-          <select placeholder="Select Employee" class="custom-select" id="inputGroupEmployee">
+          <select placeholder="Select Employee" class="custom-select" id="inputGroupEmployee" >
           </select>
           <label for="category">Category:</label>
-          <select placeholder="Enter the Category" class="custom-select" id="inputGroupCategory">
+          <select placeholder="Enter the Category" class="custom-select" id="inputGroupCategory" >
           </select>
           <br>
           <label for="task">Task:</label>
-          <select placeholder="Enter a task" class="custom-select" id="inputGroupTask">
+          <select placeholder="Enter a task" class="custom-select" id="inputGroupTask" >
           </select>
           <br>
-          <label for="task">Task Type:</label>
-          <select class="custom-select" id="inputGroupType">
+          <label for="task type">Task Type:</label>
+          <select class="custom-select" id="inputGroupType" value="">
           </select>
           <br>
           <label for="time">Time:</label>
-          <select placeholder="Enter time" class="custom-select" id="inputGroupTime">
+          <select placeholder="Enter time" class="custom-select" id="inputGroupTime" >
           </select>
           <br>
           <br>

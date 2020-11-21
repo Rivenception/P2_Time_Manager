@@ -12,6 +12,14 @@ module.exports = function (app) {
     res.render("admin");
   });
 
+  app.get("/dept", function (req, res) {
+    res.render("dept");
+  });
+
+  app.get("/analysis", function (req, res) {
+    res.render("analysis");
+  });
+
   app.get("/eng", function (req, res) {
     db.Employee.findOne({
       where: {
@@ -82,8 +90,15 @@ module.exports = function (app) {
     }).then(function (dbTimesheet) {
       console.log(dbTimesheet.id);
       res.render("update", {
+        logId: dbTimesheet.id,
         user: dbTimesheet.employee_id,
         employeeName: dbTimesheet.name,
+        // program: dbTimesheet.program,
+        // ecr: dbTimesheet.ecr,
+        // category: dbTimesheet.category,
+        // task: dbTimesheet.task,
+        // time: dbTimesheet.time,
+        // note: dbTimesheet.note
       });
     });
   });
@@ -136,11 +151,11 @@ module.exports = function (app) {
     db.Timesheet.findOne({
       include: [db.Employee],
       where: {
-        ecr: req.params.ecr
+          ecr: req.params.ecr
       }
     }).then(function (dbTimesheet) {
       console.log(dbTimesheet.id);
-      res.render("rfb", {
+      res.render("ecr", {
         program: dbTimesheet.program,
         ecr: dbTimesheet.ecr,
       });

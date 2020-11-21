@@ -3,7 +3,7 @@ $(document).ready(function () {
     var tableContainer = $(".table-container");
 
     var dept = $('#dept').text();
-    var userName = $('#hiddenId').text();
+    var userName = $('#hidden-employeeId').text();
     var nameSelect = $('#inputGroupEmployee');
     var dateSelect = $('#date');
     var categorySelect = $("#inputGroupCategory");
@@ -18,11 +18,8 @@ $(document).ready(function () {
     $(document).on("click", ".delete-entry", handleDeleteButtonPress);
 
     // Getting the initial list of Time Entries
-    getLastTenEntries();
+    getLastEntries();
     checkDept();
-
-    console.log(dept)
-    console.log(deptURL)
 
     // Function that checks html to confirm department called from routes
     function checkDept() {
@@ -37,14 +34,13 @@ $(document).ready(function () {
     };
 
     // A function for handling what happens when the form to create a new post is submitted
-    function handleFormSubmit(event) {
-        event.preventDefault();
+    function handleFormSubmit() {
         // Wont submit the post if we are missing a body, title, or author
         if (!nameSelect.val() || !dateSelect.val().trim() || !categorySelect.val() || !taskSelect.val() || !timeSelect.val() || !programId.val().trim()) {
             return;
         }
         // Constructing a newPost object to hand to the database
-        var newTimeEntry = {
+        var newEntry = {
             employee_id: userName,
             name: nameSelect.val(),
 
@@ -54,33 +50,34 @@ $(document).ready(function () {
             task: taskSelect.val(),
             timespent: timeSelect.val(),
             program: programId.val().trim(),
+            ecr: inputEcr.val(),
             notes: inputNotes.val(),
         };
-
-        submitTimeblock(newTimeEntry);
+        submitTableRow(newEntry);
     };
 
-    // Submits a new timeblock entry
-    function submitTimeblock(data) {
+    // Submits a new tableRow entry
+    function submitTableRow(data) {
         $.post("/api/timesheets", data)
-            .then(getLastTenEntries);
+            .then(getLastEntries);
     }
 
-    // Function for creating a new list row for timeblocks
-    function createTimesheetRow(newTimeEntry) {
+    // Function for creating a new list row for tableRows
+    function createRow(newEntry) {
         var allEntries = [];
-        for (var i = 0; i < newTimeEntry.length; i++) {
+        for (var i = 0; i < newEntry.length; i++) {
             var newTr = $("<tr>");
-            newTr.data("timeblock", newTimeEntry[i].id);
-            newTr.append("<td>" + newTimeEntry[i].id + "</td>");
-            newTr.append("<td><a href='/" + deptURL + newTimeEntry[i].employee_id + "'>" + newTimeEntry[i].name +"</td>");
-            newTr.append("<td>" + newTimeEntry[i].date + "</td>");
-            newTr.append("<td>" + newTimeEntry[i].category + "</td>");
-            newTr.append("<td>" + newTimeEntry[i].task + "</td>");
-            newTr.append("<td>" + newTimeEntry[i].timespent + "</td>");
-            newTr.append("<td><a href='/rfb/" + newTimeEntry[i].program + "'>" + newTimeEntry[i].program + "</td>");
-            newTr.append("<td><a href='/rfb/ecr/" + newTimeEntry[i].ecr + "'>" + newTimeEntry[i].ecr + "</td>");
-            newTr.append("<td>" + newTimeEntry[i].notes + "</td>");
+            newTr.data("tableRow", newEntry[i].id);
+            newTr.append("<td id=''>" + newEntry[i].id + "</td>");
+            newTr.append("<td id='tableName'><a href='/" + deptURL + "/" + newEntry[i].employee_id + "'>" + newEntry[i].name + "</td>");
+            newTr.append("<td id='tableDate'>" + newEntry[i].date + "</td>");
+            newTr.append("<td id='tableCategory'>" + newEntry[i].category + "</td>");
+            newTr.append("<td id='tableTask'>" + newEntry[i].task + "</td>");
+            newTr.append("<td id='tableTime'>" + newEntry[i].timespent + "</td>");
+            newTr.append("<td id='tableProgram'><a href='/rfb/" + newEntry[i].program + "'>" + newEntry[i].program + "</td>");
+            newTr.append("<td id='tableECR'><a href='/rfb/ecr/" + newEntry[i].ecr + "'>" + newEntry[i].ecr + "</td>");
+            newTr.append("<td id='tableNotes'>" + newEntry[i].notes + "</td>");
+            newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='duplicate-entry fa fa-files-o aria-hidden='true'></i></td>");
             newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='edit-entry fa fa-pencil-square-o aria-hidden='true'></i></td>");
             newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='delete-entry fa fa-trash-o'></i></td>");
             allEntries.push(newTr)
@@ -88,13 +85,14 @@ $(document).ready(function () {
         return allEntries;
     }
 
-    // Function for retrieving timeblocks and getting them ready to be rendered to the page
-    function getLastTenEntries() {
+    // Function for retrieving tableRows and getting them ready to be rendered to the page
+    function getLastEntries() {
+        checkDept();
         var rowsToAdd = [];
-        var route = "/api/timesheets/limit=10/" + userName;
+        var route = "/api/timesheets/limit=50/"  + userName;
         $.get(route, function (data) {
             for (var i = 0; i < data.length; i++) {
-                var newTimeEntry = {
+                var newEntry = {
                     id: data[i].id,
                     employee_id: data[i].employee_id,
                     name: data[i].name,
@@ -106,16 +104,16 @@ $(document).ready(function () {
                     program: data[i].program,
                     notes: data[i].notes,
                 }
-                // console.log(newTimeEntry);
-                rowsToAdd.push(newTimeEntry);
+                // console.log(newEntry);
+                rowsToAdd.push(newEntry);
                 // console.log(rowsToAdd);
             }
-            renderTimesheetList(createTimesheetRow(rowsToAdd));
+            renderList(createRow(rowsToAdd));
         });
     }
 
-    // A function for rendering the list of timeblocks to the page
-    function renderTimesheetList(rowsToAdd) {
+    // A function for rendering the list of tableRows to the page
+    function renderList(rowsToAdd) {
         tableBody.children().not(":last").remove();
         tableContainer.children(".alert").remove();
         if (rowsToAdd.length) {
@@ -137,13 +135,13 @@ $(document).ready(function () {
 
     // Function for handling what happens when the delete button is pressed
     function handleDeleteButtonPress() {
-        var id = $(this).parent("td").parent("tr").data("timeblock");
+        var id = $(this).parent("td").parent("tr").data("tableRow");
         console.log(id);
         $.ajax({
             method: "DELETE",
             url: "api/timesheets/entries/" + id
         })
-            .then(getLastTenEntries);
+            .then(getLastEntries);
     }
 
     $(document).on("click", ".edit-entry", handleEdit);
@@ -151,9 +149,44 @@ $(document).ready(function () {
     // This function figures out which post we want to edit and takes it to the appropriate url
     function handleEdit() {
         console.log("yes");
-        var currentEntry = $(this).parent("td").parent("tr").data("timeblock");
+        var currentEntry = $(this).parent("td").parent("tr").data("tableRow");
         console.log(currentEntry);
         window.location.href = "/update/" + currentEntry
+    }
+
+    $(document).on("click", ".duplicate-entry", duplicate);
+
+    //Set default date of today
+    var today = new Date();
+    var dd = ("0" + (today.getDate())).slice(-2);
+    var mm = ("0" + (today.getMonth() + 1)).slice(-2);
+    var yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+
+    // This function figures out which post we want to edit and takes it to the appropriate url
+    function duplicate() {
+        // console.log($(this));
+        // console.log($(this).parent("td"));
+        // console.log($(this).parent("td").parent("tr"));
+        console.log($(this).parent("td").parent("tr").children("#tableECR"));
+        console.log($(this).parent("td").parent("tr").children("#tableECR").text());
+        console.log($(this).parent("td").parent("tr").children("#tableProgram"));
+        console.log($(this).parent("td").parent("tr").children("#tableProgram").text());
+        duplicateEntry = {
+            employee_id: userName,
+            name: $(this).parent("td").parent("tr").children("#tableName").text(),
+            date: today,
+            category: $(this).parent("td").parent("tr").children("#tableCategory").text(),
+            task: $(this).parent("td").parent("tr").children("#tableTask").text(),
+            timespent: $(this).parent("td").parent("tr").children("#tableTime").text(),
+            program: $(this).parent("td").parent("tr").children("#tableProgram").text(),
+            ecr: $(this).parent("td").parent("tr").children("#tableECR").text(),
+            notes: $(this).parent("td").parent("tr").children("#tableNotes").text(),
+        }
+        console.log(duplicateEntry.ecr);
+        submitTableRow(duplicateEntry);
+
+        // window.location.href = "/update/" + currentEntry
     }
 
 });

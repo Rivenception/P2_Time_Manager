@@ -2,7 +2,8 @@ $(document).ready(function () {
     var tableBody = $("tbody");
     var tableContainer = $(".table-container");
 
-    var userName = $('#hiddenId').text();
+    var userName = $('#hidden-employeeId').text();
+    var entryId = $('#hidden-logId').text();
     var nameSelect = $('#inputGroupEmployee');
     var dateSelect = $('#date');
     var categorySelect = $("#inputGroupCategory");
@@ -12,17 +13,13 @@ $(document).ready(function () {
     var inputEcr = $('#inputGroupEcr');
     var inputNotes = $('#inputGroupNotes');
 
-    var windowURL = window.location.href
-    var entryId = windowURL.split("http://localhost:8080/update/", 2)
-    entryId = entryId[1]
-
     updating = true;
 
     $(document).on("click", "#timeSubmit", handleFormSubmit);
     $(document).on("click", ".delete-entry", handleDeleteButtonPress);
 
     // Getting the initial list of Time Entries
-    getLastTenEntries();
+    getLastEntries();
 
     // A function for handling what happens when the form to create a new post is submitted
     function handleFormSubmit(event) {
@@ -58,13 +55,13 @@ $(document).ready(function () {
     // Submits a new timeblock entry
     function submitTimeblock(data) {
         $.post("/api/timesheets", data)
-            .then(getLastTenEntries);
+            .then(getLastEntries);
     }
 
     // Function for creating a new list row for timeblocks
 
     // for some reason this is not working
-    function createTimesheetRow(newTimeEntry) {
+    function createRow(newTimeEntry) {
         var allEntries = [];
         for (var i = 0; i < newTimeEntry.length; i++) {
             var newTr = $("<tr>");
@@ -78,21 +75,19 @@ $(document).ready(function () {
             newTr.append("<td>" + newTimeEntry[i].program + "</td>");
             newTr.append("<td>" + newTimeEntry[i].ecr + "</td>");
             newTr.append("<td>" + newTimeEntry[i].notes + "</td>");
-            newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='edit-entry fa fa-pencil-square-o aria-hidden='true'></i></td>");
-            newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='delete-entry fa fa-trash-o'></i></td>");
             allEntries.push(newTr)
         }
         return allEntries;
     }
 
     // Function for retrieving timeblocks and getting them ready to be rendered to the page
-    function getLastTenEntries() {
+    function getLastEntries() {
         var rowsToAdd = [];
         var route = "";
         if (updating) {
             route = "/api/timesheets/entries/" + entryId;
         } else {
-            route = "/api/timesheets/limit=10/" + userName;
+            route = "/api/timesheets/limit=20/" + userName;
         }
         console.log(route);
         $.get(route, function (data) {
@@ -113,12 +108,12 @@ $(document).ready(function () {
                 rowsToAdd.push(newTimeEntry);
                 // console.log(rowsToAdd);
             }
-            renderTimesheetList(createTimesheetRow(rowsToAdd));
+            renderList(createRow(rowsToAdd));
         });
     }
 
     // A function for rendering the list of timeblocks to the page
-    function renderTimesheetList(rowsToAdd) {
+    function renderList(rowsToAdd) {
         tableBody.children().not(":last").remove();
         tableContainer.children(".alert").remove();
         if (rowsToAdd.length) {
@@ -146,7 +141,7 @@ $(document).ready(function () {
             method: "DELETE",
             url: "api/timesheets/entries/" + id
         })
-            .then(getLastTenEntries);
+            .then(getLastEntries);
     }
 
     // working on editing
@@ -154,9 +149,7 @@ $(document).ready(function () {
 
     // This function figures out which post we want to edit and takes it to the appropriate url
     function handleEdit() {
-        console.log("yes");
         var currentEntry = $(this).parent("td").parent("tr").data("timeblock");
-        console.log(currentEntry);
         updating = true;
         window.location.href = "/update/" + currentEntry
     }
