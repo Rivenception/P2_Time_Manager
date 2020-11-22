@@ -2,15 +2,19 @@
     <td colspan="12">
         <br>
         <form class="index-form">
+            <label for="deptSelect">Department:</label>
+            <select class="custom-select" id="deptSelect" name="deptSelect">
+
+                <!--tried to get handlebars to handle if statement to change htt order of the options-->
+
+                <option value="Engineering">Engineering</option>
+                <option value="Manufacturing">Manufacturing</option>
+                <option value="Program Management">Program Management</option>
+            </select>
             <label for="name">Name:</label>
             <select placeholder="Select Employee" class="custom-select" id="inputGroupEmployee">
             </select>
-            <label for="dept">Department:</label>
-            <select class="custom-select" id="dept" name="dept">
-                <option value="Engineering">Engineering</option>
-                <option value="Manufacturing">Manufacturing</option>
-                <option value="ProgramManagement">Program Management</option>
-            </select>
+
             <div style="display: flex; justify-content: center; align-tiems: center;">
                 <button type="submit" class="btn btn-success" id="Search">Search</button>
             </div>

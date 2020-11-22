@@ -84,8 +84,9 @@ $(document).ready(function () {
 
     // Function for retrieving tableRows and getting them ready to be rendered to the page
     function getLastEntries() {
+        checkDept();
         var rowsToAdd = [];
-        var route = "/api/timesheets/limit=50/" + userName;
+        var route = "/api/timesheets/limit=50/" + deptURL;
         console.log(route);
         $.get(route, function (data) {
             for (var i = 0; i < data.length; i++) {
@@ -126,7 +127,7 @@ $(document).ready(function () {
     function renderEmpty() {
         var alertDiv = $("<div>");
         alertDiv.addClass("alert alert-danger");
-        alertDiv.text("Please contact your administrator to have your employeeID entered");
+        alertDiv.text("Please contact your administrator to have your employeeID entered. If the user has an employeeID then the user hasn't logged any hours yet!");
         tableContainer.append(alertDiv);
     }
 

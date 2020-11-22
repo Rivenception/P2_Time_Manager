@@ -11,6 +11,45 @@ module.exports = function (app) {
         });
     });
 
+    app.get("/api/employees/eng", function (req, res) {
+        db.Employee.findAll({
+            where: {
+                dept: 'Engineering'
+            },
+            order: [
+                ['name', 'ASC']
+            ],
+        }).then(function (dbEmployee) {
+            res.json(dbEmployee);
+        });
+    });
+
+    app.get("/api/employees/mfg", function (req, res) {
+        db.Employee.findAll({
+            where: {
+                dept: 'Manufacturing'
+            },
+            order: [
+                ['name', 'ASC']
+            ],
+        }).then(function (dbEmployee) {
+            res.json(dbEmployee);
+        });
+    });
+
+    app.get("/api/employees/pm", function (req, res) {
+        db.Employee.findAll({
+            where: {
+                dept: 'Program Management'
+            },
+            order: [
+                ['name', 'ASC']
+            ],
+        }).then(function (dbEmployee) {
+            res.json(dbEmployee);
+        });
+    });
+
     app.get("/api/employees/:user", function (req, res) {
         db.Employee.findOne({
             where: {
