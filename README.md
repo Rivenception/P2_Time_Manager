@@ -63,3 +63,7 @@ GitHub: https://github.com/rivenception
 
 
 <img width="1044" alt="Screen Shot 2020-11-21 at 9 59 08 PM" src="https://user-images.githubusercontent.com/68867054/99892637-d782bd80-2c44-11eb-8a02-5cbeb8e7e0ec.png">
+
+## Submission on BCS 
+
+Heroku Deployed Link: https://intense-badlands-45869.herokuapp.com/ 
