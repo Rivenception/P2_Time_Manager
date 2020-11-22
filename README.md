@@ -53,3 +53,13 @@ GitHub: https://github.com/juliettegondon
 GitHub: https://github.com/garrib10
 [@gmail.com](@gmail.com)
 GitHub: https://github.com/rivenception
+
+## Screenshots 
+
+<img width="1177" alt="Screen Shot 2020-11-21 at 9 53 02 PM" src="https://user-images.githubusercontent.com/68867054/99892581-27ad5000-2c44-11eb-8e60-3af39a719361.png">
+
+
+<img width="1179" alt="Screen Shot 2020-11-21 at 9 53 27 PM" src="https://user-images.githubusercontent.com/68867054/99892594-50cde080-2c44-11eb-8fe9-9992573e1340.png">
+
+
+<img width="1044" alt="Screen Shot 2020-11-21 at 9 59 08 PM" src="https://user-images.githubusercontent.com/68867054/99892637-d782bd80-2c44-11eb-8a02-5cbeb8e7e0ec.png">
