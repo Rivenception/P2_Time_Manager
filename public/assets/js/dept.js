@@ -84,8 +84,9 @@ $(document).ready(function () {
 
     // Function for retrieving tableRows and getting them ready to be rendered to the page
     function getLastEntries() {
+        checkDept();
         var rowsToAdd = [];
-        var route = "/api/timesheets/limit=50/" + userName;
+        var route = "/api/timesheets/limit=50/" + deptURL;
         console.log(route);
         $.get(route, function (data) {
             for (var i = 0; i < data.length; i++) {

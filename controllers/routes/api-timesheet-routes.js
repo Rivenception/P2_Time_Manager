@@ -52,6 +52,57 @@ module.exports = function (app) {
         });
     });
 
+    app.get("/api/timesheets/limit=50/eng", function (req, res) {
+        db.Timesheet.findAll({
+            include: {
+                model: db.Employee,
+                where: {
+                    dept: 'Engineering'
+                },
+            },
+            order: [
+                ['id', 'DESC']
+            ],
+            limit: 50
+        }).then(function (dbTimesheet) {
+            res.json(dbTimesheet);
+        });
+    });
+
+    app.get("/api/timesheets/limit=50/mfg", function (req, res) {
+        db.Timesheet.findAll({
+            include: {
+                model: db.Employee,
+                where: {
+                    dept: 'Manufacturing'
+                },
+            },
+            order: [
+                ['id', 'DESC']
+            ],
+            limit: 50
+        }).then(function (dbTimesheet) {
+            res.json(dbTimesheet);
+        });
+    });
+
+    app.get("/api/timesheets/limit=50/pm", function (req, res) {
+        db.Timesheet.findAll({
+            include: {
+                model: db.Employee,
+                where: {
+                    dept: 'Program Management'
+                },
+            },
+            order: [
+                ['id', 'DESC']
+            ],
+            limit: 50
+        }).then(function (dbTimesheet) {
+            res.json(dbTimesheet);
+        });
+    });
+
     app.get("/api/timesheets/limit=50/:user?", function (req, res) {
         db.Timesheet.findAll({
             include: [db.Employee],
