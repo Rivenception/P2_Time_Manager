@@ -9,12 +9,12 @@ module.exports = function (sequelize, DataTypes) {
     var Employee = sequelize.define("Employee", {
         name: {
             type: DataTypes.STRING,
-            primaryKey: true,
             allowNull: false,
             len: [1]
         },
         employee_id: {
             type: DataTypes.STRING,
+            primaryKey: true,
             allowNull: false,
         },
         dept: {

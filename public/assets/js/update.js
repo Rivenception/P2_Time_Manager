@@ -165,4 +165,19 @@ $(document).ready(function () {
                 window.location.href = "/eng/" + userName;
             });
     }
+
+    function employeesDropdown() {
+        var dept = $('#dept').text();
+        console.log(dept);
+        var employeeInput = $("#inputGroupEmployee");
+        //For loop that checks the URL for a userId and compares to the employee_id key in the database. If accurate, it sets the Name value in the html for the user by default.
+        if (window.location.href === "/eng" + employeeId || "/mfg" + employeeId || "/pm" + employeeId) {
+            if (window.location.href.indexOf(employeeId[i]) > -1) {
+                let dropdown = $("<option>").attr("value", employees[i]).text(employees[i]);
+                employeeInput.append(dropdown);
+                return;
+            }
+        }
+    }
+
 });
