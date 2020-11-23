@@ -23,6 +23,10 @@ $(document).ready(function () {
     var employeeId = [];
     var department = [];
 
+    var dept = $('#dept').text();
+    var userName = $('#hidden-employeeId').text();
+    var entryId = $('#hidden-logId').text();
+
     // Function that dyanmically creates the time input options for the user in the html
     function companyDropdown() {
         console.log("fetching Company...");
@@ -56,21 +60,20 @@ $(document).ready(function () {
     };
 
     function employeesDropdown() {
-        var dept = $('#dept').text();
-        console.log(dept);
+        console.log(userName);
         var employeeInput = $("#inputGroupEmployee");
-        //For loop that checks the URL for a userId and compares to the employee_id key in the database. If accurate, it sets the Name value in the html for the user by default.
-        for (let i = 0; i < employeeId.length && employees.length; i++) {
-            if (window.location.href === "/eng" + employeeId || "/mfg" + employeeId || "/pm" + employeeId) {
-                if (window.location.href.indexOf(employeeId[i]) > -1) {
-                    let dropdown = $("<option>").attr("value", employees[i]).text(employees[i]);
-                    $("#inputGroupEmployee").append(dropdown);
-                    return;
-                }
-            }
-        };
         // For loop that gets all employees and dynamically creates list in the html for the respective departments.
-        if (window.location.href === "/eng" || "/mfg" || "/pm") {
+        if (userName) {
+            //For loop that checks the URL for a userId and compares to the employee_id key in the database. If accurate, it sets the Name value in the html for the user by default.
+            $.get("/api/employees", function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].employee_id === userName) {
+                        let dropdown = $("<option>").attr("value", data[i].employee_id).text(data[i].name);
+                        employeeInput.append(dropdown);
+                    }
+                }
+            })
+        } else {
             if (dept === "Engineering") {
                 $.get("/api/employees", function (data) {
                     for (var i = 0; i < data.length; i++) {
@@ -99,23 +102,57 @@ $(document).ready(function () {
                     }
                 })
             };
-        }
+        };
     };
-
     // Function that dyanmically creates the categories input options for the user in the html
     function categoriesDropdown() {
-        console.log("fetching Categories...");
-        if (window.location.href === "/eng" || "/eng" + employeeId) {
+        console.log("fetching Categories for " + userName);
+        if (entryId && dept) {
+            console.log(dept);
+            if (dept === "Engineering") {
+                for (let i = 0; i < eng_category.length; i++) {
+                    let dropdown = $("<option>").attr("value", eng_category[i]).text(eng_category[i]);
+                    $("#inputGroupCategory").append(dropdown)
+                };
+            } else if (dept === "Manufacturing") {
+                for (let i = 0; i < mfg_category.length; i++) {
+                    let dropdown = $("<option>").attr("value", mfg_category[i]).text(mfg_category[i]);
+                    $("#inputGroupCategory").append(dropdown);
+                }
+            } else if (dept === "Program Management") {
+                for (let i = 0; i < pm_category.length; i++) {
+                    let dropdown = $("<option>").attr("value", pm_category[i]).text(pm_category[i]);
+                    $("#inputGroupCategory").append(dropdown);
+                }
+            };
+        } else if (userName && dept) {
+            if (dept === "Engineering") {
+                for (let i = 0; i < eng_category.length; i++) {
+                    let dropdown = $("<option>").attr("value", eng_category[i]).text(eng_category[i]);
+                    $("#inputGroupCategory").append(dropdown)
+                };
+            } else if (dept === "Manufacturing") {
+                for (let i = 0; i < mfg_category.length; i++) {
+                    let dropdown = $("<option>").attr("value", mfg_category[i]).text(mfg_category[i]);
+                    $("#inputGroupCategory").append(dropdown);
+                }
+            } else if (dept === "Program Management") {
+                for (let i = 0; i < pm_category.length; i++) {
+                    let dropdown = $("<option>").attr("value", pm_category[i]).text(pm_category[i]);
+                    $("#inputGroupCategory").append(dropdown);
+                }
+            };
+        } else if (window.location.href === "/eng") {
             for (let i = 0; i < eng_category.length; i++) {
                 let dropdown = $("<option>").attr("value", eng_category[i]).text(eng_category[i]);
                 $("#inputGroupCategory").append(dropdown);
             }
-        } else if (window.location.href === "/mfg" || "/mfg" + employeeId) {
+        } else if (window.location.href === "/mfg") {
             for (let i = 0; i < mfg_category.length; i++) {
                 let dropdown = $("<option>").attr("value", mfg_category[i]).text(mfg_category[i]);
                 $("#inputGroupCategory").append(dropdown);
             }
-        } else if (window.location.href === "/pm" || "/pm" + employeeId) {
+        } else if (window.location.href === "/pm") {
             for (let i = 0; i < pm_category.length; i++) {
                 let dropdown = $("<option>").attr("value", pm_category[i]).text(pm_category[i]);
                 $("#inputGroupCategory").append(dropdown);
@@ -126,20 +163,25 @@ $(document).ready(function () {
     // Function that dyanmically creates the task input options for the user in the html
     function tasksDropdown() {
         console.log("fetching Tasks...");
-        if (window.location.href === "/eng" || "/eng" + employeeId) {
+        if (window.location.href === "/eng") {
             for (let i = 0; i < eng_tasks.length; i++) {
                 let dropdown = $("<option>").attr("value", eng_tasks[i]).text(eng_tasks[i]);
                 $("#inputGroupTask").append(dropdown);
             }
-        } else if (window.location.href === "/mfg" || "/mfg" + employeeId) {
+        } else if (window.location.href === "/mfg") {
             for (let i = 0; i < mfg_tasks.length; i++) {
                 let dropdown = $("<option>").attr("value", mfg_tasks[i]).text(mfg_tasks[i]);
                 $("#inputGroupTask").append(dropdown);
             }
-        } else if (window.location.href === "/pm" || "/pm" + employeeId) {
+        } else if (window.location.href === "/pm") {
             for (let i = 0; i < pm_tasks.length; i++) {
                 let dropdown = $("<option>").attr("value", pm_tasks[i]).text(pm_tasks[i]);
                 $("#inputGroupTask").append(dropdown);
+            }
+        } else if (entryId) {
+            for (let i = 0; i < pm_category.length; i++) {
+                let dropdown = $("<option>").attr("value", pm_category[i]).text(pm_category[i]);
+                $("#inputGroupCategory").append(dropdown);
             }
         }
     }
