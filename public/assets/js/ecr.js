@@ -70,7 +70,7 @@ $(document).ready(function () {
         }
     }
 
-    // Function for handling what to render when there are no authors
+    // Function for handling what to render when there are no posts
     function renderEmpty() {
         var alertDiv = $("<div>");
         alertDiv.addClass("alert alert-danger");
