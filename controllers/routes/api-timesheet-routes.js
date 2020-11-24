@@ -148,9 +148,12 @@ module.exports = function (app) {
     });
 
     app.post("/api/timesheets", function (req, res) {
-        db.Timesheet.create(req.body).then(function (dbTimesheet) {
-            res.json(dbTimesheet);
-        });
+        db.Timesheet.create(req.body,
+            {
+                include: [db.Employee],
+            }).then(function (dbTimesheet) {
+                res.json(dbTimesheet);
+            });
     });
 
     app.delete("/api/timesheets/entries/:id", function (req, res) {
@@ -162,16 +165,16 @@ module.exports = function (app) {
             res.json(dbTimesheet);
         });
     });
-    
+
     app.put("/api/timesheets/entries/:id", function (req, res) {
         db.Timesheet.update(req.body,
             {
-            where: {
-                id: req.body.id
-            }
-        }).then(function (dbTimesheet) {
-            res.json(dbTimesheet);
-        });
+                where: {
+                    id: req.body.id
+                }
+            }).then(function (dbTimesheet) {
+                res.json(dbTimesheet);
+            });
     });
 
 };
