@@ -52,6 +52,7 @@ $(document).ready(function () {
             program: programId.val().trim(),
             ecr: inputEcr.val(),
             notes: inputNotes.val(),
+            FKemployee_id: userName,
         };
         submitTableRow(newEntry);
     };
@@ -182,6 +183,7 @@ $(document).ready(function () {
             program: $(this).parent("td").parent("tr").children("#tableProgram").text(),
             ecr: $(this).parent("td").parent("tr").children("#tableECR").text(),
             notes: $(this).parent("td").parent("tr").children("#tableNotes").text(),
+            FKemployee_id: userName,
         }
         console.log(duplicateEntry.ecr);
         submitTableRow(duplicateEntry);

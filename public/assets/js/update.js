@@ -31,7 +31,7 @@ $(document).ready(function () {
         // Constructing a newPost object to hand to the database
         var newTimeEntry = {
             employee_id: userName,
-            name: nameSelect.val(),
+            name: nameSelect.text().trim(),
 
             // may need to reformat date information for mySQL?
             date: dateSelect.val(),
@@ -41,6 +41,7 @@ $(document).ready(function () {
             program: programId.val().trim(),
             ecr: inputEcr.val(),
             notes: inputNotes.val(),
+            employee_id: userName,
         };
 
         if (updating) {

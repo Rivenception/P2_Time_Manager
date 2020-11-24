@@ -12,8 +12,7 @@ CREATE TABLE employees (
   title VARCHAR(45) DEFAULT '' NOT NULL,
   salary INT,
   status VARCHAR(45) DEFAULT 'ACTIVE' NOT NULL,
-  PRIMARY KEY (id),
-  KEY (employee_id)
+  PRIMARY KEY (employee_id)
   );
 
 CREATE TABLE timesheets (

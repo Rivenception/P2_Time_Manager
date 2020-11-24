@@ -67,9 +67,9 @@ module.exports = function (sequelize, DataTypes) {
                 name: 'FKemployee_id',
                 allowNull: false,
             },
-            foreignKeyConstraint: true,
-            targetKey: 'employee_id',
-            constraints: false
+            // foreignKeyConstraint: true,
+            // targetKey: 'employee_id',
+            // constraints: false
         });
     };
 

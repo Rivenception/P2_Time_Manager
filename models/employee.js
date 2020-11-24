@@ -60,8 +60,8 @@ module.exports = function (sequelize, DataTypes) {
                 name: 'FKemployee_id',
                 allowNull: false,
             },
-            foreignKeyConstraint: true,
-            sourceKey: 'employee_id'
+            // foreignKeyConstraint: true,
+            // sourceKey: 'employee_id'
         });
     };
 
