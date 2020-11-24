@@ -42,7 +42,7 @@ $(document).ready(function () {
         // Constructing a newPost object to hand to the database
         var newEntry = {
             employee_id: userName,
-            name: nameSelect.val(),
+            name: nameSelect.text().trim(),
 
             // may need to reformat date information for mySQL?
             date: dateSelect.val(),
