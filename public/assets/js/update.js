@@ -12,6 +12,8 @@ $(document).ready(function () {
     var programId = $('#inputGroupProgram');
     var inputEcr = $('#inputGroupEcr');
     var inputNotes = $('#inputGroupNotes');
+    var dept = $('#dept').text();
+    var deptURL = '';
 
     updating = true;
 
@@ -20,6 +22,19 @@ $(document).ready(function () {
 
     // Getting the initial list of Time Entries
     getLastEntries();
+    checkDept();
+
+    // Function that checks html to confirm department called from routes
+    function checkDept() {
+        deptURL = '';
+        if (dept === 'Engineering') {
+            deptURL = "eng";
+        } else if (dept === 'Manufacturing') {
+            deptURL = "mfg";
+        } else if (dept === 'Program Management') {
+            deptURL = "pm";
+        };
+    };
 
     // A function for handling what happens when the form to create a new post is submitted
     function handleFormSubmit(event) {
@@ -29,7 +44,7 @@ $(document).ready(function () {
             return;
         }
         // Constructing a newPost object to hand to the database
-        var newTimeEntry = {
+        var newEntry = {
             employee_id: userName,
             name: nameSelect.text().trim(),
 
@@ -46,10 +61,10 @@ $(document).ready(function () {
 
         if (updating) {
             console.log("fetching updates");
-            newTimeEntry.id = entryId;
-            updateTimeblock(newTimeEntry);
+            newEntry.id = entryId;
+            updateTimeblock(newEntry);
         } else {
-            submitTimeblock(newTimeEntry);
+            submitTimeblock(newEntry);
         }
     };
 
@@ -62,20 +77,20 @@ $(document).ready(function () {
     // Function for creating a new list row for timeblocks
 
     // for some reason this is not working
-    function createRow(newTimeEntry) {
+    function createRow(newEntry) {
         var allEntries = [];
-        for (var i = 0; i < newTimeEntry.length; i++) {
+        for (var i = 0; i < newEntry.length; i++) {
             var newTr = $("<tr>");
-            newTr.data("timeblock", newTimeEntry[i].id);
-            newTr.append("<td>" + newTimeEntry[i].id + "</td>");
-            newTr.append("<td>" + newTimeEntry[i].name + "</td>");
-            newTr.append("<td>" + newTimeEntry[i].date + "</td>");
-            newTr.append("<td>" + newTimeEntry[i].category + "</td>");
-            newTr.append("<td>" + newTimeEntry[i].task + "</td>");
-            newTr.append("<td>" + newTimeEntry[i].timespent + "</td>");
-            newTr.append("<td>" + newTimeEntry[i].program + "</td>");
-            newTr.append("<td>" + newTimeEntry[i].ecr + "</td>");
-            newTr.append("<td>" + newTimeEntry[i].notes + "</td>");
+            newTr.data("timeblock", newEntry[i].id);
+            newTr.append("<td id='logId-"  + newEntry[i].id + "'>" + newEntry[i].id + "</td>");
+            newTr.append("<td id='tableName'><a href='/" + deptURL + "/" + newEntry[i].employee_id + "'>" + newEntry[i].name + "</td>");
+            newTr.append("<td id='tableDate'>" + newEntry[i].date + "</td>");
+            newTr.append("<td id='tableCategory'>" + newEntry[i].category + "</td>");
+            newTr.append("<td id='tableTask'>" + newEntry[i].task + "</td>");
+            newTr.append("<td id='tableTime'>" + newEntry[i].timespent + "</td>");
+            newTr.append("<td id='tableProgram'><a href='/rfb/" + newEntry[i].program + "'>" + newEntry[i].program + "</td>");
+            newTr.append("<td id='tableECR'><a href='/rfb/ecr/" + newEntry[i].ecr + "'>" + newEntry[i].ecr + "</td>");
+            newTr.append("<td id='tableNotes'>" + newEntry[i].notes + "</td>");
             allEntries.push(newTr)
         }
         return allEntries;
@@ -93,7 +108,7 @@ $(document).ready(function () {
         console.log(route);
         $.get(route, function (data) {
             for (var i = 0; i < data.length; i++) {
-                var newTimeEntry = {
+                var newEntry = {
                     id: data[i].id,
                     employee_id: data[i].employee_id,
                     name: data[i].name,
@@ -105,11 +120,33 @@ $(document).ready(function () {
                     program: data[i].program,
                     notes: data[i].notes,
                 }
-                // console.log(newTimeEntry);
-                rowsToAdd.push(newTimeEntry);
+                // console.log(newEntry);
+                rowsToAdd.push(newEntry);
                 // console.log(rowsToAdd);
             }
             renderList(createRow(rowsToAdd));
+
+             // prefills the values for these the log entry to the html form for faster edits from the user
+             programId.attr("value", ($("#logId-" + entryId).parent("tr").children("#tableProgram").text()))
+             inputNotes.attr("value", ($("#logId-" + entryId).parent("tr").children("#tableNotes").text()))
+             inputEcr.attr("value", ($("#logId-" + entryId).parent("tr").children("#tableECR").text()))
+
+             // pre-selects the current log entry options to the html form for faster edits from the user
+             $("#inputGroupCategory > option").each(function() {
+                if (this.value === ($("#logId-" + entryId).parent("tr").children("#tableCategory").text())) {
+                    this.selected = true
+                }
+            });
+            $("#inputGroupTask > option").each(function() {
+                if (this.value === ($("#logId-" + entryId).parent("tr").children("#tableTask").text())) {
+                    this.selected = true
+                }
+            });
+            $("#inputGroupTime > option").each(function() {
+                if (this.value === ($("#logId-" + entryId).parent("tr").children("#tableTime").text())) {
+                    this.selected = true
+                }
+            });
         });
     }
 
@@ -165,20 +202,6 @@ $(document).ready(function () {
             .then(function () {
                 window.location.href = "/eng/" + userName;
             });
-    }
-
-    function employeesDropdown() {
-        var dept = $('#dept').text();
-        console.log(dept);
-        var employeeInput = $("#inputGroupEmployee");
-        //For loop that checks the URL for a userId and compares to the employee_id key in the database. If accurate, it sets the Name value in the html for the user by default.
-        if (window.location.href === "/eng" + employeeId || "/mfg" + employeeId || "/pm" + employeeId) {
-            if (window.location.href.indexOf(employeeId[i]) > -1) {
-                let dropdown = $("<option>").attr("value", employees[i]).text(employees[i]);
-                employeeInput.append(dropdown);
-                return;
-            }
-        }
     }
 
 });

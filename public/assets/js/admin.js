@@ -11,10 +11,11 @@ $(document).ready(function () {
 
     var employeeId = $("#employee-id");
     var name = $('#name')
-    var department = $('#dept');
+    var department = $('#deptSelect');
     var title = $("#title");
     var salary = $('#salary');
-    var status = $('#status');
+    var status = $('#statusSelect');
+    var userName = $('#hidden-employeeId').text();
 
     $(document).on("click", "#employeeSubmit", handleFormSubmit);
 
@@ -25,11 +26,11 @@ $(document).ready(function () {
         // Wont submit if data is missing.
 
         console.log(employeeId.val().trim());
-        console.log(department.val().trim());
+        console.log(department.text().trim());
         console.log(name.val().trim());
         console.log(title.val().trim());
 
-        if (!employeeId.val().trim() || !name.val().trim() || !department.val().trim() || !title.val().trim()) {
+        if (!employeeId.val().trim() || !name.val().trim() || !title.val().trim()) {
             return;
         }
         // Constructing a newEmployee object to hand to the database
@@ -42,8 +43,12 @@ $(document).ready(function () {
             status: status.val().trim(),
         };
 
-        //below function still needs to be written.
-        submitEmployee(newEmployee);
+        if (userName && (userName != "")) {
+            console.log("fetching updates");
+            updateEmployee(newEmployee);
+        } else {
+            submitEmployee(newEmployee);
+        }
     };
 
     // Submits a new employee entry
@@ -58,13 +63,13 @@ $(document).ready(function () {
         var allEntries = [];
         for (var i = 0; i < newEntry.length; i++) {
             var newTr = $("<tr>");
-            newTr.data("employee", newEntry[i].employee_id);
-            newTr.append("<td>" + newEntry[i].employee_id + "</td>");
-            newTr.append("<td>" + newEntry[i].name + "</td>");
-            newTr.append("<td>" + newEntry[i].dept + "</td>");
-            newTr.append("<td>" + newEntry[i].title + "</td>");
-            newTr.append("<td>" + newEntry[i].salary + "</td>");
-            newTr.append("<td>" + newEntry[i].status + "</td>");
+            newTr.data("tableRow", newEntry[i].employee_id);
+            newTr.append("<td id='tableEmployeeId'>" + newEntry[i].employee_id + "</td>");
+            newTr.append("<td id='tableName'>" + newEntry[i].name + "</td>");
+            newTr.append("<td id='tableDept'>" + newEntry[i].dept + "</td>");
+            newTr.append("<td id='tableTitle'>" + newEntry[i].title + "</td>");
+            newTr.append("<td id='tableSalary'>" + newEntry[i].salary + "</td>");
+            newTr.append("<td id='tableStatus'>" + newEntry[i].status + "</td>");
             newTr.append("<td><i style='cursor:pointer;color:#a72b32' class='edit-entry fa fa-pencil-square-o aria-hidden='true'></i></td>");
             allEntries.push(newTr)
         }
@@ -74,8 +79,16 @@ $(document).ready(function () {
     // Function for retrieving timeblocks and getting them ready to be rendered to the page
     function getAllEmployees() {
         var rowsToAdd = [];
-        var route = "/api/employees";
+        var route = "";
+        if (userName && (userName != "")) {
+            route = "/api/employees/" + userName;
+        } else {
+            route = "/api/employees";
+        };
         $.get(route, function (data) {
+            if (userName && (userName != "")) {
+                data = [data];
+            };
             for (var i = 0; i < data.length; i++) {
                 var newEntry = {
                     employee_id: data[i].employee_id,
@@ -88,6 +101,25 @@ $(document).ready(function () {
                 rowsToAdd.push(newEntry);
             }
             renderList(createRow(rowsToAdd));
+
+            if (userName && (userName != "")) {
+                employeeId.attr("value", ($("tr").children("#tableEmployeeId").text()))
+                name.attr("value", ($("tr").children("#tableName").text()))
+                title.attr("value", ($("tr").children("#tableTitle").text()))
+                salary.attr("value", ($("tr").children("#tableSalary").text()))
+
+                // pre-selects the current log entry options to the html form for faster edits from the user
+                $("#deptSelect > option").each(function() {
+                if (this.value === ($("tr").children("#tableDept").text())) {
+                    this.selected = true
+                }
+                });
+                $("#statusSelect > option").each(function() {
+                    if (this.value === ($("tr").children("#tableStatus").text())) {
+                        this.selected = true
+                    }
+                });
+            }
         });
     }
 
@@ -110,6 +142,28 @@ $(document).ready(function () {
         alertDiv.addClass("alert alert-danger");
         alertDiv.text("Please contact your administrator to have your employeeID entered");
         tableContainer.append(alertDiv);
+    }
+
+    $(document).on("click", ".edit-entry", handleEdit);
+
+    // This function figures out which post we want to edit and takes it to the appropriate url
+    function handleEdit() {
+        var currentEntry = $(this).parent("td").parent("tr").data("tableRow");
+        console.log(currentEntry);
+        window.location.href = "/admin/" + currentEntry
+    }
+
+    // Update a given post, bring user to the blog page when done
+    function updateEmployee(entry) {
+        console.log(entry);
+        $.ajax({
+            method: "PUT",
+            url: "/api/employees/" + userName,
+            data: entry
+        })
+            .then(function () {
+                window.location.href = "/admin";
+            });
     }
 });
 

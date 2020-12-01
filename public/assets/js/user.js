@@ -35,10 +35,16 @@ $(document).ready(function () {
 
     // A function for handling what happens when the form to create a new post is submitted
     function handleFormSubmit() {
+        console.log("Add Button Triggered");
         // Wont submit the post if we are missing a body, title, or author
         if (!nameSelect.val() || !dateSelect.val().trim() || !categorySelect.val() || !taskSelect.val() || !timeSelect.val() || !programId.val().trim()) {
+            var alertDiv = $("<div>");
+            alertDiv.addClass("alert alert-danger");
+            alertDiv.text("Make sure the program ID is not empty and all required fields are filled in.");
+            tableContainer.prepend(alertDiv);
             return;
         }
+
         // Constructing a newPost object to hand to the database
         var newEntry = {
             employee_id: userName,
@@ -54,22 +60,25 @@ $(document).ready(function () {
             notes: inputNotes.val(),
             FKemployee_id: userName,
         };
+
         submitTableRow(newEntry);
     };
 
     // Submits a new tableRow entry
     function submitTableRow(data) {
+        console.log("Posting new entry...")
         $.post("/api/timesheets", data)
             .then(getLastEntries);
     }
 
     // Function for creating a new list row for tableRows
     function createRow(newEntry) {
+        console.log("Creating Rows...");
         var allEntries = [];
         for (var i = 0; i < newEntry.length; i++) {
             var newTr = $("<tr>");
             newTr.data("tableRow", newEntry[i].id);
-            newTr.append("<td id=''>" + newEntry[i].id + "</td>");
+            newTr.append("<td id='logId#"  + newEntry[i].id + "'>" + newEntry[i].id + "</td>");
             newTr.append("<td id='tableName'><a href='/" + deptURL + "/" + newEntry[i].employee_id + "'>" + newEntry[i].name + "</td>");
             newTr.append("<td id='tableDate'>" + newEntry[i].date + "</td>");
             newTr.append("<td id='tableCategory'>" + newEntry[i].category + "</td>");
@@ -89,6 +98,7 @@ $(document).ready(function () {
     // Function for retrieving tableRows and getting them ready to be rendered to the page
     function getLastEntries() {
         checkDept();
+        console.log("Getting latest entries for " + userName);
         var rowsToAdd = [];
         var route = "/api/timesheets/limit=50/"  + userName;
         $.get(route, function (data) {
@@ -136,6 +146,7 @@ $(document).ready(function () {
 
     // Function for handling what happens when the delete button is pressed
     function handleDeleteButtonPress() {
+        console.log("Delete Button Triggered");
         var id = $(this).parent("td").parent("tr").data("tableRow");
         console.log(id);
         $.ajax({
@@ -149,7 +160,6 @@ $(document).ready(function () {
 
     // This function figures out which post we want to edit and takes it to the appropriate url
     function handleEdit() {
-        console.log("yes");
         var currentEntry = $(this).parent("td").parent("tr").data("tableRow");
         console.log(currentEntry);
         window.location.href = "/update/" + currentEntry
@@ -187,8 +197,6 @@ $(document).ready(function () {
         }
         console.log(duplicateEntry.ecr);
         submitTableRow(duplicateEntry);
-
-        // window.location.href = "/update/" + currentEntry
     }
 
 });
