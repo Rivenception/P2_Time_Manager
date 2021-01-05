@@ -5,7 +5,7 @@ $(document).ready(function () {
     let mfg_tasks = ["Tooling LP", "Tooling Mold", "Tooling Hotwire", "Tooling Programming", "GPD Cushion Rev", "GPD dress covers"]
     let eng_tasks = ["Design", "Samples", "GPDs", "Patterns", "TLDs", "BOMs", "Labels", "Product Development", "Review", "Other"]
     let ecr_tasks = ["Design", "GPDs", "Patterns", "TLDs", "BOMs", "Product Development", "Labels", "Review", "Processing", "Other"]
-    let admin_tasks = ["Other", "Internal Meeting", "Customer Meeting", "Training", "H-cell Support", "Production/Mfg Supprort", "Emails"]
+    let admin_tasks = ["Other", "Internal Meeting", "Customer Meeting", "Training", "H-cell Support", "Production/Mfg Support", "Emails"]
     let rd_tasks = ["Product Development", "Production Implementation", "Sales Samples"]
 
 
@@ -77,7 +77,7 @@ $(document).ready(function () {
             if (dept === "Engineering") {
                 $.get("/api/employees", function (data) {
                     for (var i = 0; i < data.length; i++) {
-                        if (data[i].dept === 'Engineering') {
+                        if (data[i].dept === 'Engineering' && data[i].status === 'Active') {
                             let dropdown = $("<option>").attr("value", data[i].employee_id).text(data[i].name);
                             employeeInput.append(dropdown);
                         }
@@ -86,7 +86,7 @@ $(document).ready(function () {
             } else if (dept === "Manufacturing") {
                 $.get("/api/employees", function (data) {
                     for (var i = 0; i < data.length; i++) {
-                        if (data[i].dept === 'Manufacturing') {
+                        if (data[i].dept === 'Manufacturing' && data[i].status === 'Active') {
                             let dropdown = $("<option>").attr("value", data[i].employee_id).text(data[i].name);
                             employeeInput.append(dropdown);
                         }
@@ -95,7 +95,7 @@ $(document).ready(function () {
             } else if (dept === "Program Management") {
                 $.get("/api/employees", function (data) {
                     for (var i = 0; i < data.length; i++) {
-                        if (data[i].dept === 'Program Management') {
+                        if (data[i].dept === 'Program Management' && data[i].status === 'Active') {
                             let dropdown = $("<option>").attr("value", data[i].employee_id).text(data[i].name);
                             employeeInput.append(dropdown);
                         }
